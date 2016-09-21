@@ -5,6 +5,8 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -164,7 +166,7 @@ public class MassActivity extends AppCompatActivity {
                 }
                 Resources res = getResources();
                 if (m > 0) {
-                    massTextview.setText(String.format(res.getString(R.string.massOutput_name), m));
+                    massTextview.setText(String.format(res.getString(R.string.massOutput_name), x,m));
                 } else {
                     massTextview.setText(String.format(res.getString(R.string.error_name)));
                 }
@@ -180,9 +182,14 @@ public class MassActivity extends AppCompatActivity {
                 massText.setHint(null);
             }
         });
-    }
+    };
 
-    ;
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.mainmenu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     public static int calAsc(String x) {
         char c = x.toCharArray()[0];
@@ -217,6 +224,17 @@ public class MassActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 this.finish();
+                return true;
+            case R.id.action_share:
+                Intent share = new Intent(Intent.ACTION_SEND);
+                share.setType("text/plain");
+                share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                share.putExtra(Intent.EXTRA_SUBJECT,
+                        getString(R.string.app_name));
+                TextView massTextview=(TextView) findViewById(R.id.massTextview);
+                share.putExtra(Intent.EXTRA_TEXT, massTextview.getText().toString());
+                startActivity(Intent.createChooser(share,
+                        getString(R.string.app_name)));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

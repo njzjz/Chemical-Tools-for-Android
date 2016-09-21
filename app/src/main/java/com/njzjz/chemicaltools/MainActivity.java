@@ -5,6 +5,8 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -63,6 +65,12 @@ public class MainActivity extends AppCompatActivity {
         });
     };
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.mainmenu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             //菜单栏返回键功能
@@ -71,6 +79,17 @@ public class MainActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 this.finish();
+                return true;
+            case R.id.action_share:
+                Intent share = new Intent(Intent.ACTION_SEND);
+                share.setType("text/plain");
+                share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                share.putExtra(Intent.EXTRA_SUBJECT,
+                        getString(R.string.app_name));
+                TextView elementTextview=(TextView) findViewById(R.id.elementTextview);
+                share.putExtra(Intent.EXTRA_TEXT, elementTextview.getText().toString());
+                startActivity(Intent.createChooser(share,
+                        getString(R.string.app_name)));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

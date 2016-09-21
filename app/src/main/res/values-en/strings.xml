@@ -6,7 +6,7 @@
     <string name="error_name">Error!</string>
     <string name="button_element">Search Elements</string>
     <string name="massTextview_name">Welcome to calculate mass of chemicals.</string>
-    <string name="massOutput_name">Molar mass: %1$.2f</string>
+    <string name="massOutput_name">%1$s\nMolar mass: %2$.2f</string>
     <string name="button_About">About</string>
     <string name="button_mass">Calculate Mass</string>
     <string name="elementEditText_name">Please input the number or name of an element.</string>
