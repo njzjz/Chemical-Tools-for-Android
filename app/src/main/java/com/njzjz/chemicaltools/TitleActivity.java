@@ -22,6 +22,7 @@ public class TitleActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
+    private DrawerArrowDrawable drawerArrow;
     private boolean drawerArrowColor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class TitleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_title);
 
         ActionBar ab = getSupportActionBar();
+        ab.setHomeAsUpIndicator(R.drawable.home);
         ab.setDisplayShowHomeEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setHomeButtonEnabled(true);
@@ -37,7 +39,7 @@ public class TitleActivity extends AppCompatActivity {
         mDrawerList = (ListView) findViewById(R.id.navdrawer);
 
 
-        DrawerArrowDrawable drawerArrow = new DrawerArrowDrawable(this) {
+        drawerArrow = new DrawerArrowDrawable(this) {
             @Override
             public boolean isLayoutRtl() {
                 return false;
@@ -88,13 +90,10 @@ public class TitleActivity extends AppCompatActivity {
                         startActivity(browserIntent);
                         break;
                     case 3:
-
                         break;
                     case 4:
-
                         break;
                     case 5:
-
                         break;
                     case 6:
 
