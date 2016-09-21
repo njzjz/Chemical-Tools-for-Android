@@ -13,10 +13,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/massText"
+        android:imeOptions="actionDone"
+        android:inputType="text"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.06"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:maxLines="1" />
 
     <Button
         android:layout_width="132dp"
@@ -32,10 +35,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/massTextview"
         android:layout_weight="0.06"
-        android:singleLine="false"
         android:text="@string/massTextview_name"
         android:textSize="25dp"
         android:textColor="@color/abc_primary_text_material_light"
         android:layout_below="@+id/massButton"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:singleLine="false" />
 </RelativeLayout>

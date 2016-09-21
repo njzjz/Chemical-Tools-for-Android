@@ -25,8 +25,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/elementText"
+            android:imeOptions="actionDone"
+            android:inputType="text"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="0.06" />
+            android:layout_weight="0.06"
+            android:maxLines="1"/>
 
         <Button
             android:layout_width="132dp"
@@ -40,7 +43,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/elementTextview"
             android:layout_weight="0.06"
-            android:singleLine="false"
             android:text="@string/elementTextview_name"
             android:textSize="25dp"
             android:textColor="@color/abc_primary_text_material_light" />

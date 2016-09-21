@@ -6,4 +6,7 @@
     <string name="error_name">输入错误，请重新输入！</string>
     <string name="button_element">元素查询</string>
     <string name="massTextview_name">欢迎使用质量计算器！</string>
+    <string name="massOutput_name">相对分子质量=%1$.2f</string>
+    <string name="button_About">关于</string>
+    <string name="button_mass">质量计算</string>
 </resources>
