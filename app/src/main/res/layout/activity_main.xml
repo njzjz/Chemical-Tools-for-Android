@@ -32,8 +32,8 @@
             android:layout_width="132dp"
             android:layout_height="wrap_content"
             android:text="@string/elementButton_name"
-            android:layout_weight="0.06"
-            android:id="@+id/elementButton" />
+            android:id="@+id/elementButton"
+            android:layout_gravity="center_horizontal" />
 
         <TextView
             android:layout_width="wrap_content"

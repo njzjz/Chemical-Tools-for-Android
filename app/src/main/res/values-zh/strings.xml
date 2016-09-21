@@ -5,4 +5,5 @@
     <string name="elementOutput_name">原子序数：%1$d\n元素名称：%2$s\n元素符号：%3$s\n相对原子质量：%4$s</string>
     <string name="error_name">输入错误，请重新输入！</string>
     <string name="button_element">元素查询</string>
+    <string name="massTextview_name">欢迎使用质量计算器！</string>
 </resources>
