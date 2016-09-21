@@ -12,4 +12,5 @@
     <string name="elementEditText_name">Please input the number or name of an element.</string>
     <string name="massEditText_name">Please input chemical formula, e.g. K4[Fe(CN)6].</string>
     <string name="button_Share">Share</string>
+    <string name="massButton_name">Calculate</string>
 </resources>

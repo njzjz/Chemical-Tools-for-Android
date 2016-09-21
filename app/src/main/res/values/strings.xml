@@ -10,6 +10,7 @@
     <string name="massTextview_name">Welcome to calculate mass of chemicals.</string>
     <string name="massOutput_name">%1$s\nMolar mass: %2$.2f</string>
     <string name="massEditText_name">Please input chemical formula.</string>
+    <string name="massButton_name">Calculate</string>
     <!-- drawer -->
     <string name="drawer_open">drawer_open</string>
     <string name="drawer_close">drawer_close</string>

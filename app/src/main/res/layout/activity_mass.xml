@@ -25,7 +25,7 @@
     <Button
         android:layout_width="132dp"
         android:layout_height="wrap_content"
-        android:text="@string/elementButton_name"
+        android:text="@string/massButton_name"
         android:id="@+id/massButton"
         android:layout_gravity="center_horizontal"
         android:layout_below="@+id/massText"

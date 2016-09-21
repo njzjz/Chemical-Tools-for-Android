@@ -12,4 +12,5 @@
     <string name="elementEditText_name">请输入元素名称、符号或原子序数。</string>
     <string name="massEditText_name">请输入化学式，例如K4[Fe(CN)6]。</string>
     <string name="button_Share">分享</string>
+    <string name="massButton_name">计算</string>
 </resources>
