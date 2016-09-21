@@ -9,4 +9,7 @@
     <string name="massOutput_name">Molar mass: %1$.2f</string>
     <string name="button_About">About</string>
     <string name="button_mass">Calculate Mass</string>
+    <string name="elementEditText_name">Please input the number or name of an element.</string>
+    <string name="massEditText_name">Please input chemical formula, e.g. K4[Fe(CN)6].</string>
+    <string name="button_Share">Share</string>
 </resources>

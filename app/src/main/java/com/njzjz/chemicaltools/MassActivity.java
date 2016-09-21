@@ -2,9 +2,9 @@ package com.njzjz.chemicaltools;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -173,6 +173,12 @@ public class MassActivity extends AppCompatActivity {
             }
 
             ;
+        });
+        final EditText massText = (EditText) findViewById(R.id.massText);
+        massText.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                massText.setHint(null);
+            }
         });
     }
 

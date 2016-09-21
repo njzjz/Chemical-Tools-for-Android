@@ -66,6 +66,7 @@ public class TitleActivity extends AppCompatActivity {
         String[] values = new String[]{
                 res.getString(R.string.button_element),
                 res.getString(R.string.button_mass),
+                res.getString(R.string.button_Share),
                 res.getString(R.string.button_About),
         };
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -84,12 +85,22 @@ public class TitleActivity extends AppCompatActivity {
                         //Mass
                         openMass(view);
                         break;
-                    case 2:
+                    case 3:
                         //About
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/njzjz/Chemical-Tools-for-Android"));
                         startActivity(browserIntent);
                         break;
-                    case 3:
+                    case 2:
+                        //Share
+                        Intent share = new Intent(Intent.ACTION_SEND);
+                        share.setType("text/plain");
+                        share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        share.putExtra(Intent.EXTRA_SUBJECT,
+                                getString(R.string.app_name));
+                        share.putExtra(Intent.EXTRA_TEXT, getString(R.string.app_name) + "\n" +
+                                "https://github.com/njzjz/Chemical-Tools-for-Android");
+                        startActivity(Intent.createChooser(share,
+                                getString(R.string.app_name)));
                         break;
                     case 4:
                         break;

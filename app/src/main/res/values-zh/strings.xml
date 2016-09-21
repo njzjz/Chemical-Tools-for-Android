@@ -9,4 +9,7 @@
     <string name="massOutput_name">相对分子质量=%1$.2f</string>
     <string name="button_About">关于</string>
     <string name="button_mass">质量计算</string>
+    <string name="elementEditText_name">请输入元素名称、符号或原子序数。</string>
+    <string name="massEditText_name">请输入化学式，例如K4[Fe(CN)6]。</string>
+    <string name="button_Share">分享</string>
 </resources>

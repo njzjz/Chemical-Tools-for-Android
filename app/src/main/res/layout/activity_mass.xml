@@ -19,7 +19,8 @@
         android:layout_weight="0.06"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:maxLines="1" />
+        android:maxLines="1"
+        android:hint="@string/massEditText_name"/>
 
     <Button
         android:layout_width="132dp"
@@ -40,5 +41,5 @@
         android:textColor="@color/abc_primary_text_material_light"
         android:layout_below="@+id/massButton"
         android:layout_centerHorizontal="true"
-        android:singleLine="false" />
+        />
 </RelativeLayout>

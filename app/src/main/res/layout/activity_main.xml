@@ -29,7 +29,9 @@
             android:inputType="text"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.06"
-            android:maxLines="1"/>
+            android:maxLines="1"
+            android:hint="@string/elementEditText_name"/>
+        />
 
         <Button
             android:layout_width="132dp"

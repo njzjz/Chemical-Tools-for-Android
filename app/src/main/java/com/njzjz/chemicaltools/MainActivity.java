@@ -55,6 +55,12 @@ public class MainActivity extends AppCompatActivity {
                 };
             };
         });
+        final EditText elementText = (EditText) findViewById(R.id.elementText);
+        elementText.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                elementText.setHint(null);
+            }
+        });
     };
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

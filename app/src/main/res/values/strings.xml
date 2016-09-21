@@ -4,14 +4,17 @@
     <string name="elementButton_name">Search</string>
     <string name="elementOutput_name">Element Number: %1$d\nElement Name (Chinese): %2$s\Symbol: %3$s\n Standard atomic weight: %4$s</string>
     <string name="elementTextview_name">Welcome to search for elements!</string>
+    <string name="elementEditText_name">Please input the number or name of an element.</string>
     <string name="error_name">Error!</string>
     <!-- Mass -->
     <string name="massTextview_name">Welcome to calculate mass of chemicals.</string>
     <string name="massOutput_name">Molar mass: %1$.2f</string>
+    <string name="massEditText_name">Please input chemical formula.</string>
     <!-- drawer -->
     <string name="drawer_open">drawer_open</string>
     <string name="drawer_close">drawer_close</string>
     <string name="button_element">Search Elements</string>
     <string name="button_mass">Calculate Mass</string>
+    <string name="button_Share">Share</string>
     <string name="button_About">About</string>
 </resources>
