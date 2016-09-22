@@ -1,7 +1,6 @@
 package com.njzjz.chemicaltools;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,58 +13,51 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class ExamActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_exam);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayShowHomeEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setHomeButtonEnabled(true);
-        TextView mFileContentView = (TextView) findViewById(R.id.elementTextview);
+        TextView mFileContentView = (TextView) findViewById(R.id.examTextview);
         mFileContentView.setMovementMethod(ScrollingMovementMethod.getInstance());
-        final Button elementButton = (Button) findViewById(R.id.elementButton);
-        final String[] elementNameArray = getResources().getStringArray(R.array.elementNameArray);
-        final String[] elementAbbrArray = getResources().getStringArray(R.array.elementAbbrArray);
-        final String[] elementMassArray= getResources().getStringArray(R.array.elementMassArray);
-        elementButton.setOnClickListener(new View.OnClickListener() {
+        final EditText examText = (EditText) findViewById(R.id.examText);
+        examText.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                int i;
-                int elementNumber=0;
-                String elementInput="";
-                EditText elementText =(EditText)findViewById(R.id.elementText);
-                TextView elementTextview=(TextView)findViewById(R.id.elementTextview);
-                elementInput=elementText.getText().toString();
-                for(i=0;i<118;i++) {
-                    if (elementInput.equals(String.valueOf(i+1))){
-                        elementNumber=i+1;
-                    }else{
-                        if(elementInput.equals(elementNameArray[i])){
-                            elementNumber=i+1;
-                        }else{
-                            if(elementInput.equals(elementAbbrArray[i])){
-                                elementNumber=i+1;
-                            }
-                        }
-                    }
-                }
-                Resources res = getResources();
-                if(elementNumber>0){
-                    elementTextview.setText(String.format(res.getString(R.string.elementOutput_name),elementNumber,elementNameArray[elementNumber-1],elementAbbrArray[elementNumber-1],elementMassArray[elementNumber-1]));
-                }else{
-                    elementTextview.setText(String.format(res.getString(R.string.error_name)));
-                };
-            };
-        });
-        final EditText elementText = (EditText) findViewById(R.id.elementText);
-        elementText.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                elementText.setHint(null);
+                examText.setHint(null);
             }
         });
-    };
+        final String[] elementNameArray = getResources().getStringArray(R.array.elementNameArray);
+        final String[] elementAbbrArray = getResources().getStringArray(R.array.elementAbbrArray);
+        final TextView examTextviewTop = (TextView) findViewById(R.id.examTextviewTop);
+        final Button examButton = (Button) findViewById(R.id.examButton);
+        final int[] examElementnumber = {examReflesh(examTextviewTop, elementNameArray)};
+        examButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                EditText examText = (EditText) findViewById(R.id.examText);
+                String examInput=examText.getText().toString();
+                TextView examTextview = (TextView) findViewById(R.id.examTextview);
+                if(examInput.equals(elementAbbrArray[examElementnumber[0]])){
+                    examTextview.setText(getResources().getString(R.string.examOutputRight_name));
+                }else{
+                    examTextview.setText(String.format(getResources().getString(R.string.examOutputWrong_name),elementAbbrArray[examElementnumber[0]],examInput));
+                }
+                examElementnumber[0] =examReflesh(examTextviewTop,elementNameArray);
+            }
+        });
+    }
+
+    public int examReflesh(TextView textView,String[] elementNameArray){
+        final double d = Math.random();
+        final int i = (int)(d*118);
+        textView.setText(elementNameArray[i]);
+        return i;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -88,8 +80,8 @@ public class MainActivity extends AppCompatActivity {
                 share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 share.putExtra(Intent.EXTRA_SUBJECT,
                         getString(R.string.app_name));
-                TextView elementTextview=(TextView) findViewById(R.id.elementTextview);
-                share.putExtra(Intent.EXTRA_TEXT, elementTextview.getText().toString());
+//                TextView elementTextview=(TextView) findViewById(R.id.elementTextview);
+                share.putExtra(Intent.EXTRA_TEXT, "");
                 startActivity(Intent.createChooser(share,
                         getString(R.string.app_name)));
                 return true;
@@ -97,5 +89,4 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-};
-
+}

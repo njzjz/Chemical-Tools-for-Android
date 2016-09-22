@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">化学小工具</string>
+    <string name="app_name">元素小管家</string>
     <string name="elementButton_name">查询</string>
     <string name="elementTextview_name">欢迎使用元素查询器！</string>
     <string name="elementOutput_name">原子序数：%1$d\n元素名称：%2$s\n元素符号：%3$s\n相对原子质量：%4$s</string>
@@ -13,4 +13,11 @@
     <string name="massEditText_name">请输入化学式，例如K4[Fe(CN)6]。</string>
     <string name="button_Share">分享</string>
     <string name="massButton_name">计算</string>
+    <string name="massper_name">%1$s（符号：%2$s），%3$d个原子，原子量为%4$s，质量分数为%5$.2f%%；</string>
+    <string name="button_exam">元素记忆</string>
+    <string name="examOutputWrong_name">答案错误，正确答案为：%1$s\n您的答案：%2$s</string>
+    <string name="examOutputRight_name">恭喜您，回答正确！</string>
+    <string name="examButton_name">输入</string>
+    <string name="examEditText_name">请输入元素符号。</string>
+    <string name="examTextview_name">欢迎使用元素记忆功能！</string>
 </resources>

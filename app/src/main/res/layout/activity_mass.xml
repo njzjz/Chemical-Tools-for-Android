@@ -41,5 +41,6 @@
         android:textColor="@color/abc_primary_text_material_light"
         android:layout_below="@+id/massButton"
         android:layout_centerHorizontal="true"
+        android:scrollbars="vertical"
         />
 </RelativeLayout>

@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,17 +24,20 @@ public class MassActivity extends AppCompatActivity {
         ab.setDisplayShowHomeEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setHomeButtonEnabled(true);
-
+        TextView mFileContentView = (TextView) findViewById(R.id.massTextview);
+        mFileContentView.setMovementMethod(ScrollingMovementMethod.getInstance());
         final Button massButton = (Button) findViewById(R.id.massButton);
+        final String[] elementNameArray = getResources().getStringArray(R.array.elementNameArray);
+        final String[] elementAbbrArray = getResources().getStringArray(R.array.elementAbbrArray);
+        final String[] elementMassArray = getResources().getStringArray(R.array.elementMassArray);
         massButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String[] elementAbbrArray = getResources().getStringArray(R.array.elementAbbrArray);
-                String[] elementMassArray = getResources().getStringArray(R.array.elementMassArray);
                 EditText massText = (EditText) findViewById(R.id.massText);
                 TextView massTextview = (TextView) findViewById(R.id.massTextview);
                 String x = massText.getText().toString();
                 int l = x.length(), i = 0, n, s = 0, i2, c;
                 double m = 0;
+                double[] massPer=new double[119];
                 String y1 = "", y2 = "", y3 = "", y4 = "", T = "";
                 int[] AtomNumber = new int[119];
                 int[] MulNumber = new int[l + 1], MulIf = new int[l + 1], MulLeft = new int[l + 1], MulRight = new int[l + 1], MulNum = new int[l + 1];
@@ -167,6 +171,12 @@ public class MassActivity extends AppCompatActivity {
                 Resources res = getResources();
                 if (m > 0) {
                     massTextview.setText(String.format(res.getString(R.string.massOutput_name), x,m));
+                    for(i=0;i<118;i++){
+                        if(AtomNumber[i+1]>0){
+                            massPer[i+1]=AtomNumber[i + 1] * Double.parseDouble(elementMassArray[i])/m*100;
+                            massTextview.setText(massTextview.getText().toString()+"\n"+String.format(res.getString(R.string.massper_name), elementNameArray[i],elementAbbrArray[i],AtomNumber[i+1],elementMassArray[i],massPer[i+1]));
+                        }
+                    }
                 } else {
                     massTextview.setText(String.format(res.getString(R.string.error_name)));
                 }

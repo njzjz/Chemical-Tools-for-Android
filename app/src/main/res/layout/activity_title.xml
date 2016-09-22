@@ -16,28 +16,40 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="com.njzjz.chemicaltools.TitleActivity">
 
-        <ImageButton
+        <Button
         android:layout_width="match_parent"
             android:layout_height="wrap_content"
         android:id="@+id/openMassButton"
-        android:src="@drawable/mass"
         android:onClick="openMass"
         android:longClickable="false"
             android:maxWidth="500dp"
             android:layout_below="@+id/openElementButton"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:text="@string/button_mass"/>
 
-        <ImageButton
+        <Button
             android:layout_height="wrap_content"
             android:id="@+id/openElementButton"
-            android:src="@drawable/element"
             android:onClick="openElement"
             android:longClickable="false"
             android:layout_width="match_parent"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:text="@string/button_element" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/openExamButton"
+            android:onClick="openExam"
+            android:longClickable="false"
+            android:maxWidth="500dp"
+            android:layout_below="@+id/openMassButton"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:text="@string/button_exam"/>
     </RelativeLayout>
 
     <!-- The navigation drawer -->

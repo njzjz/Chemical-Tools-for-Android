@@ -13,4 +13,11 @@
     <string name="massEditText_name">Please input chemical formula, e.g. K4[Fe(CN)6].</string>
     <string name="button_Share">Share</string>
     <string name="massButton_name">Calculate</string>
+    <string name="massper_name">%2$s (%3$d itoms): atomic weight is %4$s and mass fraction is %5$.2f%%.</string>
+    <string name="button_exam">Exam</string>
+    <string name="examOutputWrong_name">Your answer was wrong.\nThe correct answer: %1$s\nYour answer: %2$s</string>
+    <string name="examOutputRight_name">Your answer was right.</string>
+    <string name="examButton_name">Input</string>
+    <string name="examEditText_name">Please input symbol of the element.</string>
+    <string name="examTextview_name">Welcome to exam.</string>
 </resources>

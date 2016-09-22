@@ -47,7 +47,9 @@
             android:layout_weight="0.06"
             android:text="@string/elementTextview_name"
             android:textSize="25dp"
-            android:textColor="@color/abc_primary_text_material_light" />
+            android:textColor="@color/abc_primary_text_material_light"
+            android:scrollbars="vertical"
+            />
     </LinearLayout>
 
 </RelativeLayout>
