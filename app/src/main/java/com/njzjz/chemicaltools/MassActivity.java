@@ -3,6 +3,7 @@ package com.njzjz.chemicaltools;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
@@ -180,10 +181,9 @@ public class MassActivity extends AppCompatActivity {
                         }
                     }
                 } else {
-                    massTextview.setText(String.format(res.getString(R.string.error_name)));
-                }
-                ;
-
+                    Snackbar.make(v, res.getString(R.string.error_name), Snackbar.LENGTH_LONG)
+                            .setAction("Error", null).show();
+                };
             }
 
             ;

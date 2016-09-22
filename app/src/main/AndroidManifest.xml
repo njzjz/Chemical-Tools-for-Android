@@ -19,7 +19,7 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".MassActivity" />
-        <activity android:name=".ExamActivity"></activity>
+        <activity android:name=".ExamActivity" />
     </application>
 
 </manifest>

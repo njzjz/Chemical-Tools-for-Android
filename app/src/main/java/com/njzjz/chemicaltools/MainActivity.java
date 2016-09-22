@@ -3,6 +3,7 @@ package com.njzjz.chemicaltools;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
@@ -45,21 +46,20 @@ public class MainActivity extends AppCompatActivity {
                 for(i=0;i<118;i++) {
                     if (elementInput.equals(String.valueOf(i+1))){
                         elementNumber=i+1;
-                    }else{
-                        if(elementInput.equals(elementNameArray[i])){
-                            elementNumber=i+1;
-                        }else{
-                            if(elementInput.equals(elementAbbrArray[i])){
-                                elementNumber=i+1;
-                            }
-                        }
+                    }else if(elementInput.equals(elementNameArray[i])){
+                        elementNumber=i+1;
+                    }else if(elementInput.toUpperCase().equals(elementAbbrArray[i].toUpperCase())){
+                        elementNumber=i+1;
+                    }else if(elementInput.toUpperCase().equals(elementIUPACArray[i].toUpperCase())){
+                        elementNumber=i+1;
                     }
                 }
                 Resources res = getResources();
                 if(elementNumber>0){
                     elementTextview.setText(String.format(res.getString(R.string.elementOutput_name),elementNumber,elementNameArray[elementNumber-1],elementAbbrArray[elementNumber-1],elementMassArray[elementNumber-1],elementIUPACArray[elementNumber-1],elementOriginArray[elementNumber-1]));
                 }else{
-                    elementTextview.setText(String.format(res.getString(R.string.error_name)));
+                    Snackbar.make(v, res.getString(R.string.error_name), Snackbar.LENGTH_LONG)
+                            .setAction("Error", null).show();
                 };
             };
         });
