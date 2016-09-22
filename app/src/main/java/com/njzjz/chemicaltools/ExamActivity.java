@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -26,16 +28,26 @@ public class ExamActivity extends AppCompatActivity {
         TextView mFileContentView = (TextView) findViewById(R.id.examTextview);
         mFileContentView.setMovementMethod(ScrollingMovementMethod.getInstance());
         final EditText examText = (EditText) findViewById(R.id.examText);
+        final Button examButton = (Button) findViewById(R.id.examButton);
+        final String[] elementNameArray = getResources().getStringArray(R.array.elementNameArray);
+        final String[] elementAbbrArray = getResources().getStringArray(R.array.elementAbbrArray);
+        final TextView examTextviewTop = (TextView) findViewById(R.id.examTextviewTop);
+        final int[] examElementnumber = {examReflesh(examTextviewTop, elementNameArray)};
         examText.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 examText.setHint(null);
             }
         });
-        final String[] elementNameArray = getResources().getStringArray(R.array.elementNameArray);
-        final String[] elementAbbrArray = getResources().getStringArray(R.array.elementAbbrArray);
-        final TextView examTextviewTop = (TextView) findViewById(R.id.examTextviewTop);
-        final Button examButton = (Button) findViewById(R.id.examButton);
-        final int[] examElementnumber = {examReflesh(examTextviewTop, elementNameArray)};
+        examText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEND) {
+                    examButton.performClick();
+                }
+                return false;
+            }
+        });
+
         examButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 EditText examText = (EditText) findViewById(R.id.examText);
@@ -47,6 +59,7 @@ public class ExamActivity extends AppCompatActivity {
                     examTextview.setText(String.format(getResources().getString(R.string.examOutputWrong_name),elementAbbrArray[examElementnumber[0]],examInput));
                 }
                 examElementnumber[0] =examReflesh(examTextviewTop,elementNameArray);
+                examText.setText("");
             }
         });
     }

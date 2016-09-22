@@ -2,7 +2,7 @@
     <string name="app_name">Chemical Tools</string>
     <string name="elementButton_name">Search</string>
     <string name="elementTextview_name">Welcome to search for elements!</string>
-    <string name="elementOutput_name">Element Number: %1$d\nElement Name (Chinese): %2$s\Symbol: %3$s\n Standard atomic weight: %4$s</string>
+    <string name="elementOutput_name">Element Number: %1$d\nElement Name: %5$s\nSymbol: %3$s\nElement Name (Chinese): %2$s\nStandard atomic weight: %4$s\nOrigin of the name: %6$s</string>
     <string name="error_name">Error!</string>
     <string name="button_element">Search Elements</string>
     <string name="massTextview_name">Welcome to calculate mass of chemicals.</string>

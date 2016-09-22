@@ -360,4 +360,244 @@
         <item>295</item>
         <item>293</item>
     </string-array>
+    <string-array name="elementIUPACArray">
+        <item>Hydrogen</item>
+        <item>Helium</item>
+        <item>Lithium</item>
+        <item>Beryllium</item>
+        <item>Boron</item>
+        <item>Carbon</item>
+        <item>Nitrogen</item>
+        <item>Oxygen</item>
+        <item>Fluorine</item>
+        <item>Neon</item>
+        <item>Sodium</item>
+        <item>Magnesium</item>
+        <item>Aluminium</item>
+        <item>Silicon</item>
+        <item>Phosphorus</item>
+        <item>Sulfur</item>
+        <item>Chlorine</item>
+        <item>Argon</item>
+        <item>Potassium</item>
+        <item>Calcium</item>
+        <item>Scandium</item>
+        <item>Titanium</item>
+        <item>Vanadium</item>
+        <item>Chromium</item>
+        <item>Manganese</item>
+        <item>Iron</item>
+        <item>Cobalt</item>
+        <item>Nickel</item>
+        <item>Copper</item>
+        <item>Zinc</item>
+        <item>Gallium</item>
+        <item>Germanium</item>
+        <item>Arsenic</item>
+        <item>Selenium</item>
+        <item>Bromine</item>
+        <item>Krypton</item>
+        <item>Rubidium</item>
+        <item>Strontium</item>
+        <item>Yttrium</item>
+        <item>Zirconium</item>
+        <item>Niobium</item>
+        <item>Molybdenum</item>
+        <item>Technetium</item>
+        <item>Ruthenium</item>
+        <item>Rhodium</item>
+        <item>Palladium</item>
+        <item>Silver</item>
+        <item>Cadmium</item>
+        <item>Indium</item>
+        <item>Tin</item>
+        <item>Antimony</item>
+        <item>Tellurium</item>
+        <item>Iodine</item>
+        <item>Xenon</item>
+        <item>Caesium</item>
+        <item>Barium</item>
+        <item>Lanthanum</item>
+        <item>Cerium</item>
+        <item>Praseodymium</item>
+        <item>Neodymium</item>
+        <item>Promethium</item>
+        <item>Samarium</item>
+        <item>Europium</item>
+        <item>Gadolinium</item>
+        <item>Terbium</item>
+        <item>Dysprosium</item>
+        <item>Holmium</item>
+        <item>Erbium</item>
+        <item>Thulium</item>
+        <item>Ytterbium</item>
+        <item>Lutetium</item>
+        <item>Hafnium</item>
+        <item>Tantalum</item>
+        <item>Tungsten</item>
+        <item>Rhenium</item>
+        <item>Osmium</item>
+        <item>Iridium</item>
+        <item>Platinum</item>
+        <item>Gold</item>
+        <item>Mercury</item>
+        <item>Thallium</item>
+        <item>Lead</item>
+        <item>Bismuth</item>
+        <item>Polonium</item>
+        <item>Astatine</item>
+        <item>Radon</item>
+        <item>Francium</item>
+        <item>Radium</item>
+        <item>Actinium</item>
+        <item>Thorium</item>
+        <item>Protactinium</item>
+        <item>Uranium</item>
+        <item>Neptunium</item>
+        <item>Plutonium</item>
+        <item>Americium</item>
+        <item>Curium</item>
+        <item>Berkelium</item>
+        <item>Californium</item>
+        <item>Einsteinium</item>
+        <item>Fermium</item>
+        <item>Mendelevium</item>
+        <item>Nobelium</item>
+        <item>Lawrencium</item>
+        <item>Rutherfordium</item>
+        <item>Dubnium</item>
+        <item>Seaborgium</item>
+        <item>Bohrium</item>
+        <item>Hassium</item>
+        <item>Meitnerium</item>
+        <item>Darmstadtium</item>
+        <item>Roentgenium</item>
+        <item>Copernicium</item>
+        <item>Nihonium</item>
+        <item>Flerovium</item>
+        <item>Moscovium</item>
+        <item>Livermorium</item>
+        <item>Tennessine</item>
+        <item>Oganesson</item>
+    </string-array>
+    <string-array name="elementOriginArray">
+        <item>composed of the Greek elements hydro-and -gen meaning water-forming</item>
+        <item>the Greek helios, sun</item>
+        <item>the Greek lithos, stone</item>
+        <item>beryl, a mineral</item>
+        <item>borax, a mineral</item>
+        <item>the Latin carbo, coal</item>
+        <item>the Greek nitron and -gen meaning niter-forming</item>
+        <item>from the Greek oxy-, both sharp and acid, and -gen, meaning acid-forming</item>
+        <item>the Latin fluere, to flow</item>
+        <item>the Greek neos, meaning new</item>
+        <item>the English word soda (natrium in Latin)[3]</item>
+        <item>Magnesia, a district of Eastern Thessalyin Greece</item>
+        <item>from alumina, a compound (originally aluminum)</item>
+        <item>from the Latin silex, flint (originally silicium)</item>
+        <item>the Greek phoosphoros, carrying light</item>
+        <item>the Latin sulphur, fire and brimstone[5]</item>
+        <item>the Greek chloros, greenish yellow</item>
+        <item>the Greek argos, idle</item>
+        <item>New Latin potassa, potash (kalium in Latin)[3]</item>
+        <item>the Latin calx, lime</item>
+        <item>Scandia, the Latin name for Scandinavia</item>
+        <item>Titans, the sons of the Earth goddess of Greek mythology</item>
+        <item>Vanadis, an Old Norse name for the Scandinavian goddess Freyja</item>
+        <item>the Greek chroma, color</item>
+        <item>corrupted from magnesia negra, see Magnesium</item>
+        <item>English word (ferrum in Latin)</item>
+        <item>the German word Kobold, goblin</item>
+        <item>from Swedish kopparnickel, containing the German word Nickel, goblin</item>
+        <item>English word (Latin cuprum)</item>
+        <item>the German Zink</item>
+        <item>Gallia, the Latin name for France</item>
+        <item>Germania, the Latin name for Germany</item>
+        <item>English word (Latin arsenicum)</item>
+        <item>the Greek selene, moon</item>
+        <item>the Greek bromos, stench</item>
+        <item>the Greek kryptos, hidden</item>
+        <item>the Latin rubidus, deep red</item>
+        <item>Strontian, a small town in Scotland</item>
+        <item>Ytterby, Sweden</item>
+        <item>Persian Zargun, gold-colored; German Zirkoon, jargoon</item>
+        <item>Niobe, daughter of king Tantalus from Greek mythology</item>
+        <item>the Greek molybdos meaning lead</item>
+        <item>the Greek tekhnètos meaning artificial</item>
+        <item>Ruthenia, the New Latin name for Russia</item>
+        <item>the Greek rhodos, meaning rose coloured</item>
+        <item>the then recently discovered asteroid Pallas, considered a planet at the time</item>
+        <item>English word (argentum in Latin)[3]</item>
+        <item>the New Latin cadmia, from King Kadmos</item>
+        <item>indigo</item>
+        <item>English word (stannum in Latin)</item>
+        <item>composed from the Greek anti, against, and monos, alone (stibium in Latin)</item>
+        <item>Latin tellus, earth</item>
+        <item>French iode (after the Greek ioeides, violet)</item>
+        <item>the Greek xenos, strange</item>
+        <item>the Latin caesius, sky blue</item>
+        <item>the Greek barys, heavy</item>
+        <item>the Greek lanthanein, to lie hidden</item>
+        <item>the then recently discovered asteroid Ceres, considered a planet at the time</item>
+        <item>the Greek praseios didymos meaning green twin</item>
+        <item>the Greek neos didymos meaning new twin</item>
+        <item>Prometheus of Greek mythology who stole fire from the Gods and gave it to humans</item>
+        <item>Samarskite, the name of the mineral from which it was first isolated</item>
+        <item>Europe</item>
+        <item>Johan Gadolin, chemist, physicist and mineralogist</item>
+        <item>Ytterby, Sweden</item>
+        <item>the Greek dysprositos, hard to get</item>
+        <item>Holmia, the New Latin name for Stockholm</item>
+        <item>Ytterby, Sweden</item>
+        <item>Thule, the ancient name for Scandinavia</item>
+        <item>Ytterby, Sweden</item>
+        <item>Lutetia, the Latin name for Paris</item>
+        <item>Hafnia, the New Latin name for Copenhagen</item>
+        <item>King Tantalus, father of Niobe from Greek mythology</item>
+        <item>the Swedish tung sten, heavy stone (W is wolfram, the old name of the tungsten mineral wolframite)[3]</item>
+        <item>Rhenus, the Latin name for the river Rhine</item>
+        <item>the Greek osmè, meaning smell</item>
+        <item>Iris, the Greek goddess of the rainbow</item>
+        <item>the Spanish platina, meaning little silver</item>
+        <item>English word (aurum in Latin)</item>
+        <item>the New Latin name mercurius, named after the Roman god (Hg from former name hydrargyrum, from Greek hydr-, water, and argyros, silver)</item>
+        <item>the Greek thallos, green twig</item>
+        <item>English word (plumbum in Latin)[3]</item>
+        <item>German word, now obsolete</item>
+        <item>Polonia, the New Latin name for Poland</item>
+        <item>the Greek astatos, unstable</item>
+        <item>From radium, as it was first detected as an emission from radium during radioactive decay</item>
+        <item>Francia, the New Latin name for France</item>
+        <item>the Latin radius, ray</item>
+        <item>the Greek aktis, ray</item>
+        <item>Thor, the Scandinavian god of thunder</item>
+        <item>the Greek protos, first, and actinium, which is produced through the radioactive decay of protactinium</item>
+        <item>Uranus, the seventh planet in the Solar System</item>
+        <item>Neptune, the eighth planet in the Solar System</item>
+        <item>Pluto, a dwarf planet in the Solar System (considered the ninth planet at the time)</item>
+        <item>The Americas, as the element was first synthesized on the continent, by analogy with europium</item>
+        <item>Pierre Curie, a physicist, and Marie Curie, a physicist and chemist, named after great scientists by analogy with gadolinium</item>
+        <item>Berkeley, California, where the element was first synthesized, by analogy with terbium</item>
+        <item>California, where the element was first synthesized</item>
+        <item>Albert Einstein, physicist</item>
+        <item>Enrico Fermi, physicist</item>
+        <item>Dmitri Mendeleev, chemist and inventor</item>
+        <item>Alfred Nobel, chemist, engineer, innovator, and armaments manufacturer</item>
+        <item>Ernest O. Lawrence, physicist</item>
+        <item>Ernest Rutherford, chemist and physicist</item>
+        <item>Dubna, Russia</item>
+        <item>Glenn T. Seaborg, scientist</item>
+        <item>Niels Bohr, physicist</item>
+        <item>Hesse, Germany, where the element was first synthesized</item>
+        <item>Lise Meitner, physicist</item>
+        <item>Darmstadt, Germany, where the element was first synthesized</item>
+        <item>Wilhelm Conrad Röntgen, physicist</item>
+        <item>Nicolaus Copernicus, astronomer</item>
+        <item>Japanese word meaning Japan</item>
+        <item>Georgy Flyorov, physicist</item>
+        <item>In recognition of the Moscow region and honors the ancient Russian land that is the home of the Joint Institute for Nuclear Research</item>
+        <item>Lawrence Livermore National Laboratory(in Livermore, California) which collaborated with JINR on its synthesis</item>
+        <item>In recognition of the contribution of the Tennessee region</item>
+        <item>Honoring a scientist and recognizes Professor Yuri Oganessian</item>
+    </string-array>
 </resources>

@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         final String[] elementNameArray = getResources().getStringArray(R.array.elementNameArray);
         final String[] elementAbbrArray = getResources().getStringArray(R.array.elementAbbrArray);
         final String[] elementMassArray= getResources().getStringArray(R.array.elementMassArray);
+        final String[] elementIUPACArray= getResources().getStringArray(R.array.elementIUPACArray);
+        final String[] elementOriginArray= getResources().getStringArray(R.array.elementOriginArray);
         elementButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 int i;
@@ -53,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 Resources res = getResources();
                 if(elementNumber>0){
-                    elementTextview.setText(String.format(res.getString(R.string.elementOutput_name),elementNumber,elementNameArray[elementNumber-1],elementAbbrArray[elementNumber-1],elementMassArray[elementNumber-1]));
+                    elementTextview.setText(String.format(res.getString(R.string.elementOutput_name),elementNumber,elementNameArray[elementNumber-1],elementAbbrArray[elementNumber-1],elementMassArray[elementNumber-1],elementIUPACArray[elementNumber-1],elementOriginArray[elementNumber-1]));
                 }else{
                     elementTextview.setText(String.format(res.getString(R.string.error_name)));
                 };
@@ -63,6 +67,15 @@ public class MainActivity extends AppCompatActivity {
         elementText.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 elementText.setHint(null);
+            }
+        });
+        elementText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEND) {
+                    elementButton.performClick();
+                }
+                return false;
             }
         });
     };
