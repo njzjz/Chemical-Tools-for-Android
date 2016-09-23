@@ -20,4 +20,17 @@
     <string name="examButton_name">输入</string>
     <string name="examEditText_name">请输入元素符号。</string>
     <string name="examTextview_name">欢迎使用元素记忆功能！</string>
+    <string name="button_Github">打开Github</string>
+    <string name="button_Settings">设置</string>
+    <string name="setting_rate_sum">喜欢我们的应用吗？快去应用市场评价吧！</string>
+    <string name="setting_rate">评价应用</string>
+    <string name="setting_feedback">反馈</string>
+    <string name="setting_clearSettings">清空数据</string>
+    <string name="setting_others">其它</string>
+    <string name="setting_elementnumber_limit">原子序数上限</string>
+    <string name="setting_message">确认要清空所有数据吗？</string>
+    <string name="postive_button">确认</string>
+    <string name="negative_button">取消</string>
+    <string name="examScoreOutput_name">共回答%1$d题，其中%2$d题正确，正确率为%3$.2f%%</string>
+    <string name="examShare_name">我在元素记忆测试中回答了%1$d道题，正确率高达%2$.2f%%！快下载元素小管家挑战我吧！</string>
 </resources>

@@ -53,20 +53,38 @@ public class ExamActivity extends AppCompatActivity {
                 EditText examText = (EditText) findViewById(R.id.examText);
                 String examInput=examText.getText().toString();
                 TextView examTextview = (TextView) findViewById(R.id.examTextview);
-                if(examInput.equals(elementAbbrArray[examElementnumber[0]])){
+                int examCorrectNumber=Integer.parseInt(PreferenceUtils.getPrefString(getApplicationContext(),"examCorrectNumber","0"));
+                int examIncorrectnumber=Integer.parseInt(PreferenceUtils.getPrefString(getApplicationContext(),"examIncorrectnumber","0"));
+                if(examInput.toUpperCase().equals(elementAbbrArray[examElementnumber[0]].toUpperCase())){
                     examTextview.setText(getResources().getString(R.string.examOutputRight_name));
+                    examCorrectNumber++;
+                    PreferenceUtils.setPrefString(getApplicationContext(),"examCorrectNumber",String.valueOf(examCorrectNumber));
                 }else{
                     examTextview.setText(String.format(getResources().getString(R.string.examOutputWrong_name),elementAbbrArray[examElementnumber[0]],examInput));
+                    examIncorrectnumber++;
+                    PreferenceUtils.setPrefString(getApplicationContext(),"examIncorrectnumber",String.valueOf(examIncorrectnumber));
                 }
+                examScoreOutput(examCorrectNumber,examIncorrectnumber);
                 examElementnumber[0] =examReflesh(examTextviewTop,elementNameArray);
                 examText.setText("");
             }
         });
+        int examCorrectNumber=Integer.parseInt(PreferenceUtils.getPrefString(getApplicationContext(),"examCorrectNumber","0"));
+        int examIncorrectnumber=Integer.parseInt(PreferenceUtils.getPrefString(getApplicationContext(),"examIncorrectnumber","0"));
+        if(examCorrectNumber+examIncorrectnumber>0) examScoreOutput(examCorrectNumber,examIncorrectnumber);
+    }
+    public void examScoreOutput(int examCorrectNumber,int examIncorrectnumber){
+        int sum=examCorrectNumber+examIncorrectnumber;
+        double examCorrectPercent;
+        if(sum>0) examCorrectPercent=(double)examCorrectNumber/sum*100; else examCorrectPercent=0;
+        TextView examScoreTextview = (TextView) findViewById(R.id.examScoreTextview);
+        examScoreTextview.setText(String.format(getResources().getString(R.string.examScoreOutput_name),sum,examCorrectNumber,examCorrectPercent));
     }
 
     public int examReflesh(TextView textView,String[] elementNameArray){
         final double d = Math.random();
-        final int i = (int)(d*118);
+        int elementnumber_limit=Integer.parseInt(PreferenceUtils.getPrefString(getApplicationContext(),"elementnumber_limit","118"));
+        final int i = (int)(d*elementnumber_limit);
         textView.setText(elementNameArray[i]);
         return i;
     }
@@ -93,13 +111,24 @@ public class ExamActivity extends AppCompatActivity {
                 share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 share.putExtra(Intent.EXTRA_SUBJECT,
                         getString(R.string.app_name));
-//                TextView elementTextview=(TextView) findViewById(R.id.elementTextview);
-                share.putExtra(Intent.EXTRA_TEXT, "");
+                int examCorrectNumber=Integer.parseInt(PreferenceUtils.getPrefString(getApplicationContext(),"examCorrectNumber","0"));
+                int examIncorrectnumber=Integer.parseInt(PreferenceUtils.getPrefString(getApplicationContext(),"examIncorrectnumber","0"));
+                int sum=examCorrectNumber+examIncorrectnumber;
+                double examCorrectPercent;
+                if(sum>0) examCorrectPercent=(double)examCorrectNumber/sum*100; else examCorrectPercent=0;
+                share.putExtra(Intent.EXTRA_TEXT, String.format(getResources().getString(R.string.examShare_name),sum,examCorrectPercent));
                 startActivity(Intent.createChooser(share,
                         getString(R.string.app_name)));
+                return true;
+            case R.id.action_settings:
+                openSettings();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    public void openSettings(){
+        Intent intent =new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 }

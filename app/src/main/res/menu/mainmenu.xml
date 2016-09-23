@@ -9,4 +9,9 @@
         android:icon="@android:drawable/ic_menu_share"
         android:title="@string/button_Share"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:title="@string/button_Share"
+        app:showAsAction="always" />
 </menu>

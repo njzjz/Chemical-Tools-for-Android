@@ -2,14 +2,14 @@
     <string name="app_name">Chemical Tools</string>
     <string name="elementButton_name">Search</string>
     <string name="elementTextview_name">Welcome to search for elements!</string>
-    <string name="elementOutput_name">Element Number: %1$d\nElement Name: %5$s\nSymbol: %3$s\nElement Name (Chinese): %2$s\nStandard atomic weight: %4$s\nOrigin of the name: %6$s</string>
+    <string name="elementOutput_name">Atomic Number: %1$d\nElement Name: %5$s\nSymbol: %3$s\nStandard atomic weight: %4$s\nOrigin of the name: %6$s</string>
     <string name="error_name">Error!</string>
     <string name="button_element">Search Elements</string>
     <string name="massTextview_name">Welcome to calculate mass of chemicals.</string>
     <string name="massOutput_name">%1$s\nMolar mass: %2$.2f</string>
     <string name="button_About">About</string>
     <string name="button_mass">Calculate Mass</string>
-    <string name="elementEditText_name">Please input the number or name of an element.</string>
+    <string name="elementEditText_name">Please input the atomic number or name of an element.</string>
     <string name="massEditText_name">Please input chemical formula, e.g. K4[Fe(CN)6].</string>
     <string name="button_Share">Share</string>
     <string name="massButton_name">Calculate</string>
@@ -20,4 +20,17 @@
     <string name="examButton_name">Input</string>
     <string name="examEditText_name">Please input symbol of the element.</string>
     <string name="examTextview_name">Welcome to exam.</string>
+    <string name="button_Github">Github</string>
+    <string name="button_Settings">Settings</string>
+    <string name="setting_feedback">Feedback</string>
+    <string name="setting_rate">Rate this app</string>
+    <string name="setting_rate_sum">Like the app?Please consider leaving a review in the Store!</string>
+    <string name="setting_clearSettings">Clear settings</string>
+    <string name="setting_others">Others</string>
+    <string name="setting_elementnumber_limit">Atomic Number Limit</string>
+    <string name="setting_message">Do you want to clear settings?</string>
+    <string name="negative_button">NO</string>
+    <string name="postive_button">Yes</string>
+    <string name="examScoreOutput_name">Total: %1$d Correct: %2$d Correct rate:%3$.2f%%</string>
+    <string name="examShare_name">Hey! I answered %1$d questions on the app Chemical Tools and the correct rate is %2$.2f%%. Would like to have a try?</string>
 </resources>

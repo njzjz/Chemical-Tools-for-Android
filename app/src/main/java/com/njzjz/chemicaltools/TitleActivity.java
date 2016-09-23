@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -67,8 +69,9 @@ public class TitleActivity extends AppCompatActivity {
                 res.getString(R.string.button_element),
                 res.getString(R.string.button_mass),
                 res.getString(R.string.button_exam),
+                res.getString(R.string.button_Settings),
                 res.getString(R.string.button_Share),
-                res.getString(R.string.button_About),
+                res.getString(R.string.button_Github),
         };
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, values);
@@ -86,12 +89,12 @@ public class TitleActivity extends AppCompatActivity {
                         //Mass
                         openMass(view);
                         break;
-                    case 4:
-                        //About
+                    case 5:
+                        //Github
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/njzjz/Chemical-Tools-for-Android"));
                         startActivity(browserIntent);
                         break;
-                    case 3:
+                    case 4:
                         //Share
                         Intent share = new Intent(Intent.ACTION_SEND);
                         share.setType("text/plain");
@@ -107,7 +110,9 @@ public class TitleActivity extends AppCompatActivity {
                         //Exam
                         openExam(view);
                         break;
-                    case 5:
+                    case 3:
+                        //Settings
+                        openSettings();
                         break;
                     case 6:
 
@@ -119,14 +124,32 @@ public class TitleActivity extends AppCompatActivity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            if (mDrawerLayout.isDrawerOpen(mDrawerList)) {
-                mDrawerLayout.closeDrawer(mDrawerList);
-            } else {
-                mDrawerLayout.openDrawer(mDrawerList);
-            }
+        switch (item.getItemId()) {
+            //菜单栏返回键功能
+            case android.R.id.home:
+                if (mDrawerLayout.isDrawerOpen(mDrawerList)) {
+                    mDrawerLayout.closeDrawer(mDrawerList);
+                } else {
+                    mDrawerLayout.openDrawer(mDrawerList);
+                }
+                return true;
+            case R.id.action_share:
+                Intent share = new Intent(Intent.ACTION_SEND);
+                share.setType("text/plain");
+                share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                share.putExtra(Intent.EXTRA_SUBJECT,
+                        getString(R.string.app_name));
+                share.putExtra(Intent.EXTRA_TEXT, getString(R.string.app_name) + "\n" +
+                        "https://github.com/njzjz/Chemical-Tools-for-Android");
+                startActivity(Intent.createChooser(share,
+                        getString(R.string.app_name)));
+                return true;
+            case R.id.action_settings:
+                openSettings();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -140,7 +163,12 @@ public class TitleActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.mainmenu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     public void openElement(View view) {
         Intent intent = new Intent(this, MainActivity.class);
@@ -154,4 +182,9 @@ public class TitleActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ExamActivity.class);
         startActivity(intent);
     }
+    public void openSettings(){
+        Intent intent =new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
+
+}

@@ -1,5 +1,6 @@
 package com.njzjz.chemicaltools;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int i;
                 int elementNumber=0;
-                String elementInput="";
+                String elementInput;
                 EditText elementText =(EditText)findViewById(R.id.elementText);
                 TextView elementTextview=(TextView)findViewById(R.id.elementTextview);
                 elementInput=elementText.getText().toString();
@@ -57,10 +59,13 @@ public class MainActivity extends AppCompatActivity {
                 Resources res = getResources();
                 if(elementNumber>0){
                     elementTextview.setText(String.format(res.getString(R.string.elementOutput_name),elementNumber,elementNameArray[elementNumber-1],elementAbbrArray[elementNumber-1],elementMassArray[elementNumber-1],elementIUPACArray[elementNumber-1],elementOriginArray[elementNumber-1]));
+                    PreferenceUtils.setPrefString(getApplicationContext(),"historyElement",elementInput);
                 }else{
                     Snackbar.make(v, res.getString(R.string.error_name), Snackbar.LENGTH_LONG)
                             .setAction("Error", null).show();
                 };
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
             };
         });
         final EditText elementText = (EditText) findViewById(R.id.elementText);
@@ -78,6 +83,12 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        if(!PreferenceUtils.getPrefString(getApplicationContext(),"historyElement","").equals("")){
+            elementText.setText(PreferenceUtils.getPrefString(getApplicationContext(),"historyElement",""));
+            elementButton.callOnClick();
+            elementText.setText("");
+            elementText.setHint(getResources().getString(R.string.elementEditText_name));
+        }
     };
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -106,9 +117,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(Intent.createChooser(share,
                         getString(R.string.app_name)));
                 return true;
+            case R.id.action_settings:
+                openSettings();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    public void openSettings(){
+        Intent intent =new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 };
 

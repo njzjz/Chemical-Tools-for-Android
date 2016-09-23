@@ -1,5 +1,6 @@
 package com.njzjz.chemicaltools;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -178,12 +180,15 @@ public class MassActivity extends AppCompatActivity {
                         if(AtomNumber[i+1]>0){
                             massPer[i+1]=AtomNumber[i + 1] * Double.parseDouble(elementMassArray[i])/m*100;
                             massTextview.setText(massTextview.getText().toString()+"\n"+String.format(res.getString(R.string.massper_name), elementNameArray[i],elementAbbrArray[i],AtomNumber[i+1],elementMassArray[i],massPer[i+1]));
+                            PreferenceUtils.setPrefString(getApplicationContext(),"historyMass",x);
                         }
                     }
                 } else {
                     Snackbar.make(v, res.getString(R.string.error_name), Snackbar.LENGTH_LONG)
                             .setAction("Error", null).show();
                 };
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
             }
 
             ;
@@ -203,6 +208,12 @@ public class MassActivity extends AppCompatActivity {
                 return false;
             }
         });
+        if(!PreferenceUtils.getPrefString(getApplicationContext(),"historyElement","").equals("")){
+            massText.setText(PreferenceUtils.getPrefString(getApplicationContext(),"historyMass",""));
+            massButton.callOnClick();
+            massText.setText("");
+            massText.setHint(getResources().getString(R.string.elementEditText_name));
+        }
     };
 
     @Override
@@ -257,9 +268,16 @@ public class MassActivity extends AppCompatActivity {
                 startActivity(Intent.createChooser(share,
                         getString(R.string.app_name)));
                 return true;
+            case R.id.action_settings:
+                openSettings();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    public void openSettings(){
+        Intent intent =new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 }
 

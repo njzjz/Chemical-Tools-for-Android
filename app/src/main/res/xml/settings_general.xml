@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/button_exam">
+        <ListPreference android:title="@string/setting_elementnumber_limit"
+            android:key="elementnumber_limit"
+            android:defaultValue="118"
+            android:entryValues="@array/settings_entry_values_elementnumber_limit"
+            android:entries="@array/settings_entries_elementnumber_limit"/>
+    </PreferenceCategory>
+    <!-- 示例 !-->
+    <!--
+        <PreferenceCategory android:title="Post">
+            <ListPreference android:title="Post Limit"
+                android:defaultValue="10"
+                android:entryValues="@array/settings_entry_values_post_limit"
+                android:entries="@array/settings_entries_post_limit"/>
+
+            <ListPreference android:title="Preview Image Quality"
+                android:defaultValue="0"
+                android:key="preview_image"
+                android:entryValues="@array/settings_entry_values_preview_image_size"
+                android:entries="@array/settings_entries_image_size"/>
+
+            <ListPreference android:title="Download Image Quality"
+                android:defaultValue="2"
+                android:key="download_image"
+                android:entryValues="@array/settings_entry_values_preview_image_size"
+                android:entries="@array/settings_entries_image_size"/>
+
+            <CheckBoxPreference android:title="Safe Mode"
+                android:defaultValue="true"
+                android:summaryOn="You are now under protected"
+                android:summaryOff="Warning! You may need be more careful!"/>
+        </PreferenceCategory>
+    !-->
+    <PreferenceCategory android:title="@string/setting_others">
+        <PreferenceScreen android:title="@string/setting_clearSettings"
+            android:key="clearSettings">
+        </PreferenceScreen>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/button_About">
+
+        <PreferenceScreen android:title="@string/button_About"
+            android:key="about">
+        </PreferenceScreen>
+        <PreferenceScreen
+            android:title="@string/setting_rate"
+            android:summary="@string/setting_rate_sum">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="market://details?id=com.njzjz.chemicaltools"/>
+
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/setting_feedback"
+
+            android:summary="njzjz@msn.com">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="mailto:njzjz@msn.com?subject=Chemical Tools App Feedback"/>
+        </PreferenceScreen>
+    </PreferenceCategory>
+</PreferenceScreen>
