@@ -13,7 +13,7 @@
         style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
         >
     <ImageView
         android:id="@+id/list_item_card_pic"
@@ -22,7 +22,7 @@
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/ic_launcher"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="0dp"
         android:layout_height="25dp" />
 
     <TextView
@@ -32,21 +32,28 @@
         android:layout_height="wrap_content"
         android:gravity="left"
         android:layout_gravity="left"
-        android:textSize="20dp"
+        android:textSize="16dp"
         android:minLines="1"
         />
     </LinearLayout>
-
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        >
     <TextView
         android:id="@+id/list_item_card_text2"
         style="@style/ListItemText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="17dp"
+        android:textSize="14sp"
         android:layout_gravity="center_horizontal"
         android:gravity="left|center_vertical"
         android:minLines="3"
-/>
+        />
+    </LinearLayout>
 
     <View
         android:id="@+id/list_item_seperator"
@@ -66,12 +73,12 @@
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dip"
+            android:layout_margin="3dip"
             android:layout_weight="0.5"
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:text="@string/button_Share"
-            android:textSize="12sp"
+            android:textSize="14dp"
             android:textStyle="normal" />
 
         <Button
@@ -79,13 +86,18 @@
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dip"
+            android:layout_margin="3dip"
             android:layout_weight="0.5"
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:text="@string/button_open"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:textStyle="normal" />
     </LinearLayout>
+    <View
+        android:id="@+id/shadow"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+    android:background="@drawable/shadow_drawable"/>
 
 </LinearLayout>

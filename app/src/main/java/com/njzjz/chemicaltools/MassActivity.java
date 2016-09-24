@@ -3,6 +3,7 @@ package com.njzjz.chemicaltools;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
@@ -18,6 +19,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.mikepenz.aboutlibraries.Libs;
 
 public class MassActivity extends AppCompatActivity {
 
@@ -270,6 +273,13 @@ public class MassActivity extends AppCompatActivity {
                 return true;
             case R.id.action_settings:
                 openSettings();
+                return true;
+            case R.id.action_Feedback:
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:njzjz@msn.com?subject=Chemical Tools App Feedback"));
+                startActivity(browserIntent);
+                return true;
+            case R.id.action_About:
+                new Libs.Builder().withActivityTitle(getString(R.string.button_About)).withFields(R.string.class.getFields()).start(MassActivity.this);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

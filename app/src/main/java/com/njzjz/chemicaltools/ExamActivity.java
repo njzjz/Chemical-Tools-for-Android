@@ -1,6 +1,7 @@
 package com.njzjz.chemicaltools;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,8 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.mikepenz.aboutlibraries.Libs;
 
 public class ExamActivity extends AppCompatActivity {
 
@@ -169,6 +172,13 @@ public class ExamActivity extends AppCompatActivity {
                 return true;
             case R.id.action_settings:
                 openSettings();
+                return true;
+            case R.id.action_Feedback:
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:njzjz@msn.com?subject=Chemical Tools App Feedback"));
+                startActivity(browserIntent);
+                return true;
+            case R.id.action_About:
+                new Libs.Builder().withActivityTitle(getString(R.string.button_About)).withFields(R.string.class.getFields()).start(ExamActivity.this);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

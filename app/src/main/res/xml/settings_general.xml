@@ -57,7 +57,6 @@
 
         </PreferenceScreen>
         <PreferenceScreen android:title="@string/setting_feedback"
-
             android:summary="njzjz@msn.com">
             <intent
                 android:action="android.intent.action.VIEW"

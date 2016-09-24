@@ -6,12 +6,20 @@
 
     <item
         android:id="@+id/action_share"
-        android:icon="@android:drawable/ic_menu_share"
+        android:icon="@drawable/ic_menu_share"
+        android:tint="#FFFFFF"
         android:title="@string/button_Share"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_settings"
-        android:icon="@android:drawable/ic_menu_manage"
-        android:title="@string/button_Share"
-        app:showAsAction="always" />
+        android:title="@string/button_Settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_Feedback"
+        android:title="@string/setting_feedback"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_About"
+        android:title="@string/button_About"
+        app:showAsAction="never" />
 </menu>

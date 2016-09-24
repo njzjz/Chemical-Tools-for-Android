@@ -18,6 +18,7 @@ import android.widget.ListView;
 
 import com.ikimuhendis.ldrawer.ActionBarDrawerToggle;
 import com.ikimuhendis.ldrawer.DrawerArrowDrawable;
+import com.mikepenz.aboutlibraries.Libs;
 
 public class TitleActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "com.njzjz.chemicalTools.MESSAGE";
@@ -82,9 +83,10 @@ public class TitleActivity extends AppCompatActivity {
                 res.getString(R.string.button_element),
                 res.getString(R.string.button_mass),
                 res.getString(R.string.button_exam),
-                res.getString(R.string.button_Settings),
                 res.getString(R.string.button_Share),
-                res.getString(R.string.button_Github),
+                res.getString(R.string.button_Settings),
+                res.getString(R.string.setting_feedback),
+                res.getString(R.string.button_About),
         };
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, values);
@@ -103,11 +105,11 @@ public class TitleActivity extends AppCompatActivity {
                         openMass(view);
                         break;
                     case 5:
-                        //Github
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/njzjz/Chemical-Tools-for-Android"));
+                        //Feedback
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:njzjz@msn.com?subject=Chemical Tools App Feedback"));
                         startActivity(browserIntent);
                         break;
-                    case 4:
+                    case 3:
                         //Share
                         Intent share = new Intent(Intent.ACTION_SEND);
                         share.setType("text/plain");
@@ -123,12 +125,13 @@ public class TitleActivity extends AppCompatActivity {
                         //Exam
                         openExam(view);
                         break;
-                    case 3:
+                    case 4:
                         //Settings
                         openSettings();
                         break;
                     case 6:
-
+                        //About
+                        new Libs.Builder().withActivityTitle(getString(R.string.button_About)).withFields(R.string.class.getFields()).start(TitleActivity.this);
                         break;
                 }
 
@@ -160,6 +163,13 @@ public class TitleActivity extends AppCompatActivity {
                 return true;
             case R.id.action_settings:
                 openSettings();
+                return true;
+            case R.id.action_Feedback:
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:njzjz@msn.com?subject=Chemical Tools App Feedback"));
+                startActivity(browserIntent);
+                return true;
+            case R.id.action_About:
+                new Libs.Builder().withActivityTitle(getString(R.string.button_About)).withFields(R.string.class.getFields()).start(TitleActivity.this);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
