@@ -2,7 +2,7 @@
     <string name="app_name">元素小管家</string>
     <string name="elementButton_name">查询</string>
     <string name="elementTextview_name">欢迎使用元素查询器！</string>
-    <string name="elementOutput_name">原子序数：%1$d\n元素名称：%2$s\n元素符号：%3$s\nIUPAC名：%5$s\n相对原子质量：%4$s\n元素名称含义：%6$s</string>
+    <string name="elementOutput_name">元素名称：%2$s\n元素符号：%3$s\nIUPAC名：%5$s\n原子序数：%1$d\n相对原子质量：%4$s\n元素名称含义：%6$s</string>
     <string name="error_name">输入错误，请重新输入！</string>
     <string name="button_element">元素查询</string>
     <string name="massTextview_name">欢迎使用质量计算器！</string>
@@ -50,4 +50,6 @@
     <string name="examEditText_name_IUPAC">请输入元素的IUPAC名。</string>
     <string name="examEditText_name_elementname">请输入元素名称。</string>
     <string name="examEditText_name_number">请输入元素的原子序数。</string>
+    <string name="button_open">打开</string>
+    <string name="button_notUsed">您从未使用过此功能，快来试试吧！</string>
 </resources>

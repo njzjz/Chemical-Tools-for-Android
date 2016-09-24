@@ -36,4 +36,19 @@
     <string name="examEditText_name_IUPAC">Please input the name of the element.</string>
     <string name="examEditText_name_elementname">Please input the Chinese name of the element.</string>
     <string name="examEditText_name_number">Please input the atomic number of the element.</string>
+    <string name="setting_mode_0">Answer symbols for elements according to Chinese names</string>
+    <string name="setting_mode_9">Answer Chinese names according to IUPAC names</string>
+    <string name="setting_mode_8">Answer IUPAC names according to atomic numbers</string>
+    <string name="setting_mode_7">Answer symbols for elements according to atomic numbers</string>
+    <string name="setting_mode_6">Answer Chinese names according to atomic numbers</string>
+    <string name="setting_mode">Exam Mode</string>
+    <string name="setting_mode_1">Answer atomic numbers according to Chinese names</string>
+    <string name="setting_mode_10">Answer symbols for elements according to IUPAC names</string>
+    <string name="setting_mode_11">Answer atomic numbers according to IUPAC names</string>
+    <string name="setting_mode_2">Answer IUPAC names according to Chinese names</string>
+    <string name="setting_mode_3">Answer Chinese names according to symbols for elements</string>
+    <string name="setting_mode_4">Answer atomic numbers according to symbols for elements</string>
+    <string name="setting_mode_5">Answer IUPAC names according to symbols for elements</string>
+    <string name="button_open">Open</string>
+    <string name="button_notUsed">You\\\'ve never used this function. Have a try!</string>
 </resources>

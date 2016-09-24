@@ -26,6 +26,11 @@ public class TitleActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerArrowDrawable drawerArrow;
     private boolean drawerArrowColor;
+    public static String historyElementOutput;
+    public static String historyMassOutput;
+    public static int examCorrectNumber;
+    public static int examIncorrectnumber;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +42,17 @@ public class TitleActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setHomeButtonEnabled(true);
 
+        historyElementOutput = PreferenceUtils.getPrefString(getApplicationContext(), "historyElementOutput", "");
+        historyMassOutput = PreferenceUtils.getPrefString(getApplicationContext(), "historyMassOutput", "");
+        examCorrectNumber=Integer.parseInt(PreferenceUtils.getPrefString(getApplicationContext(),"examCorrectNumber","0"));
+        examIncorrectnumber=Integer.parseInt(PreferenceUtils.getPrefString(getApplicationContext(),"examIncorrectnumber","0"));
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.navdrawer);
 
+        if (savedInstanceState == null) {
+            getFragmentManager().beginTransaction().add(R.id.container, new CardLayoutFragment()).commit();
+        }
 
         drawerArrow = new DrawerArrowDrawable(this) {
             @Override
@@ -122,6 +135,7 @@ public class TitleActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

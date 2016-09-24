@@ -20,7 +20,10 @@
         android:background="@android:color/background_light"
         android:weightSum="1"
         android:id="@+id/linearLayout">
-
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,16 +33,21 @@
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.06"
             android:maxLines="1"
-            android:hint="@string/elementEditText_name"/>
+            android:hint="@string/elementEditText_name"
+            android:layout_toLeftOf="@+id/elementButton"
+            android:layout_toStartOf="@+id/elementButton" />
         />
 
-        <Button
-            android:layout_width="132dp"
-            android:layout_height="wrap_content"
-            android:text="@string/elementButton_name"
-            android:id="@+id/elementButton"
-            android:layout_gravity="center_horizontal" />
-
+            <Button
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="@string/elementButton_name"
+                android:id="@+id/elementButton"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

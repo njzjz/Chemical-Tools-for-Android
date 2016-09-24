@@ -37,13 +37,13 @@ public class MainActivity extends AppCompatActivity {
         final String[] elementMassArray= getResources().getStringArray(R.array.elementMassArray);
         final String[] elementIUPACArray= getResources().getStringArray(R.array.elementIUPACArray);
         final String[] elementOriginArray= getResources().getStringArray(R.array.elementOriginArray);
+        final TextView elementTextview=(TextView)findViewById(R.id.elementTextview);
         elementButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 int i;
                 int elementNumber=0;
                 String elementInput;
                 EditText elementText =(EditText)findViewById(R.id.elementText);
-                TextView elementTextview=(TextView)findViewById(R.id.elementTextview);
                 elementInput=elementText.getText().toString();
                 for(i=0;i<118;i++) {
                     if (elementInput.equals(String.valueOf(i+1))){
@@ -58,8 +58,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 Resources res = getResources();
                 if(elementNumber>0){
-                    elementTextview.setText(String.format(res.getString(R.string.elementOutput_name),elementNumber,elementNameArray[elementNumber-1],elementAbbrArray[elementNumber-1],elementMassArray[elementNumber-1],elementIUPACArray[elementNumber-1],elementOriginArray[elementNumber-1]));
+                    String elementOutput=String.format(res.getString(R.string.elementOutput_name),elementNumber,elementNameArray[elementNumber-1],elementAbbrArray[elementNumber-1],elementMassArray[elementNumber-1],elementIUPACArray[elementNumber-1],elementOriginArray[elementNumber-1]);
+                    elementTextview.setText(elementOutput);
                     PreferenceUtils.setPrefString(getApplicationContext(),"historyElement",elementInput);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"historyElementOutput",elementOutput);
                 }else{
                     Snackbar.make(v, res.getString(R.string.error_name), Snackbar.LENGTH_LONG)
                             .setAction("Error", null).show();
@@ -83,11 +85,9 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        if(!PreferenceUtils.getPrefString(getApplicationContext(),"historyElement","").equals("")){
-            elementText.setText(PreferenceUtils.getPrefString(getApplicationContext(),"historyElement",""));
-            elementButton.callOnClick();
-            elementText.setText("");
-            elementText.setHint(getResources().getString(R.string.elementEditText_name));
+        String historyElementOutput=PreferenceUtils.getPrefString(getApplicationContext(),"historyElementOutput","");
+        if(!historyElementOutput.equals("")){
+            elementTextview.setText(historyElementOutput);
         }
     };
     @Override

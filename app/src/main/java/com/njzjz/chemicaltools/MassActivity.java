@@ -35,10 +35,10 @@ public class MassActivity extends AppCompatActivity {
         final String[] elementNameArray = getResources().getStringArray(R.array.elementNameArray);
         final String[] elementAbbrArray = getResources().getStringArray(R.array.elementAbbrArray);
         final String[] elementMassArray = getResources().getStringArray(R.array.elementMassArray);
+        final TextView massTextview = (TextView) findViewById(R.id.massTextview);
         massButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 EditText massText = (EditText) findViewById(R.id.massText);
-                TextView massTextview = (TextView) findViewById(R.id.massTextview);
                 String x = massText.getText().toString();
                 int l = x.length(), i = 0, n, s = 0, i2, c;
                 double m = 0;
@@ -179,8 +179,10 @@ public class MassActivity extends AppCompatActivity {
                     for(i=0;i<118;i++){
                         if(AtomNumber[i+1]>0){
                             massPer[i+1]=AtomNumber[i + 1] * Double.parseDouble(elementMassArray[i])/m*100;
-                            massTextview.setText(massTextview.getText().toString()+"\n"+String.format(res.getString(R.string.massper_name), elementNameArray[i],elementAbbrArray[i],AtomNumber[i+1],elementMassArray[i],massPer[i+1]));
+                            String massOutput=massTextview.getText().toString()+"\n"+String.format(res.getString(R.string.massper_name), elementNameArray[i],elementAbbrArray[i],AtomNumber[i+1],elementMassArray[i],massPer[i+1]);
+                            massTextview.setText(massOutput);
                             PreferenceUtils.setPrefString(getApplicationContext(),"historyMass",x);
+                            PreferenceUtils.setPrefString(getApplicationContext(),"historyMassOutput",massOutput);
                         }
                     }
                 } else {
@@ -208,11 +210,9 @@ public class MassActivity extends AppCompatActivity {
                 return false;
             }
         });
-        if(!PreferenceUtils.getPrefString(getApplicationContext(),"historyElement","").equals("")){
-            massText.setText(PreferenceUtils.getPrefString(getApplicationContext(),"historyMass",""));
-            massButton.callOnClick();
-            massText.setText("");
-            massText.setHint(getResources().getString(R.string.elementEditText_name));
+        String historyMassOutput=PreferenceUtils.getPrefString(getApplicationContext(),"historyMassOutput","");
+        if(!historyMassOutput.equals("")){
+            massTextview.setText(historyMassOutput);
         }
     };
 

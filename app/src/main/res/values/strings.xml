@@ -21,11 +21,11 @@
     <string name="examEditText_name_number">Please input the atomic number of the element.</string>
     <string name="examEditText_name_IUPAC">Please input the name of the element.</string>
     <string name="examButton_name">Input</string>
-    <string name="examScoreOutput_name">共回答：%1$d题 答对%2$d题 正确率：%3$.2f%%</string>
+    <string name="examScoreOutput_name">Total: %1$d Correct: %2$d Correct rate:%3$.2f%%</string>
     <string name="examShare_name">Hey! I answered %1$d questions on the app Chemical Tools and the correct rate is %2$.2f%%. Would like to have a try?</string>
     <!-- drawer -->
-    <string name="drawer_open">drawer_open</string>
-    <string name="drawer_close">drawer_close</string>
+    <string name="drawer_open" translatable="false">drawer_open</string>
+    <string name="drawer_close" translatable="false">drawer_close</string>
     <string name="button_element">Search Elements</string>
     <string name="button_mass">Calculate Mass</string>
     <string name="button_exam">Exam</string>
@@ -33,6 +33,8 @@
     <string name="button_Share">Share</string>
     <string name="button_About">About</string>
     <string name="button_Github">Github</string>
+    <string name="button_open">Open</string>
+    <string name="button_notUsed">You\'ve never used this function. Have a try!</string>
     <!-- Settings -->
     <string name="setting_elementnumber_limit">Atomic Number Limit</string>
     <string name="setting_rate">Rate this app</string>
@@ -45,16 +47,16 @@
     <string name="negative_button">NO</string>
     <!--  测试模式  -->
     <string name="setting_mode">Exam Mode</string>
-    <string name="setting_mode_0"></string>
-    <string name="setting_mode_1"></string>
-    <string name="setting_mode_2"></string>
-    <string name="setting_mode_3"></string>
-    <string name="setting_mode_4"></string>
-    <string name="setting_mode_5"></string>
-    <string name="setting_mode_6"></string>
-    <string name="setting_mode_7"></string>
-    <string name="setting_mode_8"></string>
-    <string name="setting_mode_9"></string>
-    <string name="setting_mode_10"></string>
-    <string name="setting_mode_11"></string>
+    <string name="setting_mode_0">Answer symbols for elements according to Chinese names</string>
+    <string name="setting_mode_1">Answer atomic numbers according to Chinese names</string>
+    <string name="setting_mode_2">Answer IUPAC names according to Chinese names</string>
+    <string name="setting_mode_3">Answer Chinese names according to symbols for elements</string>
+    <string name="setting_mode_4">Answer atomic numbers according to symbols for elements</string>
+    <string name="setting_mode_5">Answer IUPAC names according to symbols for elements</string>
+    <string name="setting_mode_6">Answer Chinese names according to atomic numbers</string>
+    <string name="setting_mode_7">Answer symbols for elements according to atomic numbers</string>
+    <string name="setting_mode_8">Answer IUPAC names according to atomic numbers</string>
+    <string name="setting_mode_9">Answer Chinese names according to IUPAC names</string>
+    <string name="setting_mode_10">Answer symbols for elements according to IUPAC names</string>
+    <string name="setting_mode_11">Answer atomic numbers according to IUPAC names</string>
 </resources>

@@ -10,30 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.njzjz.chemicaltools.ExamActivity">
 
-    <Button
-        android:layout_width="132dp"
-        android:layout_height="wrap_content"
-        android:text="@string/examButton_name"
-        android:id="@+id/examButton"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/examTextviewTop"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="54dp" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/examText"
-        android:imeOptions="actionSend"
-        android:inputType="text"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.06"
-        android:maxLines="1"
-        android:hint="@string/examEditText_name"
-        android:layout_below="@+id/examTextviewTop"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,7 +20,7 @@
         android:textColor="@color/abc_primary_text_material_light"
         android:scrollbars="vertical"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/examButton"
+        android:layout_below="@+id/relativeLayout1"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -66,4 +42,38 @@
         android:id="@+id/examScoreTextview"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/examTextviewTop"
+        android:layout_alignParentStart="true">
+
+        <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/examText"
+        android:imeOptions="actionSend"
+        android:inputType="text"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.06"
+        android:maxLines="1"
+        android:hint="@string/examEditText_name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/examButton"
+            android:layout_toStartOf="@+id/examButton" />
+
+        <Button
+            android:layout_height="wrap_content"
+            android:text="@string/examButton_name"
+            android:id="@+id/examButton"
+            android:layout_gravity="center_horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_width="80dp" />
+    </RelativeLayout>
 </RelativeLayout>

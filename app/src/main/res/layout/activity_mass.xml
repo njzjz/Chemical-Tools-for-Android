@@ -8,8 +8,22 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.njzjz.chemicaltools.MassActivity">
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
-    <EditText
+        <Button
+            android:layout_height="wrap_content"
+            android:text="@string/massButton_name"
+            android:id="@+id/massButton"
+            android:layout_gravity="center_horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_width="80dp" />
+
+        <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/massText"
@@ -17,20 +31,12 @@
         android:inputType="text"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.06"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:maxLines="1"
-        android:hint="@string/massEditText_name"/>
+            android:maxLines="1"
+        android:hint="@string/massEditText_name"
+            android:layout_toLeftOf="@+id/massButton"
+            android:layout_toStartOf="@+id/massButton" />
 
-    <Button
-        android:layout_width="132dp"
-        android:layout_height="wrap_content"
-        android:text="@string/massButton_name"
-        android:id="@+id/massButton"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/massText"
-        android:layout_centerHorizontal="true" />
-
+    </RelativeLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,8 +45,9 @@
         android:text="@string/massTextview_name"
         android:textSize="25dp"
         android:textColor="@color/abc_primary_text_material_light"
-        android:layout_below="@+id/massButton"
+        android:layout_below="@+id/relativeLayout1"
         android:layout_centerHorizontal="true"
         android:scrollbars="vertical"
         />
+
 </RelativeLayout>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="aboutLibraries_description_name">@string/app_name</string>
-    <string name="aboutLibraries_description_showIcon">true</string>
-    <string name="aboutLibraries_description_showVersion">true</string>
-  <string name="aboutLibraries_description_text">
+    <string name="aboutLibraries_description_name" translatable="false">@string/app_name</string>
+    <string name="aboutLibraries_description_showIcon" translatable="false">true</string>
+    <string name="aboutLibraries_description_showVersion" translatable="false">true</string>
+  <string name="aboutLibraries_description_text" translatable="false">
     <![CDATA[This is an Android app in material design. <br /><br /><b>You can fork me on <a href="https://github.com/njzjz/Chemical-Tools-for-Android">GitHub</a> </b>]]>
   </string>
 </resources>
