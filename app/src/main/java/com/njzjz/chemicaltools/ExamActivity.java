@@ -121,10 +121,10 @@ public class ExamActivity extends AppCompatActivity {
         textView.setText(output);
         switch (examMode){
             case "3":case"6":case"9":
-                editText.setHint(getResources().getString(R.string.examEditText_name));
+                editText.setHint(getResources().getString(R.string.examEditText_name_elementname));
                 break;
             case "0":case"7":case"10":
-                editText.setHint(getResources().getString(R.string.examEditText_name_elementname));
+                editText.setHint(getResources().getString(R.string.examEditText_name));
                 break;
             case "1":case"4":case"11":
                 editText.setHint(getResources().getString(R.string.examEditText_name_number));
