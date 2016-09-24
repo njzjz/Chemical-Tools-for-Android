@@ -77,7 +77,7 @@ public class ExamActivity extends AppCompatActivity {
                     examCorrectNumber++;
                     PreferenceUtils.setPrefString(getApplicationContext(),"examCorrectNumber",String.valueOf(examCorrectNumber));
                 }else{
-                    examTextview.setText(String.format(getResources().getString(R.string.examOutputWrong_name),elementAbbrArray[examElementnumber[0]],examInput));
+                    examTextview.setText(String.format(getResources().getString(R.string.examOutputWrong_name),correctAnswer,examInput));
                     examIncorrectnumber++;
                     PreferenceUtils.setPrefString(getApplicationContext(),"examIncorrectnumber",String.valueOf(examIncorrectnumber));
                 }
