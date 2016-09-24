@@ -33,4 +33,21 @@
     <string name="negative_button">取消</string>
     <string name="examScoreOutput_name">共回答%1$d题，其中%2$d题正确，正确率为%3$.2f%%</string>
     <string name="examShare_name">我在元素记忆测试中回答了%1$d道题，正确率高达%2$.2f%%！快下载元素小管家挑战我吧！</string>
+
+    <string name="setting_mode_0">根据元素名称回答元素符号</string>
+    <string name="setting_mode_1">根据元素名称回答原子序数</string>
+    <string name="setting_mode_2">根据元素名称回答IUPAC名</string>
+    <string name="setting_mode_3">根据元素符号回答元素名称</string>
+    <string name="setting_mode">测试模式</string>
+    <string name="setting_mode_11">根据IUPAC名回答原子序数</string>
+    <string name="setting_mode_10">根据IUPAC名回答元素符号</string>
+    <string name="setting_mode_9">根据IUPAC名回答元素名称</string>
+    <string name="setting_mode_8">根据原子序数回答IUPAC名</string>
+    <string name="setting_mode_7">根据原子序数回答元素符号</string>
+    <string name="setting_mode_6">根据原子序数回答元素名称</string>
+    <string name="setting_mode_4">根据元素符号回答原子序数</string>
+    <string name="setting_mode_5">根据元素符号回答IUPAC名</string>
+    <string name="examEditText_name_IUPAC">请输入元素的IUPAC名。</string>
+    <string name="examEditText_name_elementname">请输入元素名称。</string>
+    <string name="examEditText_name_number">请输入元素的原子序数。</string>
 </resources>

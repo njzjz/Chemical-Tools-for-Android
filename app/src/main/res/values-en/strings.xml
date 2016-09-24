@@ -33,4 +33,7 @@
     <string name="postive_button">Yes</string>
     <string name="examScoreOutput_name">Total: %1$d Correct: %2$d Correct rate:%3$.2f%%</string>
     <string name="examShare_name">Hey! I answered %1$d questions on the app Chemical Tools and the correct rate is %2$.2f%%. Would like to have a try?</string>
+    <string name="examEditText_name_IUPAC">Please input the name of the element.</string>
+    <string name="examEditText_name_elementname">Please input the Chinese name of the element.</string>
+    <string name="examEditText_name_number">Please input the atomic number of the element.</string>
 </resources>

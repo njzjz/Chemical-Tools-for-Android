@@ -14,21 +14,22 @@
         <item>86</item>
         <item>118</item>
     </string-array>
-    <string-array name="settings_entries_examType">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10</item>
-        <item>11</item>
-        <item>12</item>
+    <string-array name="settings_entries_examMode">
+        <item>@string/setting_mode_0</item>
+        <item>@string/setting_mode_1</item>
+        <item>@string/setting_mode_2</item>
+        <item>@string/setting_mode_3</item>
+        <item>@string/setting_mode_4</item>
+        <item>@string/setting_mode_5</item>
+        <item>@string/setting_mode_6</item>
+        <item>@string/setting_mode_7</item>
+        <item>@string/setting_mode_8</item>
+        <item>@string/setting_mode_9</item>
+        <item>@string/setting_mode_10</item>
+        <item>@string/setting_mode_11</item>
     </string-array>
-    <string-array name="settings_entry_values_examType">
+    <string-array name="settings_entry_values_examMode">
+        <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -40,7 +41,6 @@
         <item>9</item>
         <item>10</item>
         <item>11</item>
-        <item>12</item>
     </string-array>
     <!--
     <string-array name="settings_entries_post_limit">

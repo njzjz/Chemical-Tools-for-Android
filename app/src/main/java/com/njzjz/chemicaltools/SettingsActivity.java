@@ -66,7 +66,6 @@ public class SettingsActivity extends AppCompatActivity {
                             }
                         }
                 );
-
                 ListPreference elementnumber_limitList= (ListPreference) findPreference("elementnumber_limit");
                 switch (PreferenceUtils.getPrefString(getApplicationContext(),"elementnumber_limit","118")){
                     case "18":
@@ -84,7 +83,56 @@ public class SettingsActivity extends AppCompatActivity {
                     case "118":
                         elementnumber_limitList.setValueIndex(4);
                         break;
-                }
+                };
+                findPreference("examMode").setOnPreferenceChangeListener(
+                        new Preference.OnPreferenceChangeListener() {
+                            @Override
+                            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                                String examMode=newValue.toString();
+                                PreferenceUtils.setPrefString(getApplicationContext(),"examMode",examMode);
+                                return true;
+                            }
+                        }
+                );
+                ListPreference examModeList= (ListPreference) findPreference("examMode");
+                switch (PreferenceUtils.getPrefString(getApplicationContext(),"examMode","0")){
+                    case "0":
+                        examModeList.setValueIndex(0);
+                        break;
+                    case "1":
+                        examModeList.setValueIndex(1);
+                        break;
+                    case "2":
+                        examModeList.setValueIndex(2);
+                        break;
+                    case "3":
+                        examModeList.setValueIndex(3);
+                        break;
+                    case "4":
+                        examModeList.setValueIndex(4);
+                        break;
+                    case "5":
+                        examModeList.setValueIndex(5);
+                        break;
+                    case "6":
+                        examModeList.setValueIndex(6);
+                        break;
+                    case "7":
+                        examModeList.setValueIndex(7);
+                        break;
+                    case "8":
+                        examModeList.setValueIndex(8);
+                        break;
+                    case "9":
+                        examModeList.setValueIndex(9);
+                        break;
+                    case "10":
+                        examModeList.setValueIndex(10);
+                        break;
+                    case "11":
+                        examModeList.setValueIndex(11);
+                        break;
+                };
             }
 
         };

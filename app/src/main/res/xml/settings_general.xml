@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/button_exam">
+        <ListPreference android:title="@string/setting_mode"
+            android:key="examMode"
+            android:defaultValue="0"
+            android:entryValues="@array/settings_entry_values_examMode"
+            android:entries="@array/settings_entries_examMode"/>
         <ListPreference android:title="@string/setting_elementnumber_limit"
             android:key="elementnumber_limit"
             android:defaultValue="118"

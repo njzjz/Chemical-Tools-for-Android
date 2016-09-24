@@ -31,8 +31,10 @@ public class ExamActivity extends AppCompatActivity {
         final Button examButton = (Button) findViewById(R.id.examButton);
         final String[] elementNameArray = getResources().getStringArray(R.array.elementNameArray);
         final String[] elementAbbrArray = getResources().getStringArray(R.array.elementAbbrArray);
+        final String[] elementIUPACArray = getResources().getStringArray(R.array.elementIUPACArray);
         final TextView examTextviewTop = (TextView) findViewById(R.id.examTextviewTop);
-        final int[] examElementnumber = {examReflesh(examTextviewTop, elementNameArray)};
+        final String[] examMode = {PreferenceUtils.getPrefString(getApplicationContext(), "examMode", "0")};
+        final int[] examElementnumber = {examReflesh(examTextviewTop,examText, elementNameArray,elementAbbrArray,elementIUPACArray, examMode[0])};
         examText.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 examText.setHint(null);
@@ -55,7 +57,22 @@ public class ExamActivity extends AppCompatActivity {
                 TextView examTextview = (TextView) findViewById(R.id.examTextview);
                 int examCorrectNumber=Integer.parseInt(PreferenceUtils.getPrefString(getApplicationContext(),"examCorrectNumber","0"));
                 int examIncorrectnumber=Integer.parseInt(PreferenceUtils.getPrefString(getApplicationContext(),"examIncorrectnumber","0"));
-                if(examInput.toUpperCase().equals(elementAbbrArray[examElementnumber[0]].toUpperCase())){
+                String correctAnswer="";
+                switch (examMode[0]){
+                    case "3":case"6":case"9":
+                        correctAnswer=elementNameArray[examElementnumber[0]];
+                        break;
+                    case "0":case"7":case"10":
+                        correctAnswer=elementAbbrArray[examElementnumber[0]];
+                        break;
+                    case "1":case"4":case"11":
+                        correctAnswer=String.valueOf(examElementnumber[0]+1);
+                        break;
+                    case "2":case"5":case"8":
+                        correctAnswer=elementIUPACArray[examElementnumber[0]];
+                        break;
+                }
+                if(examInput.toUpperCase().equals(correctAnswer.toUpperCase())){
                     examTextview.setText(getResources().getString(R.string.examOutputRight_name));
                     examCorrectNumber++;
                     PreferenceUtils.setPrefString(getApplicationContext(),"examCorrectNumber",String.valueOf(examCorrectNumber));
@@ -65,7 +82,8 @@ public class ExamActivity extends AppCompatActivity {
                     PreferenceUtils.setPrefString(getApplicationContext(),"examIncorrectnumber",String.valueOf(examIncorrectnumber));
                 }
                 examScoreOutput(examCorrectNumber,examIncorrectnumber);
-                examElementnumber[0] =examReflesh(examTextviewTop,elementNameArray);
+                examMode[0] =PreferenceUtils.getPrefString(getApplicationContext(),"examMode","0");
+                examElementnumber[0] =examReflesh(examTextviewTop,examText,elementNameArray,elementAbbrArray,elementIUPACArray, examMode[0]);
                 examText.setText("");
             }
         });
@@ -81,11 +99,40 @@ public class ExamActivity extends AppCompatActivity {
         examScoreTextview.setText(String.format(getResources().getString(R.string.examScoreOutput_name),sum,examCorrectNumber,examCorrectPercent));
     }
 
-    public int examReflesh(TextView textView,String[] elementNameArray){
+    public int examReflesh(TextView textView,EditText editText,String[] elementNameArray,String[] elementAbbrArray,String[] elementIUPACArray,String examMode){
         final double d = Math.random();
         int elementnumber_limit=Integer.parseInt(PreferenceUtils.getPrefString(getApplicationContext(),"elementnumber_limit","118"));
         final int i = (int)(d*elementnumber_limit);
-        textView.setText(elementNameArray[i]);
+        String output="";
+        switch (examMode){
+            case "0":case"1":case"2":
+                output=elementNameArray[i];
+                break;
+            case "3":case"4":case"5":
+                output=elementAbbrArray[i];
+                break;
+            case "6":case"7":case"8":
+                output=String.valueOf(i+1);
+                break;
+            case "9":case"10":case"11":
+                output=elementIUPACArray[i];
+                break;
+        }
+        textView.setText(output);
+        switch (examMode){
+            case "3":case"6":case"9":
+                editText.setHint(getResources().getString(R.string.elementEditText_name));
+                break;
+            case "0":case"7":case"10":
+                editText.setHint(getResources().getString(R.string.examEditText_name_elementname));
+                break;
+            case "1":case"4":case"11":
+                editText.setHint(getResources().getString(R.string.examEditText_name_number));
+                break;
+            case "2":case"5":case"8":
+                editText.setHint(getResources().getString(R.string.examEditText_name_IUPAC));
+                break;
+        }
         return i;
     }
 

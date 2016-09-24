@@ -17,6 +17,9 @@
     <string name="examOutputRight_name">Your answer was right.</string>
     <string name="examOutputWrong_name">Your answer was wrong.\nThe correct answer: %1$s\nYour answer: %2$s</string>
     <string name="examEditText_name">Please input symbol of the element.</string>
+    <string name="examEditText_name_elementname">Please input the Chinese name of the element.</string>
+    <string name="examEditText_name_number">Please input the atomic number of the element.</string>
+    <string name="examEditText_name_IUPAC">Please input the name of the element.</string>
     <string name="examButton_name">Input</string>
     <string name="examScoreOutput_name">共回答：%1$d题 答对%2$d题 正确率：%3$.2f%%</string>
     <string name="examShare_name">Hey! I answered %1$d questions on the app Chemical Tools and the correct rate is %2$.2f%%. Would like to have a try?</string>
@@ -40,4 +43,18 @@
     <string name="setting_message">Do you want to clear settings?</string>
     <string name="postive_button">Yes</string>
     <string name="negative_button">NO</string>
+    <!--  测试模式  -->
+    <string name="setting_mode">Exam Mode</string>
+    <string name="setting_mode_0"></string>
+    <string name="setting_mode_1"></string>
+    <string name="setting_mode_2"></string>
+    <string name="setting_mode_3"></string>
+    <string name="setting_mode_4"></string>
+    <string name="setting_mode_5"></string>
+    <string name="setting_mode_6"></string>
+    <string name="setting_mode_7"></string>
+    <string name="setting_mode_8"></string>
+    <string name="setting_mode_9"></string>
+    <string name="setting_mode_10"></string>
+    <string name="setting_mode_11"></string>
 </resources>
