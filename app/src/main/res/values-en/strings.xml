@@ -51,4 +51,6 @@
     <string name="setting_mode_5">Answer IUPAC names according to symbols for elements</string>
     <string name="button_open">Open</string>
     <string name="button_notUsed">You\\\'ve never used this function. Have a try!</string>
+    <string name="button_doyouknow">Do you know?</string>
+    <string name="Change">Change</string>
 </resources>

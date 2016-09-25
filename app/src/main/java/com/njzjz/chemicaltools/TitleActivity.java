@@ -31,6 +31,8 @@ public class TitleActivity extends AppCompatActivity {
     public static String historyMassOutput;
     public static int examCorrectNumber;
     public static int examIncorrectnumber;
+    public static String[] doyouknowArray;
+    public static String doyouknowText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class TitleActivity extends AppCompatActivity {
         historyMassOutput = PreferenceUtils.getPrefString(getApplicationContext(), "historyMassOutput", "");
         examCorrectNumber=Integer.parseInt(PreferenceUtils.getPrefString(getApplicationContext(),"examCorrectNumber","0"));
         examIncorrectnumber=Integer.parseInt(PreferenceUtils.getPrefString(getApplicationContext(),"examIncorrectnumber","0"));
+        doyouknowArray = getResources().getStringArray(R.array.doyouknow);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.navdrawer);

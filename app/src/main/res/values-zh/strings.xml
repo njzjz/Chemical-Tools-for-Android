@@ -52,4 +52,6 @@
     <string name="examEditText_name_number">请输入元素的原子序数。</string>
     <string name="button_open">打开</string>
     <string name="button_notUsed">您从未使用过此功能，快来试试吧！</string>
+    <string name="button_doyouknow">你知道吗？</string>
+    <string name="Change">换一个</string>
 </resources>

@@ -14,13 +14,17 @@ public class CardsAdapter extends BaseAdapter {
 
     private List<String> items1;
     private List<String> items2;
+    private List<String> itemsButton1;
+    private List<String> itemsButton2;
     private final OnClickListener itemButtonClickListener;
     private final Context context;
 
-    public CardsAdapter(Context context, List<String> items1,List<String> items2, OnClickListener itemButtonClickListener) {
+    public CardsAdapter(Context context, List<String> items1,List<String> items2,List<String> itemsButton1,List<String> itemsButton2, OnClickListener itemButtonClickListener) {
         this.context = context;
         this.items1= items1;
         this.items2= items2;
+        this.itemsButton1=itemsButton1;
+        this.itemsButton2=itemsButton2;
         this.itemButtonClickListener = itemButtonClickListener;
     }
 
@@ -60,6 +64,8 @@ public class CardsAdapter extends BaseAdapter {
 
         holder.itemText1.setText(items1.get(position));
         holder.itemText2.setText(items2.get(position));
+        holder.itemButton1.setText(itemsButton1.get(position));
+        holder.itemButton2.setText(itemsButton2.get(position));
 
         if (itemButtonClickListener != null) {
             holder.itemButton1.setOnClickListener(itemButtonClickListener);
