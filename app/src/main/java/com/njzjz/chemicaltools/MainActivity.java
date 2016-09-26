@@ -3,6 +3,7 @@ package com.njzjz.chemicaltools;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -18,6 +19,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mikepenz.aboutlibraries.Libs;
@@ -63,7 +65,12 @@ public class MainActivity extends AppCompatActivity {
                 if(elementNumber>0){
                     String elementOutput=String.format(res.getString(R.string.elementOutput_name),elementNumber,elementNameArray[elementNumber-1],elementAbbrArray[elementNumber-1],elementMassArray[elementNumber-1],elementIUPACArray[elementNumber-1],elementOriginArray[elementNumber-1]);
                     elementTextview.setText(elementOutput);
+                    TypedArray elementPictureArray = getResources().obtainTypedArray(R.array.elementPictureArray);
+                    int  resId = elementPictureArray.getResourceId(elementNumber-1, 0);
+                    ImageView elementImage=(ImageView) findViewById(R.id.elementImage);
+                    elementImage.setImageResource(resId);
                     PreferenceUtils.setPrefString(getApplicationContext(),"historyElement",elementInput);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"historyElementNumber",String.valueOf(elementNumber));
                     PreferenceUtils.setPrefString(getApplicationContext(),"historyElementOutput",elementOutput);
                 }else{
                     Snackbar.make(v, res.getString(R.string.error_name), Snackbar.LENGTH_LONG)
@@ -88,6 +95,14 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        String historyElementNumber=PreferenceUtils.getPrefString(getApplicationContext(),"historyElementNumber","0");
+        int elementNumber=Integer.parseInt(historyElementNumber);
+        if (elementNumber>0) {
+            TypedArray elementPictureArray = getResources().obtainTypedArray(R.array.elementPictureArray);
+            int resId = elementPictureArray.getResourceId(elementNumber - 1, 0);
+            ImageView elementImage = (ImageView) findViewById(R.id.elementImage);
+            elementImage.setImageResource(resId);
+        }
         String historyElementOutput=PreferenceUtils.getPrefString(getApplicationContext(),"historyElementOutput","");
         if(!historyElementOutput.equals("")){
             elementTextview.setText(historyElementOutput);
