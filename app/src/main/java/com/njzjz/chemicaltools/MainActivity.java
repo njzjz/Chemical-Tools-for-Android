@@ -9,14 +9,18 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ListPopupWindow;
 import android.text.method.ScrollingMovementMethod;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,7 +28,11 @@ import android.widget.TextView;
 
 import com.mikepenz.aboutlibraries.Libs;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnTouchListener,
+        AdapterView.OnItemClickListener {
+    private EditText etTest;
+    private ListPopupWindow lpw;
+    private String[] list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +115,40 @@ public class MainActivity extends AppCompatActivity {
         if(!historyElementOutput.equals("")){
             elementTextview.setText(historyElementOutput);
         }
-    };
+
+        etTest = (EditText) findViewById(R.id.elementText);
+        etTest.setOnTouchListener((View.OnTouchListener) this);
+
+        list = elementAbbrArray;
+        lpw = new ListPopupWindow(this);
+        lpw.setAdapter(new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, list));
+        lpw.setAnchorView(etTest);
+        lpw.setModal(true);
+        lpw.setOnItemClickListener((AdapterView.OnItemClickListener) this);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position,
+                            long id) {
+        String item = list[position];
+        etTest.setText(item);
+        lpw.dismiss();
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        final int DRAWABLE_RIGHT = 2;
+
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            if (event.getX() >= (v.getWidth() - ((EditText) v)
+                    .getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                lpw.show();
+                return true;
+            }
+        }
+        return false;
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

@@ -36,7 +36,9 @@
             android:maxLines="1"
             android:hint="@string/elementEditText_name"
             android:layout_toLeftOf="@+id/elementButton"
-            android:layout_toStartOf="@+id/elementButton" />
+            android:layout_toStartOf="@+id/elementButton"
+            android:drawableRight="@drawable/numberpicker_down_normal_holo_light"
+            />
         />
 
             <Button
