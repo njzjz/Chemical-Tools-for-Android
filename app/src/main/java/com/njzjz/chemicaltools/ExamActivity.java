@@ -75,12 +75,27 @@ public class ExamActivity extends AppCompatActivity {
                         correctAnswer=elementIUPACArray[examElementnumber[0]];
                         break;
                 }
+                String output="";
+                switch (examMode[0]){
+                    case "0":case"1":case"2":
+                        output=elementNameArray[examElementnumber[0]];
+                        break;
+                    case "3":case"4":case"5":
+                        output=elementAbbrArray[examElementnumber[0]];
+                        break;
+                    case "6":case"7":case"8":
+                        output=String.valueOf(examElementnumber[0]+1);
+                        break;
+                    case "9":case"10":case"11":
+                        output=elementIUPACArray[examElementnumber[0]];
+                        break;
+                }
                 if(examInput.toUpperCase().equals(correctAnswer.toUpperCase())){
                     examTextview.setText(getResources().getString(R.string.examOutputRight_name));
                     examCorrectNumber++;
                     PreferenceUtils.setPrefString(getApplicationContext(),"examCorrectNumber",String.valueOf(examCorrectNumber));
                 }else{
-                    examTextview.setText(String.format(getResources().getString(R.string.examOutputWrong_name),correctAnswer,examInput));
+                    examTextview.setText(String.format(getResources().getString(R.string.examOutputWrong_name),correctAnswer,examInput,output));
                     examIncorrectnumber++;
                     PreferenceUtils.setPrefString(getApplicationContext(),"examIncorrectnumber",String.valueOf(examIncorrectnumber));
                 }

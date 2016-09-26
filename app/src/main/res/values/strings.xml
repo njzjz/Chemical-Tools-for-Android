@@ -15,7 +15,7 @@
     <!-- Exam -->
     <string name="examTextview_name">Welcome to exam.</string>
     <string name="examOutputRight_name">Your answer was right.</string>
-    <string name="examOutputWrong_name">Your answer was wrong.\nThe correct answer: %1$s\nYour answer: %2$s</string>
+    <string name="examOutputWrong_name">Your answer was wrong.\nThe correct answer: %1$s\nThe question: %3$s \nYour answer: %2$s</string>
     <string name="examEditText_name">Please input symbol of the element.</string>
     <string name="examEditText_name_elementname">Please input the Chinese name of the element.</string>
     <string name="examEditText_name_number">Please input the atomic number of the element.</string>
