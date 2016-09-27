@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mikepenz.aboutlibraries.Libs;
+import com.tencent.stat.StatService;
 
 public class SettingsActivity extends AppCompatActivity {
     @Override
@@ -134,7 +135,16 @@ public class SettingsActivity extends AppCompatActivity {
                 .replace(R.id.include_settings_container, fragment)
                 .commit();
     }
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        StatService.onResume(this);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        StatService.onPause(this);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.mikepenz.aboutlibraries.Libs;
+import com.tencent.stat.StatService;
 
 public class MassActivity extends AppCompatActivity {
 
@@ -219,6 +220,16 @@ public class MassActivity extends AppCompatActivity {
         }
     };
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        StatService.onResume(this);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        StatService.onPause(this);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

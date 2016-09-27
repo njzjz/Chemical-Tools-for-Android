@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mikepenz.aboutlibraries.Libs;
+import com.tencent.stat.StatService;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -225,7 +226,16 @@ public class ExamActivity extends AppCompatActivity {
         }
         return i;
     }
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        StatService.onResume(this);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        StatService.onPause(this);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

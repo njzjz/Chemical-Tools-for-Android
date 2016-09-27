@@ -19,6 +19,8 @@ import android.widget.ListView;
 import com.ikimuhendis.ldrawer.ActionBarDrawerToggle;
 import com.ikimuhendis.ldrawer.DrawerArrowDrawable;
 import com.mikepenz.aboutlibraries.Libs;
+import com.tencent.stat.MtaSDkException;
+import com.tencent.stat.StatService;
 
 public class TitleActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "com.njzjz.chemicalTools.MESSAGE";
@@ -38,6 +40,21 @@ public class TitleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_title);
+
+        String appkey = "A55JRMC53SPT";
+        // 在startStatService之前调用StatConfig配置类接口，使得MTA配置及时生效
+        // 初始化并启动MTA
+        // 第三方SDK必须按以下代码初始化MTA，其中appkey为规定的格式或MTA分配的代码。
+        // 其它普通的app可自行选择是否调用
+        try {
+            // 第三个参数必须为：com.tencent.stat.common.StatConstants.VERSION
+            StatService.startStatService(this, appkey,
+                    com.tencent.stat.common.StatConstants.VERSION);
+        } catch (MtaSDkException e) {
+            // MTA初始化失败
+
+        }
+
 
         ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.home);
@@ -140,6 +157,16 @@ public class TitleActivity extends AppCompatActivity {
 
             }
         });
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        StatService.onResume(this);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        StatService.onPause(this);
     }
 
     @Override

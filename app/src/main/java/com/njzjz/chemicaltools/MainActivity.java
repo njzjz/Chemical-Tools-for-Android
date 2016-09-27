@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mikepenz.aboutlibraries.Libs;
+import com.tencent.stat.StatService;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener,
         AdapterView.OnItemClickListener {
@@ -127,7 +128,16 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         lpw.setModal(true);
         lpw.setOnItemClickListener((AdapterView.OnItemClickListener) this);
     }
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        StatService.onResume(this);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        StatService.onPause(this);
+    }
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
