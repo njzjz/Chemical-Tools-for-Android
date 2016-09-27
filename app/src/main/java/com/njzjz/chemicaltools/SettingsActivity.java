@@ -7,6 +7,7 @@ package com.njzjz.chemicaltools;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -60,14 +61,20 @@ public class SettingsActivity extends AppCompatActivity {
                         new Preference.OnPreferenceChangeListener() {
                             @Override
                             public boolean onPreferenceChange(Preference preference, Object newValue) {
+                                ListPreference elementnumber_limitList= (ListPreference) findPreference("elementnumber_limit");
                                 String elementnumber_limit=newValue.toString();
                                 PreferenceUtils.setPrefString(getApplicationContext(),"elementnumber_limit",elementnumber_limit);
+                                elementnumber_limitList.setSummary(elementnumber_limit);
+                                Intent intent=new Intent();
+                                intent.putExtra("result","1");
+                                setResult(1001,intent);
                                 return true;
                             }
                         }
                 );
                 ListPreference elementnumber_limitList= (ListPreference) findPreference("elementnumber_limit");
-                switch (PreferenceUtils.getPrefString(getApplicationContext(),"elementnumber_limit","118")){
+                String elementnumber_limit=PreferenceUtils.getPrefString(getApplicationContext(),"elementnumber_limit","118");
+                switch (elementnumber_limit){
                     case "18":
                         elementnumber_limitList.setValueIndex(0);
                         break;
@@ -84,55 +91,42 @@ public class SettingsActivity extends AppCompatActivity {
                         elementnumber_limitList.setValueIndex(4);
                         break;
                 };
+                elementnumber_limitList.setSummary(elementnumber_limit);
                 findPreference("examMode").setOnPreferenceChangeListener(
                         new Preference.OnPreferenceChangeListener() {
                             @Override
                             public boolean onPreferenceChange(Preference preference, Object newValue) {
+                                ListPreference examModeList= (ListPreference) findPreference("examMode");
                                 String examMode=newValue.toString();
                                 PreferenceUtils.setPrefString(getApplicationContext(),"examMode",examMode);
+                                examModeList.setSummary(examModeList.getEntries()[Integer.parseInt(examMode)]);
+                                Intent intent=new Intent();
+                                intent.putExtra("result","1");
+                                setResult(1001,intent);
                                 return true;
                             }
                         }
                 );
                 ListPreference examModeList= (ListPreference) findPreference("examMode");
-                switch (PreferenceUtils.getPrefString(getApplicationContext(),"examMode","0")){
-                    case "0":
-                        examModeList.setValueIndex(0);
-                        break;
-                    case "1":
-                        examModeList.setValueIndex(1);
-                        break;
-                    case "2":
-                        examModeList.setValueIndex(2);
-                        break;
-                    case "3":
-                        examModeList.setValueIndex(3);
-                        break;
-                    case "4":
-                        examModeList.setValueIndex(4);
-                        break;
-                    case "5":
-                        examModeList.setValueIndex(5);
-                        break;
-                    case "6":
-                        examModeList.setValueIndex(6);
-                        break;
-                    case "7":
-                        examModeList.setValueIndex(7);
-                        break;
-                    case "8":
-                        examModeList.setValueIndex(8);
-                        break;
-                    case "9":
-                        examModeList.setValueIndex(9);
-                        break;
-                    case "10":
-                        examModeList.setValueIndex(10);
-                        break;
-                    case "11":
-                        examModeList.setValueIndex(11);
-                        break;
-                };
+                int examMode=Integer.parseInt(PreferenceUtils.getPrefString(getApplicationContext(),"examMode","0"));
+                examModeList.setValueIndex(examMode);
+                examModeList.setSummary(examModeList.getEntry());
+                findPreference("setting_examOptionMode").setOnPreferenceChangeListener(
+                        new Preference.OnPreferenceChangeListener() {
+                            @Override
+                            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                                boolean setting_examOptionMode=Boolean.valueOf(newValue.toString());
+                                PreferenceUtils.setPrefBoolean(getApplicationContext(),"setting_examOptionMode",setting_examOptionMode);
+                                Intent intent=new Intent();
+                                intent.putExtra("result","1");
+                                setResult(1001,intent);
+                                return true;
+                            }
+                        }
+                );
+                CheckBoxPreference setting_examOptionModeCheck= (CheckBoxPreference) findPreference("setting_examOptionMode");
+                Boolean setting_examOptionMode=PreferenceUtils.getPrefBoolean(getApplicationContext(),"setting_examOptionMode",false);
+                setting_examOptionModeCheck.setChecked(setting_examOptionMode); ;
             }
 
         };
@@ -140,6 +134,7 @@ public class SettingsActivity extends AppCompatActivity {
                 .replace(R.id.include_settings_container, fragment)
                 .commit();
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -165,6 +160,9 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 PreferenceUtils.clearPreference(getApplicationContext(), PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
+                finish();
+                Intent intent = new Intent(SettingsActivity.this, SettingsActivity.class);
+                startActivity(intent);
             }
         });
         builder.setNegativeButton(R.string.negative_button, new DialogInterface.OnClickListener() {

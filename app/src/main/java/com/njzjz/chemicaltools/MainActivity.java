@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                             .setAction("Error", null).show();
                 };
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                imm.hideSoftInputFromWindow(MainActivity.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             };
         });
         final EditText elementText = (EditText) findViewById(R.id.elementText);
@@ -134,6 +134,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         String item = list[position];
         etTest.setText(item);
         lpw.dismiss();
+        Button elementButton=(Button)findViewById(R.id.elementButton);
+        elementButton.callOnClick();
     }
 
     @Override
@@ -144,6 +146,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             if (event.getX() >= (v.getWidth() - ((EditText) v)
                     .getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
                 lpw.show();
+                String historyElementNumber=PreferenceUtils.getPrefString(getApplicationContext(),"historyElementNumber","0");
+                int elementNumber=Integer.parseInt(historyElementNumber);
+                lpw.setSelection(elementNumber-1);
                 return true;
             }
         }

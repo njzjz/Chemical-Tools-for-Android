@@ -11,6 +11,11 @@
             android:defaultValue="118"
             android:entryValues="@array/settings_entry_values_elementnumber_limit"
             android:entries="@array/settings_entries_elementnumber_limit"/>
+        <CheckBoxPreference android:title="@string/setting_examOptionMode"
+            android:key="setting_examOptionMode"
+            android:defaultValue="false"
+            android:summaryOn="@string/setting_examOptionModeOn"
+            android:summaryOff="@string/setting_examOptionModeOff"/>
     </PreferenceCategory>
     <!-- 示例 !-->
     <!--

@@ -53,4 +53,7 @@
     <string name="button_notUsed">You\\\'ve never used this function. Have a try!</string>
     <string name="button_doyouknow">Do you know?</string>
     <string name="Change">Change</string>
+    <string name="setting_examOptionMode">Giving options</string>
+    <string name="setting_examOptionModeOff">You need to answer questions by yourself.</string>
+    <string name="setting_examOptionModeOn">You\'ll be gived options when answering questions.</string>
 </resources>

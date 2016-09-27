@@ -47,6 +47,9 @@
     <string name="setting_message">Do you want to clear settings?</string>
     <string name="postive_button">Yes</string>
     <string name="negative_button">NO</string>
+    <string name="setting_examOptionMode">Giving options</string>
+    <string name="setting_examOptionModeOn">You\'ll be gived options when answering questions.</string>
+    <string name="setting_examOptionModeOff">You need to answer questions by yourself.</string>
     <!--  测试模式  -->
     <string name="setting_mode">Exam Mode</string>
     <string name="setting_mode_0">Answer symbols for elements according to Chinese names</string>

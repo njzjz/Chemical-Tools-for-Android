@@ -20,7 +20,7 @@
         android:textColor="@color/abc_primary_text_material_light"
         android:scrollbars="vertical"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/relativeLayout1"
+        android:layout_below="@+id/relativeLayout2"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -75,5 +75,83 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_width="80dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <LinearLayout
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Optionbutton_line1">
+
+            <Button
+                android:id="@+id/Optionbutton_1"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dip"
+                android:layout_weight="0.5"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:text="Option1"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/Optionbutton_2"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dip"
+                android:layout_weight="0.5"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:text="Option2"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                android:textAllCaps="false"/>
+        </LinearLayout>
+        <LinearLayout
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Optionbutton_line2"
+            android:layout_below="@+id/Optionbutton_line1">
+
+            <Button
+                android:id="@+id/Optionbutton_3"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dip"
+                android:layout_weight="0.5"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:text="Option3"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/Optionbutton_4"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dip"
+                android:layout_weight="0.5"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:text="Option4"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                android:textAllCaps="false"/>
+        </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>

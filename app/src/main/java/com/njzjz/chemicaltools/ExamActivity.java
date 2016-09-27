@@ -3,6 +3,7 @@ package com.njzjz.chemicaltools;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
@@ -14,9 +15,15 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mikepenz.aboutlibraries.Libs;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 public class ExamActivity extends AppCompatActivity {
 
@@ -29,6 +36,10 @@ public class ExamActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setHomeButtonEnabled(true);
         TextView mFileContentView = (TextView) findViewById(R.id.examTextview);
+        final Button Optionbutton_1=(Button) findViewById(R.id.Optionbutton_1);
+        final Button Optionbutton_2=(Button) findViewById(R.id.Optionbutton_2);
+        final Button Optionbutton_3=(Button) findViewById(R.id.Optionbutton_3);
+        final Button Optionbutton_4=(Button) findViewById(R.id.Optionbutton_4);
         mFileContentView.setMovementMethod(ScrollingMovementMethod.getInstance());
         final EditText examText = (EditText) findViewById(R.id.examText);
         final Button examButton = (Button) findViewById(R.id.examButton);
@@ -105,6 +116,22 @@ public class ExamActivity extends AppCompatActivity {
                 examText.setText("");
             }
         });
+        Optionbutton_1.setOnClickListener(new View.OnClickListener() { public void onClick(View v) {
+            examText.setText(Optionbutton_1.getText());
+            examButton.callOnClick();
+        }});
+        Optionbutton_2.setOnClickListener(new View.OnClickListener() { public void onClick(View v) {
+            examText.setText(Optionbutton_2.getText());
+            examButton.callOnClick();
+        }});
+        Optionbutton_3.setOnClickListener(new View.OnClickListener() { public void onClick(View v) {
+            examText.setText(Optionbutton_3.getText());
+            examButton.callOnClick();
+        }});
+        Optionbutton_4.setOnClickListener(new View.OnClickListener() { public void onClick(View v) {
+            examText.setText(Optionbutton_4.getText());
+            examButton.callOnClick();
+        }});
         int examCorrectNumber=Integer.parseInt(PreferenceUtils.getPrefString(getApplicationContext(),"examCorrectNumber","0"));
         int examIncorrectnumber=Integer.parseInt(PreferenceUtils.getPrefString(getApplicationContext(),"examIncorrectnumber","0"));
         if(examCorrectNumber+examIncorrectnumber>0) examScoreOutput(examCorrectNumber,examIncorrectnumber);
@@ -120,6 +147,7 @@ public class ExamActivity extends AppCompatActivity {
     public int examReflesh(TextView textView,EditText editText,String[] elementNameArray,String[] elementAbbrArray,String[] elementIUPACArray,String examMode){
         final double d = Math.random();
         int elementnumber_limit=Integer.parseInt(PreferenceUtils.getPrefString(getApplicationContext(),"elementnumber_limit","118"));
+        Boolean setting_examOptionMode=PreferenceUtils.getPrefBoolean(getApplicationContext(),"setting_examOptionMode",false);
         final int i = (int)(d*elementnumber_limit);
         String output="";
         switch (examMode){
@@ -137,19 +165,63 @@ public class ExamActivity extends AppCompatActivity {
                 break;
         }
         textView.setText(output);
-        switch (examMode){
-            case "3":case"6":case"9":
-                editText.setHint(getResources().getString(R.string.examEditText_name_elementname));
-                break;
-            case "0":case"7":case"10":
-                editText.setHint(getResources().getString(R.string.examEditText_name));
-                break;
-            case "1":case"4":case"11":
-                editText.setHint(getResources().getString(R.string.examEditText_name_number));
-                break;
-            case "2":case"5":case"8":
-                editText.setHint(getResources().getString(R.string.examEditText_name_IUPAC));
-                break;
+        RelativeLayout relativeLayout1=(RelativeLayout)findViewById(R.id.relativeLayout1);
+        RelativeLayout relativeLayout2=(RelativeLayout)findViewById(R.id.relativeLayout2);
+        if(setting_examOptionMode){
+            relativeLayout1.setVisibility(View.GONE);
+            relativeLayout2.setVisibility(View.VISIBLE);
+            int[] optionNumber=new int[4];
+            List list = new ArrayList();
+            optionNumber[0]=i;
+            for(int i2 = 1;i2<optionNumber.length;i2++){
+                optionNumber[i2] = (int)(Math.random()*elementnumber_limit);
+                for(int i3=0;i3<i2;i3++) {
+                    while (optionNumber[i2]==optionNumber[i3]) optionNumber[i2] = (int) (Math.random() * elementnumber_limit);
+                }
+            }
+            for(int i3 = 0;i3 < optionNumber.length;i3++){
+                switch (examMode){
+                    case "3":case"6":case"9":
+                        list.add(elementNameArray[optionNumber[i3]]);
+                        break;
+                    case "0":case"7":case"10":
+                        list.add(elementAbbrArray[optionNumber[i3]]);
+                        break;
+                    case "1":case"4":case"11":
+                        list.add(optionNumber[i3]);
+                        break;
+                    case "2":case"5":case"8":
+                        list.add(elementIUPACArray[optionNumber[i3]]);
+                        break;
+                }
+            }
+            Collections.shuffle(list);
+            Iterator ite = list.iterator();
+            Button Optionbutton_1=(Button) findViewById(R.id.Optionbutton_1);
+            Button Optionbutton_2=(Button) findViewById(R.id.Optionbutton_2);
+            Button Optionbutton_3=(Button) findViewById(R.id.Optionbutton_3);
+            Button Optionbutton_4=(Button) findViewById(R.id.Optionbutton_4);
+            Optionbutton_1.setText(ite.next().toString());
+            Optionbutton_2.setText(ite.next().toString());
+            Optionbutton_3.setText(ite.next().toString());
+            Optionbutton_4.setText(ite.next().toString());
+        }else{
+            relativeLayout2.setVisibility(View.GONE);
+            relativeLayout1.setVisibility(View.VISIBLE);
+            switch (examMode){
+                case "3":case"6":case"9":
+                    editText.setHint(getResources().getString(R.string.examEditText_name_elementname));
+                    break;
+                case "0":case"7":case"10":
+                    editText.setHint(getResources().getString(R.string.examEditText_name));
+                    break;
+                case "1":case"4":case"11":
+                    editText.setHint(getResources().getString(R.string.examEditText_name_number));
+                    break;
+                case "2":case"5":case"8":
+                    editText.setHint(getResources().getString(R.string.examEditText_name_IUPAC));
+                    break;
+            }
         }
         return i;
     }
@@ -201,6 +273,16 @@ public class ExamActivity extends AppCompatActivity {
     }
     public void openSettings(){
         Intent intent =new Intent(this, SettingsActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent,1000);
+    }
+    @Override
+    protected void onActivityResult(int requestCode,int resultCode,Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode==1000 && resultCode==1001)
+        if(data.getStringExtra("result").equals("1")){
+            finish();
+            Intent intent = new Intent(ExamActivity.this, ExamActivity.class);
+            startActivity(intent);
+        }
     }
 }
