@@ -19,6 +19,7 @@ import android.widget.ListView;
 import com.ikimuhendis.ldrawer.ActionBarDrawerToggle;
 import com.ikimuhendis.ldrawer.DrawerArrowDrawable;
 import com.mikepenz.aboutlibraries.Libs;
+import com.sangbo.autoupdate.CheckVersion;
 import com.tencent.stat.MtaSDkException;
 import com.tencent.stat.StatService;
 
@@ -157,6 +158,9 @@ public class TitleActivity extends AppCompatActivity {
 
             }
         });
+
+        CheckVersion.checkUrl = "http://test-10061032.cos.myqcloud.com/version.txt";     //定义服务器版本信息
+        CheckVersion.update(this);
     }
     @Override
     protected void onResume() {

@@ -47,6 +47,9 @@
         <PreferenceScreen android:title="@string/setting_clearSettings"
             android:key="clearSettings">
         </PreferenceScreen>
+        <PreferenceScreen android:title="@string/setting_update"
+            android:key="update">
+        </PreferenceScreen>
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/button_About">
 

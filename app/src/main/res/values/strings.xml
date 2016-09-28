@@ -64,4 +64,5 @@
     <string name="setting_mode_9">Answer Chinese names according to IUPAC names</string>
     <string name="setting_mode_10">Answer symbols for elements according to IUPAC names</string>
     <string name="setting_mode_11">Answer atomic numbers according to IUPAC names</string>
+    <string name="setting_update">Update this app</string>
 </resources>

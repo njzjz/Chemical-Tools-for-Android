@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mikepenz.aboutlibraries.Libs;
+import com.sangbo.autoupdate.CheckVersion;
 import com.tencent.stat.StatService;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -55,6 +56,14 @@ public class SettingsActivity extends AppCompatActivity {
                         new Preference.OnPreferenceClickListener() {
                             @Override public boolean onPreferenceClick(Preference preference) {
                                 showSimpleDialog(getView());
+                                return false;
+                            }
+                        });
+                findPreference("update").setOnPreferenceClickListener(
+                        new Preference.OnPreferenceClickListener(){
+                            @Override public boolean onPreferenceClick(Preference preference){
+                                CheckVersion.checkUrl = "http://test-10061032.cos.myqcloud.com/version.txt";     //定义服务器版本信息
+                                CheckVersion.update(SettingsActivity.this,true);
                                 return false;
                             }
                         });

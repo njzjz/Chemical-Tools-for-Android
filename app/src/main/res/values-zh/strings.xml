@@ -57,4 +57,5 @@
     <string name="setting_examOptionMode">给出选项</string>
     <string name="setting_examOptionModeOff">题目将不会给出选项，你需要写出正确的答案。</string>
     <string name="setting_examOptionModeOn">题目将给出选项，你无需自己写出正确的答案。</string>
+    <string name="setting_update">更新应用</string>
 </resources>
