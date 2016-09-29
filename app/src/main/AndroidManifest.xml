@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.njzjz.chemicaltools">
-    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="7"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+
+    <uses-sdk
+        android:minSdkVersion="7"
+        android:targetSdkVersion="7" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -29,9 +35,15 @@
         <activity android:name=".ExamActivity" />
         <activity android:name=".SettingsActivity" />
         <!-- 请将value改为MTA分配的appkey < -->
-        <meta-data android:name="TA_APPKEY" android:value="A55JRMC53SPT"/>
+        <meta-data
+            android:name="TA_APPKEY"
+            android:value="A55JRMC53SPT" />
         <!-- 请将value改为app发布对应的渠道，不同的发布渠道使用不同的名字 < -->
-        <meta-data android:name="InstallChannel" android:value="play"/>
+        <meta-data
+            android:name="InstallChannel"
+            android:value="play" />
         <!-- 注意：若填写的渠道为纯数字字符串类型，请不要超过int表示的范围！ < -->
+        <activity android:name=".AcidActivity"></activity>
     </application>
+
 </manifest>

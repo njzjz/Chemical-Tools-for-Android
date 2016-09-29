@@ -57,4 +57,11 @@
     <string name="setting_examOptionModeOff">You need to answer questions by yourself.</string>
     <string name="setting_examOptionModeOn">You\'ll be gived options when answering questions.</string>
     <string name="setting_update">Update this app</string>
+    <string name="setting_website">Visit the website</string>
+    <string name="button_acid">Calculate Acid or Base</string>
+    <string name="acidpHOut_name">The pH of the solution is %1$.2f.</string>
+    <string name="acidpK_name">pKa or pKb</string>
+    <string name="acidc_name">c</string>
+    <string name="acid_name">Acid</string>
+    <string name="base_name">Base</string>
 </resources>

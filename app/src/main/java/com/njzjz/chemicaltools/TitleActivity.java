@@ -32,6 +32,7 @@ public class TitleActivity extends AppCompatActivity {
     private boolean drawerArrowColor;
     public static String historyElementOutput;
     public static String historyMassOutput;
+    public static String historyAcidOutput;
     public static int examCorrectNumber;
     public static int examIncorrectnumber;
     public static String[] doyouknowArray;
@@ -64,6 +65,7 @@ public class TitleActivity extends AppCompatActivity {
 
             historyElementOutput = PreferenceUtils.getPrefString(getApplicationContext(), "historyElementOutput", "");
             historyMassOutput = PreferenceUtils.getPrefString(getApplicationContext(), "historyMassOutput", "");
+            historyAcidOutput = PreferenceUtils.getPrefString(getApplicationContext(), "historyAcidOutput", "");
             examCorrectNumber=Integer.parseInt(PreferenceUtils.getPrefString(getApplicationContext(),"examCorrectNumber","0"));
             examIncorrectnumber=Integer.parseInt(PreferenceUtils.getPrefString(getApplicationContext(),"examIncorrectnumber","0"));
             doyouknowArray = getResources().getStringArray(R.array.doyouknow);
@@ -110,10 +112,12 @@ public class TitleActivity extends AppCompatActivity {
         String[] values = new String[]{
                 res.getString(R.string.button_element),
                 res.getString(R.string.button_mass),
+                res.getString(R.string.button_acid),
                 res.getString(R.string.button_exam),
                 res.getString(R.string.button_Share),
                 res.getString(R.string.button_Settings),
                 res.getString(R.string.setting_feedback),
+                res.getString(R.string.setting_website),
                 res.getString(R.string.button_About),
         };
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -132,12 +136,12 @@ public class TitleActivity extends AppCompatActivity {
                         //Mass
                         openMass(view);
                         break;
-                    case 5:
+                    case 6:
                         //Feedback
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:njzjz@msn.com?subject=Chemical Tools App Feedback"));
                         startActivity(browserIntent);
                         break;
-                    case 3:
+                    case 4:
                         //Share
                         Intent share = new Intent(Intent.ACTION_SEND);
                         share.setType("text/plain");
@@ -149,17 +153,25 @@ public class TitleActivity extends AppCompatActivity {
                         startActivity(Intent.createChooser(share,
                                 getString(R.string.app_name)));
                         break;
-                    case 2:
+                    case 3:
                         //Exam
                         openExam(view);
                         break;
-                    case 4:
+                    case 5:
                         //Settings
                         openSettings();
                         break;
-                    case 6:
+                    case 7:
+                        //Website
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://chem.njzjz.win/")));
+                        break;
+                    case 8:
                         //About
                         new Libs.Builder().withActivityTitle(getString(R.string.button_About)).withFields(R.string.class.getFields()).start(TitleActivity.this);
+                        break;
+                    case 2:
+                        //acid
+                        openAcid(view);
                         break;
                 }
 
@@ -243,6 +255,10 @@ public class TitleActivity extends AppCompatActivity {
     }
     public void openExam(View view) {
         Intent intent = new Intent(this, ExamActivity.class);
+        startActivity(intent);
+    }
+    public void openAcid(View view) {
+        Intent intent = new Intent(this, AcidActivity.class);
         startActivity(intent);
     }
     public void openSettings(){

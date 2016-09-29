@@ -18,6 +18,7 @@ import static com.njzjz.chemicaltools.TitleActivity.doyouknowArray;
 import static com.njzjz.chemicaltools.TitleActivity.doyouknowText;
 import static com.njzjz.chemicaltools.TitleActivity.examCorrectNumber;
 import static com.njzjz.chemicaltools.TitleActivity.examIncorrectnumber;
+import static com.njzjz.chemicaltools.TitleActivity.historyAcidOutput;
 import static com.njzjz.chemicaltools.TitleActivity.historyElementOutput;
 import static com.njzjz.chemicaltools.TitleActivity.historyMassOutput;
 
@@ -73,6 +74,15 @@ public class CardLayoutFragment extends Fragment {
         }
         itemsButton1.add(getString(R.string.button_Share));
         itemsButton2.add(getString(R.string.button_open));
+        //酸碱计算
+        items1.add(getString(R.string.button_acid));
+        if(!historyAcidOutput.equals("")){
+            items2.add(historyAcidOutput);
+        }else{
+            items2.add(getString(R.string.button_notUsed));
+        }
+        itemsButton1.add(getString(R.string.button_Share));
+        itemsButton2.add(getString(R.string.button_open));
         //元素记忆
         items1.add(getString(R.string.button_exam));
         int sum=examCorrectNumber+examIncorrectnumber;
@@ -114,6 +124,13 @@ public class CardLayoutFragment extends Fragment {
                             }
                             break;
                         case 3:
+                            if(!historyAcidOutput.equals("")){
+                                x=historyAcidOutput;
+                            }else{
+                                x=getString(R.string.app_name)+"\nhttps://github.com/njzjz/Chemical-Tools-for-Android";
+                            }
+                            break;
+                        case 4:
                             int sum=examCorrectNumber+examIncorrectnumber;
                             if(sum>0){
                                 double examCorrectPercent=(double)examCorrectNumber/sum*100;
@@ -150,8 +167,12 @@ public class CardLayoutFragment extends Fragment {
                             startActivity(intent2);
                             break;
                         case 3:
-                            Intent intent3 =new Intent(getActivity(), ExamActivity.class);
+                            Intent intent3 =new Intent(getActivity(), AcidActivity.class);
                             startActivity(intent3);
+                            break;
+                        case 4:
+                            Intent intent4 =new Intent(getActivity(), ExamActivity.class);
+                            startActivity(intent4);
                             break;
                     }
                 }
@@ -172,8 +193,12 @@ public class CardLayoutFragment extends Fragment {
                     startActivity(intent2);
                     break;
                 case 3:
-                    Intent intent3 =new Intent(getActivity(), ExamActivity.class);
+                    Intent intent3 =new Intent(getActivity(), AcidActivity.class);
                     startActivity(intent3);
+                    break;
+                case 4:
+                    Intent intent4 =new Intent(getActivity(), ExamActivity.class);
+                    startActivity(intent4);
                     break;
             }
         }

@@ -23,12 +23,19 @@
     <string name="examButton_name">Input</string>
     <string name="examScoreOutput_name">Total: %1$d Correct: %2$d Correct rate:%3$.2f%%</string>
     <string name="examShare_name">Hey! I answered %1$d questions on the app Chemical Tools and the correct rate is %2$.2f%%. Would like to have a try?</string>
+    <!-- acid -->
+    <string name="acidc_name">c</string>
+    <string name="acidpK_name">pKa or pKb</string>
+    <string name="acidpHOut_name">The pH of the solution is %1$.2f.</string>
+    <string name="acid_name">Acid</string>
+    <string name="base_name">Base</string>
     <!-- drawer -->
     <string name="drawer_open" translatable="false">drawer_open</string>
     <string name="drawer_close" translatable="false">drawer_close</string>
     <string name="button_element">Search Elements</string>
     <string name="button_mass">Calculate Mass</string>
     <string name="button_exam">Exam</string>
+    <string name="button_acid">Calculate Acid or Base</string>
     <string name="button_Settings">Settings</string>
     <string name="button_Share">Share</string>
     <string name="button_About">About</string>
@@ -50,6 +57,8 @@
     <string name="setting_examOptionMode">Giving options</string>
     <string name="setting_examOptionModeOn">You\'ll be gived options when answering questions.</string>
     <string name="setting_examOptionModeOff">You need to answer questions by yourself.</string>
+    <string name="setting_update">Update this app</string>
+    <string name="setting_website">Visit the website</string>
     <!--  测试模式  -->
     <string name="setting_mode">Exam Mode</string>
     <string name="setting_mode_0">Answer symbols for elements according to Chinese names</string>
@@ -64,5 +73,4 @@
     <string name="setting_mode_9">Answer Chinese names according to IUPAC names</string>
     <string name="setting_mode_10">Answer symbols for elements according to IUPAC names</string>
     <string name="setting_mode_11">Answer atomic numbers according to IUPAC names</string>
-    <string name="setting_update">Update this app</string>
 </resources>

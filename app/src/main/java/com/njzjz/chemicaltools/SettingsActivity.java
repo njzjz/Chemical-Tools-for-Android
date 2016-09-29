@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -137,6 +138,21 @@ public class SettingsActivity extends AppCompatActivity {
                 CheckBoxPreference setting_examOptionModeCheck= (CheckBoxPreference) findPreference("setting_examOptionMode");
                 Boolean setting_examOptionMode=PreferenceUtils.getPrefBoolean(getApplicationContext(),"setting_examOptionMode",false);
                 setting_examOptionModeCheck.setChecked(setting_examOptionMode); ;
+                findPreference("pKw").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                    @Override
+                    public boolean onPreferenceChange(Preference preference, Object newValue) {
+                        String pKw=newValue.toString();
+                        if (isNumeric(pKw)) {
+                            PreferenceUtils.setPrefString(getApplicationContext(), "pKw", pKw);
+                            EditTextPreference pKwEditText = (EditTextPreference) findPreference("pKw");
+                            pKwEditText.setSummary(pKw);
+                            return true;
+                        }else return false;
+                    }});
+                EditTextPreference pKwEditText= (EditTextPreference) findPreference("pKw");
+                String pKw=PreferenceUtils.getPrefString(getApplicationContext(),"pKw","14");
+                pKwEditText.setText(pKw);
+                pKwEditText.setSummary(pKw);
             }
 
         };
@@ -154,6 +170,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onPause();
         StatService.onPause(this);
     }
+    public static boolean isNumeric(String s){	try{	Double.parseDouble(s);return true;	}catch (Exception e){return false;}}
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

@@ -58,4 +58,11 @@
     <string name="setting_examOptionModeOff">题目将不会给出选项，你需要写出正确的答案。</string>
     <string name="setting_examOptionModeOn">题目将给出选项，你无需自己写出正确的答案。</string>
     <string name="setting_update">更新应用</string>
+    <string name="setting_website">访问官网</string>
+    <string name="button_acid">酸碱计算</string>
+    <string name="acidpHOut_name">溶液的pH为%1$.2f.</string>
+    <string name="acidc_name">请输入溶液的分析浓度c</string>
+    <string name="acidpK_name">请输入酸的pKa或碱的pKb，用空格键分割</string>
+    <string name="acid_name">酸</string>
+    <string name="base_name">碱</string>
 </resources>
