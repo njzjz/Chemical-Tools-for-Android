@@ -9,7 +9,7 @@ android {
         applicationId "com.njzjz.chemicaltools"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 16
+        versionCode 17
         versionName "1.60"
     }
     buildTypes {

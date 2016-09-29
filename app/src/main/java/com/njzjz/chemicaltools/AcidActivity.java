@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -116,6 +117,7 @@ public class AcidActivity extends AppCompatActivity {
                 return false;
             }
         });
+        acidTextview.setMovementMethod(ScrollingMovementMethod.getInstance());
         String historyAcidOutput=PreferenceUtils.getPrefString(getApplicationContext(),"historyAcidOutput","");
         if(!historyAcidOutput.equals("")){
             acidTextview.setText(historyAcidOutput);
