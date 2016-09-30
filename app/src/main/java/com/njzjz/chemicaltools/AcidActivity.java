@@ -7,15 +7,20 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ListPopupWindow;
 import android.text.method.ScrollingMovementMethod;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -23,7 +28,11 @@ import android.widget.TextView;
 import com.mikepenz.aboutlibraries.Libs;
 import com.tencent.stat.StatService;
 
-public class AcidActivity extends AppCompatActivity {
+public class AcidActivity extends AppCompatActivity implements View.OnTouchListener,
+        AdapterView.OnItemClickListener  {
+    private EditText etTest;
+    private ListPopupWindow lpw;
+    private String[] list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +46,29 @@ public class AcidActivity extends AppCompatActivity {
         final Button acidButton = (Button) findViewById(R.id.acidButton);
         acidButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                double liquidpKa=-1.74;
                 String pKwstr=PreferenceUtils.getPrefString(getApplicationContext(),"pKw","14");
                 double pKw=Double.parseDouble(pKwstr);
                 Switch switchAB=(Switch) findViewById(R.id.switchAB);
                 boolean AorB=!switchAB.isChecked();
                 String ABname;
-                if(AorB)ABname="A";else ABname="B";
+                EditText acidText_name=(EditText)findViewById(R.id.acidText_name);
+                String acidname=acidText_name.getText().toString();
+                if(AorB){
+                    ABname="A";
+                    String[] acidnameArray=getResources().getStringArray(R.array.acidnameArray);
+                    String[] acidAbbrArray=getResources().getStringArray(R.array.acidAbbrArray);
+                    for(int i=0;i<acidnameArray.length;i++){
+                        if (acidnameArray[i].equals(acidname))ABname=acidAbbrArray[i];
+                    }
+                }else{
+                    ABname="B";
+                    String[] basenameArray=getResources().getStringArray(R.array.basenameArray);
+                    String[] baseAbbrArray=getResources().getStringArray(R.array.baseAbbrArray);
+                    for(int i=0;i<basenameArray.length;i++){
+                        if (basenameArray[i].equals(acidname))ABname=baseAbbrArray[i];
+                    }
+                }
                 EditText acidText_c = (EditText) findViewById(R.id.acidText_c);
                 String strc = acidText_c.getText().toString();
                 EditText acidText_pKa = (EditText) findViewById(R.id.acidText_pK);
@@ -53,7 +79,10 @@ public class AcidActivity extends AppCompatActivity {
                     double c=Double.parseDouble(strc);
                     boolean error=false;
                     for(int i=0;i<strpKaArray.length;i++){
-                        if (isNumeric(strpKaArray[i])) valpKa[i]=Double.parseDouble(strpKaArray[i]);
+                        if (isNumeric(strpKaArray[i])){
+                            valpKa[i]=Double.parseDouble(strpKaArray[i]);
+                            if (valpKa[i]<liquidpKa) valpKa[i]=liquidpKa;
+                        }
                         else error=true;
                     }
                     if(!error){
@@ -82,7 +111,7 @@ public class AcidActivity extends AppCompatActivity {
                                     cABoutput=cABoutput+"-";
                                 }
                             }else{
-                                cABoutput=cABoutput+"B";
+                                cABoutput=cABoutput+ABname;
                                 if(cAB.length-i>2){
                                     cABoutput=cABoutput+"(OH)"+ String.valueOf(cAB.length - i-1);
                                 }else if(cAB.length-i==2){
@@ -122,6 +151,81 @@ public class AcidActivity extends AppCompatActivity {
         if(!historyAcidOutput.equals("")){
             acidTextview.setText(historyAcidOutput);
         }
+        etTest = (EditText) findViewById(R.id.acidText_name);
+        etTest.setOnTouchListener((View.OnTouchListener) this);
+
+        Switch switchAB=(Switch) findViewById(R.id.switchAB);
+        boolean AorB=!switchAB.isChecked();
+        String name;
+        EditText acidText_name=(EditText)findViewById(R.id.acidText_name);
+        EditText acidText_pK=(EditText)findViewById(R.id.acidText_pK);
+        if(AorB){
+            name="HA";
+            list =  getResources().getStringArray(R.array.acidnameArray);
+            acidText_name.setHint(getResources().getString(R.string.acidname));
+            acidText_pK.setHint(getResources().getString(R.string.acidpKa));
+        } else{
+            name="BOH";
+            list =  getResources().getStringArray(R.array.basenameArray);
+            acidText_name.setHint(getResources().getString(R.string.basename));
+            acidText_pK.setHint(getResources().getString(R.string.basepKb));
+        }
+        acidText_name.setText(name);
+        lpw = new ListPopupWindow(this);
+        lpw.setAdapter(new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, list));
+        lpw.setAnchorView(etTest);
+        lpw.setModal(true);
+        lpw.setOnItemClickListener((AdapterView.OnItemClickListener) this);
+        acidText_name.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEND) {
+                    Switch switchAB=(Switch) findViewById(R.id.switchAB);
+                    boolean AorB=!switchAB.isChecked();
+                    EditText acidText_name=(EditText)findViewById(R.id.acidText_name);
+                    EditText acidText_pK=(EditText)findViewById(R.id.acidText_pK);
+                    String acidname=acidText_name.getText().toString();
+                    if(AorB){
+                        String[] acidnameArray=getResources().getStringArray(R.array.acidnameArray);
+                        String[] acidpKaArray=getResources().getStringArray(R.array.acidpKaArray);
+                        for(int i=0;i<acidnameArray.length;i++){
+                            if(acidnameArray[i].equals(acidname))acidText_pK.setText(acidpKaArray[i]);
+                        }
+                    }else{
+                        String[] basenameArray=getResources().getStringArray(R.array.basenameArray);
+                        String[] basepKbArray=getResources().getStringArray(R.array.basepKbArray);
+                        for(int i=0;i<basenameArray.length;i++){
+                            if(basenameArray[i].equals(acidname))acidText_pK.setText(basepKbArray[i]);
+                        }
+                    }
+                }
+                return false;
+            }
+        });
+        switchAB.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                String name;
+                EditText acidText_name=(EditText)findViewById(R.id.acidText_name);
+                EditText acidText_pK=(EditText)findViewById(R.id.acidText_pK);
+                if(isChecked){
+                    list =  getResources().getStringArray(R.array.basenameArray);
+                    name="BOH";
+                    acidText_name.setHint(getResources().getString(R.string.basename));
+                    acidText_pK.setHint(getResources().getString(R.string.basepKb));
+                }else{
+                    list =  getResources().getStringArray(R.array.acidnameArray);
+                    name="HA";
+                    acidText_name.setHint(getResources().getString(R.string.acidname));
+                    acidText_pK.setHint(getResources().getString(R.string.acidpKa));
+                }
+                lpw.setAdapter(new ArrayAdapter<String>(AcidActivity.this,
+                        android.R.layout.simple_list_item_1, list));
+                acidText_name.setText(name);
+                acidText_pK.setText("");
+            }
+        });
     };
     public double calpH(double[] pKa,double c,double pKw) {
         double cH,Ka1,Kw;
@@ -205,5 +309,39 @@ public class AcidActivity extends AppCompatActivity {
     public void openSettings(){
         Intent intent =new Intent(this, SettingsActivity.class);
         startActivity(intent);
+    }
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position,
+                            long id) {
+        String item = list[position];
+        etTest.setText(item);
+        lpw.dismiss();
+        EditText acidText_pK=(EditText)findViewById(R.id.acidText_pK);
+        Switch switchAB=(Switch) findViewById(R.id.switchAB);
+        boolean AorB=!switchAB.isChecked();
+        if(AorB){
+            String[] acidpKaArray=getResources().getStringArray(R.array.acidpKaArray);
+            acidText_pK.setText(acidpKaArray[position]);
+        }else{
+            String[] basepKbArray=getResources().getStringArray(R.array.basepKbArray);
+            acidText_pK.setText(basepKbArray[position]);
+        }
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        final int DRAWABLE_RIGHT = 2;
+
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            if (event.getX() >= (v.getWidth() - ((EditText) v)
+                    .getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                lpw.show();
+           //     String historyElementNumber=PreferenceUtils.getPrefString(getApplicationContext(),"historyElementNumber","0");
+           //     int elementNumber=Integer.parseInt(historyElementNumber);
+           //     lpw.setSelection(elementNumber-1);
+                return true;
+            }
+        }
+        return false;
     }
 }
