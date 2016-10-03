@@ -10,6 +10,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ListPopupWindow;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         ab.setHomeButtonEnabled(true);
         TextView mFileContentView = (TextView) findViewById(R.id.elementTextview);
         mFileContentView.setMovementMethod(ScrollingMovementMethod.getInstance());
+        mFileContentView.setMovementMethod(LinkMovementMethod.getInstance());
         final Button elementButton = (Button) findViewById(R.id.elementButton);
         final String[] elementNameArray = getResources().getStringArray(R.array.elementNameArray);
         final String[] elementAbbrArray = getResources().getStringArray(R.array.elementAbbrArray);
@@ -73,14 +76,16 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 Resources res = getResources();
                 if(elementNumber>0){
                     String elementOutput=String.format(res.getString(R.string.elementOutput_name),elementNumber,elementNameArray[elementNumber-1],elementAbbrArray[elementNumber-1],elementMassArray[elementNumber-1],elementIUPACArray[elementNumber-1],elementOriginArray[elementNumber-1]);
-                    elementTextview.setText(elementOutput);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"historyElement",elementInput);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"historyElementNumber",String.valueOf(elementNumber));
+                    PreferenceUtils.setPrefString(getApplicationContext(),"historyElementOutput",elementOutput);
+                    String elementoutputhtml=elementOutput+"\n<a href='https://en.wikipedia.org/wiki/"+elementIUPACArray[elementNumber-1]+"'>"+getResources().getString(R.string.elementWikipedia)+"</a>";
+                    PreferenceUtils.setPrefString(getApplicationContext(),"historyElementOutputHtml",elementoutputhtml);
+                    elementTextview.setText(Html.fromHtml(parseContent(elementoutputhtml)));
                     TypedArray elementPictureArray = getResources().obtainTypedArray(R.array.elementPictureArray);
                     int  resId = elementPictureArray.getResourceId(elementNumber-1, 0);
                     ImageView elementImage=(ImageView) findViewById(R.id.elementImage);
                     elementImage.setImageResource(resId);
-                    PreferenceUtils.setPrefString(getApplicationContext(),"historyElement",elementInput);
-                    PreferenceUtils.setPrefString(getApplicationContext(),"historyElementNumber",String.valueOf(elementNumber));
-                    PreferenceUtils.setPrefString(getApplicationContext(),"historyElementOutput",elementOutput);
                 }else{
                     Snackbar.make(v, res.getString(R.string.error_name), Snackbar.LENGTH_LONG)
                             .setAction("Error", null).show();
@@ -112,9 +117,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             ImageView elementImage = (ImageView) findViewById(R.id.elementImage);
             elementImage.setImageResource(resId);
         }
-        String historyElementOutput=PreferenceUtils.getPrefString(getApplicationContext(),"historyElementOutput","");
-        if(!historyElementOutput.equals("")){
-            elementTextview.setText(historyElementOutput);
+        String historyElementOutputHtml=PreferenceUtils.getPrefString(getApplicationContext(),"historyElementOutputHtml","");
+        if(!historyElementOutputHtml.equals("")){
+            elementTextview.setText(Html.fromHtml(parseContent(historyElementOutputHtml)));
         }
 
         etTest = (EditText) findViewById(R.id.elementText);
@@ -127,6 +132,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         lpw.setAnchorView(etTest);
         lpw.setModal(true);
         lpw.setOnItemClickListener((AdapterView.OnItemClickListener) this);
+    }
+    private String parseContent(String content) {
+        content = content.replace("\n","<br>");
+        return content;
     }
     @Override
     protected void onResume() {
@@ -181,13 +190,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 this.finish();
                 return true;
             case R.id.action_share:
+                String historyElementOutput=PreferenceUtils.getPrefString(getApplicationContext(),"historyElementOutput","");
                 Intent share = new Intent(Intent.ACTION_SEND);
                 share.setType("text/plain");
                 share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 share.putExtra(Intent.EXTRA_SUBJECT,
                         getString(R.string.app_name));
-                TextView elementTextview=(TextView) findViewById(R.id.elementTextview);
-                share.putExtra(Intent.EXTRA_TEXT, elementTextview.getText().toString());
+                share.putExtra(Intent.EXTRA_TEXT, historyElementOutput);
                 startActivity(Intent.createChooser(share,
                         getString(R.string.app_name)));
                 return true;
@@ -209,5 +218,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         Intent intent =new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
+
 };
 

@@ -106,26 +106,10 @@ public class CardLayoutFragment extends Fragment {
                     // PERFORM AN ACTION WITH THE ITEM AT POSITION i
                     String x = "";
                     switch (i){
-                        case 0:
-                            x=doyouknowText;
-                            break;
-                        case 1:
-                            if(!historyElementOutput.equals("")){
-                                x=historyElementOutput;
-                            }else{
-                                x=getString(R.string.app_name)+"\nhttps://github.com/njzjz/Chemical-Tools-for-Android";
-                            }
-                            break;
-                        case 2:
-                            if(!historyMassOutput.equals("")){
-                                x=historyMassOutput;
-                            }else{
-                                x=getString(R.string.app_name)+"\nhttps://github.com/njzjz/Chemical-Tools-for-Android";
-                            }
-                            break;
-                        case 3:
-                            if(!historyAcidOutput.equals("")){
-                                x=historyAcidOutput;
+                        case 0:case 1:case 2:case 3:
+                            TextView itemText = (TextView) cardsList.getChildAt(i - cardsList.getFirstVisiblePosition()).findViewById(R.id.list_item_card_text2);
+                            if(!historyElementOutput.equals(getResources().getString(R.string.button_notUsed))){
+                                x=itemText.getText().toString();
                             }else{
                                 x=getString(R.string.app_name)+"\nhttps://github.com/njzjz/Chemical-Tools-for-Android";
                             }
@@ -179,7 +163,10 @@ public class CardLayoutFragment extends Fragment {
             }
         }
     }
-
+    private String parseContent(String content) {
+        content = content.replace("\n","<br>");
+        return content;
+    }
     private final class ListItemClickListener implements OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

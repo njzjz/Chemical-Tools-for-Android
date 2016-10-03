@@ -1,5 +1,6 @@
 package com.njzjz.chemicaltools;
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -62,8 +63,8 @@ public class CardsAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.itemText1.setText(items1.get(position));
-        holder.itemText2.setText(items2.get(position));
+        holder.itemText1.setText(Html.fromHtml(parseContent(items1.get(position))));
+        holder.itemText2.setText(Html.fromHtml(parseContent(items2.get(position))));
         holder.itemButton1.setText(itemsButton1.get(position));
         holder.itemButton2.setText(itemsButton2.get(position));
 
@@ -80,6 +81,11 @@ public class CardsAdapter extends BaseAdapter {
         private TextView itemText2;
         private Button itemButton1;
         private Button itemButton2;
+    }
+
+    private String parseContent(String content) {
+        content = content.replace("\n","<br>");
+        return content;
     }
 
 }

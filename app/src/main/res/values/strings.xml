@@ -6,12 +6,14 @@
     <string name="elementTextview_name">Welcome to search for elements!</string>
     <string name="elementEditText_name">Please input the atomic number or name of an element.</string>
     <string name="error_name">Error!</string>
+    <string name="elementWikipedia">Visit Wikipedia</string>
     <!-- Mass -->
     <string name="massTextview_name">Welcome to calculate mass of chemicals.</string>
-    <string name="massOutput_name">%1$s\nMolar mass: %2$.2f</string>
+    <string name="massOutput_name">%1$s\nMolar mass: %2$.2f.</string>
     <string name="massEditText_name">Please input chemical formula.</string>
     <string name="massButton_name">Calculate</string>
     <string name="massper_name">%2$s (%3$d itoms): atomic weight is %4$s and mass fraction is %5$.2f%%.</string>
+    <string name="juhao">.</string>
     <!-- Exam -->
     <string name="examTextview_name">Welcome to exam.</string>
     <string name="examOutputRight_name">Your answer was right.</string>
@@ -26,6 +28,10 @@
     <!-- acid -->
     <string name="acidc_name">c</string>
     <string name="acidpK_name">pKa or pKb</string>
+    <string name="acidpKa">pKa</string>
+    <string name="basepKb">pKb</string>
+    <string name="acidname">Acid name</string>
+    <string name="basename">Base name</string>
     <string name="acidpHOut_name">The pH of the solution is %1$.2f.</string>
     <string name="acid_name">Acid</string>
     <string name="base_name">Base</string>

@@ -65,4 +65,10 @@
     <string name="acidpK_name">请输入酸的pKa或碱的pKb，用空格键分割</string>
     <string name="acid_name">酸</string>
     <string name="base_name">碱</string>
+    <string name="acidname">请输入酸的名称</string>
+    <string name="acidpKa">请输入酸的pKa，用空格键分割</string>
+    <string name="basepKb">请输入碱的pKb，用空格键分割</string>
+    <string name="basename">请输入碱的名称</string>
+    <string name="elementWikipedia">访问维基百科</string>
+    <string name="juhao">。</string>
 </resources>

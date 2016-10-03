@@ -64,4 +64,10 @@
     <string name="acidc_name">c</string>
     <string name="acid_name">Acid</string>
     <string name="base_name">Base</string>
+    <string name="acidname">Acid name</string>
+    <string name="acidpKa">pKa</string>
+    <string name="basepKb">pKb</string>
+    <string name="basename">Base name</string>
+    <string name="elementWikipedia">Visit Wikipedia</string>
+    <string name="juhao">.</string>
 </resources>

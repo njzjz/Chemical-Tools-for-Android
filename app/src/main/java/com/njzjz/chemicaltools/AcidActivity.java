@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ListPopupWindow;
+import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -51,22 +52,45 @@ public class AcidActivity extends AppCompatActivity implements View.OnTouchListe
                 double pKw=Double.parseDouble(pKwstr);
                 Switch switchAB=(Switch) findViewById(R.id.switchAB);
                 boolean AorB=!switchAB.isChecked();
-                String ABname;
+                String ABname,ABnameall;
                 EditText acidText_name=(EditText)findViewById(R.id.acidText_name);
                 String acidname=acidText_name.getText().toString();
                 if(AorB){
                     ABname="A";
+                    ABnameall="HA";
                     String[] acidnameArray=getResources().getStringArray(R.array.acidnameArray);
                     String[] acidAbbrArray=getResources().getStringArray(R.array.acidAbbrArray);
                     for(int i=0;i<acidnameArray.length;i++){
-                        if (acidnameArray[i].equals(acidname))ABname=acidAbbrArray[i];
+                        if (acidnameArray[i].equals(acidname)){
+                            ABname=acidAbbrArray[i];
+                            ABnameall=acidnameArray[i];
+                        }
                     }
                 }else{
                     ABname="B";
+                    ABnameall="BOH";
                     String[] basenameArray=getResources().getStringArray(R.array.basenameArray);
                     String[] baseAbbrArray=getResources().getStringArray(R.array.baseAbbrArray);
                     for(int i=0;i<basenameArray.length;i++){
-                        if (basenameArray[i].equals(acidname))ABname=baseAbbrArray[i];
+                        if (basenameArray[i].equals(acidname)){
+                            ABname=baseAbbrArray[i];
+                            ABnameall=basenameArray[i];
+                        }
+                    }
+                }
+                String ABnameHtml="",ABnameallHtml="";
+                for(int i3=0;i3<ABname.length();i3++) {
+                    if (ABname.charAt(i3) >= 48 && ABname.charAt(i3) <= 57) {
+                        ABnameHtml += "<sub>" + ABname.charAt(i3) + "</sub>";
+                    } else {
+                        ABnameHtml += ABname.charAt(i3);
+                    }
+                }
+                for(int i3=0;i3<ABnameall.length();i3++) {
+                    if (ABnameall.charAt(i3) >= 48 && ABnameall.charAt(i3) <= 57) {
+                        ABnameallHtml += "<sub>" + ABnameall.charAt(i3) + "</sub>";
+                    } else {
+                        ABnameallHtml += ABnameall.charAt(i3);
                     }
                 }
                 EditText acidText_c = (EditText) findViewById(R.id.acidText_c);
@@ -90,43 +114,44 @@ public class AcidActivity extends AppCompatActivity implements View.OnTouchListe
                         double[] cAB=calpHtoc(valpKa,c,pH);
                         if(!AorB) pH=pKw-pH;
                         double H=Math.pow(10,-pH);
-                        String acidOutput="c="+strc+"mol/L, ";
+                        String acidOutput=ABnameallHtml+" ,c="+strc+"mol/L, ";
                         for(int i=0;i<valpKa.length;i++){
-                            if(AorB)acidOutput=acidOutput+"pKa";else acidOutput=acidOutput+"pKb";
-                            if(valpKa.length>1)acidOutput=acidOutput+String.valueOf(i+1);
+                            if(AorB)acidOutput=acidOutput+"pK<sub>a</sub>";else acidOutput=acidOutput+"pK<sub>b</sub>";
+                            if(valpKa.length>1)acidOutput=acidOutput+"<sub>"+String.valueOf(i+1)+"</sub>";
                             acidOutput=acidOutput+"="+strpKaArray[i]+", ";
                         }
                         acidOutput=acidOutput+"\n"+String.format(getString(R.string.acidpHOut_name),pH);
-                        acidOutput=acidOutput+"\n"+"c(H+)="+String.format("%1$.2e",H)+"mol/L,";
+                        acidOutput=acidOutput+"\n"+"c(H<sup>+</sup>)="+String.format("%1$.2e",H)+"mol/L,";
                         for(int i=0;i<cAB.length;i++){
                             String cABoutput="c(";
                             if(AorB){
                                 if(i<cAB.length-1){
                                     cABoutput=cABoutput+"H";
-                                    if(cAB.length-i>2) cABoutput=cABoutput+ String.valueOf(cAB.length - i-1);
+                                    if(cAB.length-i>2) cABoutput=cABoutput+ "<sub>"+String.valueOf(cAB.length - i-1)+"</sub>";
                                 }
-                                cABoutput=cABoutput+ABname;
+                                cABoutput=cABoutput+ABnameHtml;
                                 if(i>0){
-                                    if(i>1) cABoutput=cABoutput+ String.valueOf(i);
-                                    cABoutput=cABoutput+"-";
+                                    if(i>1) cABoutput=cABoutput+ "<sup>"+String.valueOf(i)+"</sup>";
+                                    cABoutput=cABoutput+"<sup>-</sup>";
                                 }
                             }else{
-                                cABoutput=cABoutput+ABname;
+                                cABoutput=cABoutput+ABnameHtml;
                                 if(cAB.length-i>2){
-                                    cABoutput=cABoutput+"(OH)"+ String.valueOf(cAB.length - i-1);
+                                    cABoutput=cABoutput+"(OH)<sub>"+ String.valueOf(cAB.length - i-1)+"</sub>";
                                 }else if(cAB.length-i==2){
                                     cABoutput=cABoutput+"OH";
                                 }
                                 if(i>0){
-                                    if(i>1) cABoutput=cABoutput+String.valueOf(i);
-                                    cABoutput=cABoutput+"+";
+                                    if(i>1) cABoutput="<sup>"+cABoutput+String.valueOf(i)+"</sup>";
+                                    cABoutput=cABoutput+"<sup>+</sup>";
                                 }
                             }
                             cABoutput=cABoutput+")=";
                             acidOutput=acidOutput+"\n"+cABoutput+String.format("%1$.2e",cAB[i])+"mol/L,";
                         }
+                        acidOutput=acidOutput.substring(0,acidOutput.length()-1)+".";
                         TextView acidTextview = (TextView) findViewById(R.id.acidTextview);
-                        acidTextview.setText(acidOutput);
+                        acidTextview.setText(Html.fromHtml(parseContent(acidOutput)));
                         PreferenceUtils.setPrefString(getApplicationContext(),"historyAcidOutput",acidOutput);
                     }else Snackbar.make(v, getResources().getString(R.string.error_name), Snackbar.LENGTH_LONG)
                             .setAction("Error", null).show();
@@ -149,7 +174,7 @@ public class AcidActivity extends AppCompatActivity implements View.OnTouchListe
         acidTextview.setMovementMethod(ScrollingMovementMethod.getInstance());
         String historyAcidOutput=PreferenceUtils.getPrefString(getApplicationContext(),"historyAcidOutput","");
         if(!historyAcidOutput.equals("")){
-            acidTextview.setText(historyAcidOutput);
+            acidTextview.setText(Html.fromHtml(parseContent(historyAcidOutput)));
         }
         etTest = (EditText) findViewById(R.id.acidText_name);
         etTest.setOnTouchListener((View.OnTouchListener) this);
@@ -227,6 +252,10 @@ public class AcidActivity extends AppCompatActivity implements View.OnTouchListe
             }
         });
     };
+    private String parseContent(String content) {
+        content = content.replace("\n","<br>");
+        return content;
+    }
     public double calpH(double[] pKa,double c,double pKw) {
         double cH,Ka1,Kw;
         Ka1=Math.pow(10,-pKa[0]);

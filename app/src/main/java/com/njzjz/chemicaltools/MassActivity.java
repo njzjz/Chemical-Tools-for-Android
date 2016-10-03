@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -43,7 +44,7 @@ public class MassActivity extends AppCompatActivity {
         massButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 EditText massText = (EditText) findViewById(R.id.massText);
-                String x = massText.getText().toString();
+                String x = massText.getText().toString().trim();
                 int l = x.length(), i = 0, n, s = 0, i2, c;
                 double m = 0;
                 double[] massPer=new double[119];
@@ -179,16 +180,26 @@ public class MassActivity extends AppCompatActivity {
                 }
                 Resources res = getResources();
                 if (m > 0) {
-                    massTextview.setText(String.format(res.getString(R.string.massOutput_name), x,m));
+                    String xHtml="";
+                    for(int i3=0;i3<x.length();i3++) {
+                        if (x.charAt(i3) >= 48 && x.charAt(i3) <= 57) {
+                            xHtml += "<sub>" + x.charAt(i3) + "</sub>";
+                        } else {
+                            xHtml += x.charAt(i3);
+                        }
+                    }
+                    String massOutput=String.format(res.getString(R.string.massOutput_name), xHtml,m);
+                    massTextview.setText(Html.fromHtml(parseContent(massOutput)));
                     for(i=0;i<118;i++){
                         if(AtomNumber[i+1]>0){
                             massPer[i+1]=AtomNumber[i + 1] * Double.parseDouble(elementMassArray[i])/m*100;
-                            String massOutput=massTextview.getText().toString()+"\n"+String.format(res.getString(R.string.massper_name), elementNameArray[i],elementAbbrArray[i],AtomNumber[i+1],elementMassArray[i],massPer[i+1]);
-                            massTextview.setText(massOutput);
-                            PreferenceUtils.setPrefString(getApplicationContext(),"historyMass",x);
-                            PreferenceUtils.setPrefString(getApplicationContext(),"historyMassOutput",massOutput);
+                            massOutput=massOutput+"\n"+String.format(res.getString(R.string.massper_name), elementNameArray[i],elementAbbrArray[i],AtomNumber[i+1],elementMassArray[i],massPer[i+1]);
                         }
                     }
+                    massOutput=massOutput.substring(0,massOutput.length()-1)+res.getString(R.string.juhao);
+                    massTextview.setText(Html.fromHtml(parseContent(massOutput)));
+                    PreferenceUtils.setPrefString(getApplicationContext(),"historyMass",x);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"historyMassOutput",massOutput);
                 } else {
                     Snackbar.make(v, res.getString(R.string.error_name), Snackbar.LENGTH_LONG)
                             .setAction("Error", null).show();
@@ -216,10 +227,13 @@ public class MassActivity extends AppCompatActivity {
         });
         String historyMassOutput=PreferenceUtils.getPrefString(getApplicationContext(),"historyMassOutput","");
         if(!historyMassOutput.equals("")){
-            massTextview.setText(historyMassOutput);
+            massTextview.setText(Html.fromHtml(parseContent(historyMassOutput)));
         }
     };
-
+    private String parseContent(String content) {
+        content = content.replace("\n","<br>");
+        return content;
+    }
     @Override
     protected void onResume() {
         super.onResume();
