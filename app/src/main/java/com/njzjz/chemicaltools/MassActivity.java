@@ -23,6 +23,8 @@ import android.widget.TextView;
 
 import com.mikepenz.aboutlibraries.Libs;
 import com.tencent.stat.StatService;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 public class MassActivity extends AppCompatActivity {
 
@@ -286,15 +288,18 @@ public class MassActivity extends AppCompatActivity {
                 this.finish();
                 return true;
             case R.id.action_share:
-                Intent share = new Intent(Intent.ACTION_SEND);
-                share.setType("text/plain");
-                share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                share.putExtra(Intent.EXTRA_SUBJECT,
-                        getString(R.string.app_name));
+                //Intent share = new Intent(Intent.ACTION_SEND);
+                //share.setType("text/plain");
+                //share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                //share.putExtra(Intent.EXTRA_SUBJECT,
+                //        getString(R.string.app_name));
                 TextView massTextview=(TextView) findViewById(R.id.massTextview);
-                share.putExtra(Intent.EXTRA_TEXT, massTextview.getText().toString());
-                startActivity(Intent.createChooser(share,
-                        getString(R.string.app_name)));
+                //share.putExtra(Intent.EXTRA_TEXT, massTextview.getText().toString());
+                //startActivity(Intent.createChooser(share,
+                //        getString(R.string.app_name)));
+                new ShareAction(this).withText(massTextview.getText().toString())
+                        .setDisplayList(/*SHARE_MEDIA.QQ,*/SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,/*SHARE_MEDIA.SINA,*/SHARE_MEDIA.SMS,SHARE_MEDIA.EMAIL,SHARE_MEDIA.MORE)
+                        .open();
                 return true;
             case R.id.action_settings:
                 openSettings();

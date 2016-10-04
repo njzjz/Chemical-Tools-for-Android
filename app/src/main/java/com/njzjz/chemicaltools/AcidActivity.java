@@ -28,6 +28,8 @@ import android.widget.TextView;
 
 import com.mikepenz.aboutlibraries.Libs;
 import com.tencent.stat.StatService;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 public class AcidActivity extends AppCompatActivity implements View.OnTouchListener,
         AdapterView.OnItemClickListener  {
@@ -310,16 +312,19 @@ public class AcidActivity extends AppCompatActivity implements View.OnTouchListe
                 this.finish();
                 return true;
             case R.id.action_share:
-                Intent share = new Intent(Intent.ACTION_SEND);
-                share.setType("text/plain");
-                share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                share.putExtra(Intent.EXTRA_SUBJECT,
-                        getString(R.string.app_name));
+             //   Intent share = new Intent(Intent.ACTION_SEND);
+             //   share.setType("text/plain");
+             //   share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+             //   share.putExtra(Intent.EXTRA_SUBJECT,
+             //           getString(R.string.app_name));
                 TextView acidTextview=(TextView) findViewById(R.id.acidTextview);
-                share.putExtra(Intent.EXTRA_TEXT,
-                        acidTextview.getText().toString());
-                startActivity(Intent.createChooser(share,
-                        getString(R.string.app_name)));
+             //   share.putExtra(Intent.EXTRA_TEXT,
+             //           acidTextview.getText().toString());
+             //   startActivity(Intent.createChooser(share,
+             //           getString(R.string.app_name)));
+                new ShareAction(this).withText(acidTextview.getText().toString())
+                        .setDisplayList(/*SHARE_MEDIA.QQ,*/SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,/*SHARE_MEDIA.SINA,*/SHARE_MEDIA.SMS,SHARE_MEDIA.EMAIL,SHARE_MEDIA.MORE)
+                        .open();
                 return true;
             case R.id.action_settings:
                 openSettings();

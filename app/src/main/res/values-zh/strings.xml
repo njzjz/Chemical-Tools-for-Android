@@ -32,7 +32,7 @@
     <string name="postive_button">确认</string>
     <string name="negative_button">取消</string>
     <string name="examScoreOutput_name">共回答%1$d题，其中%2$d题正确，正确率为%3$.2f%%</string>
-    <string name="examShare_name">我在元素记忆测试中回答了%1$d道题，正确率高达%2$.2f%%！快下载元素小管家挑战我吧！</string>
+    <string name="examShare_name">我在元素记忆测试中回答了%1$d道题，正确率高达%2$.2f%%！快下载化学e+挑战我吧！</string>
 
     <string name="setting_mode_0">根据元素名称回答元素符号</string>
     <string name="setting_mode_1">根据元素名称回答原子序数</string>

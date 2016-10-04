@@ -12,8 +12,16 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-
-    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.SET_DEBUG_APP" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
 
     <application
         android:allowBackup="true"
@@ -22,7 +30,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:versionCode="4"
-        android:versionName="1.3">
+        android:versionName="1.3"
+        android:name=".App"
+        >
         <activity android:name=".TitleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,10 +40,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".MassActivity" />
-        <activity android:name=".ExamActivity" />
-        <activity android:name=".SettingsActivity" />
+        <activity android:name=".MainActivity"
+            android:label="@string/button_element"/>
+        <activity android:name=".MassActivity"
+            android:label="@string/button_mass"/>
+        <activity android:name=".AcidActivity"
+            android:label="@string/button_acid"/>
+        <activity android:name=".ExamActivity"
+            android:label="@string/button_exam"/>
+        <activity android:name=".SettingsActivity"
+            android:label="@string/button_Settings"/>
         <!-- 请将value改为MTA分配的appkey < -->
         <meta-data
             android:name="TA_APPKEY"
@@ -43,7 +59,40 @@
             android:name="InstallChannel"
             android:value="play" />
         <!-- 注意：若填写的渠道为纯数字字符串类型，请不要超过int表示的范围！ < -->
-        <activity android:name=".AcidActivity"></activity>
+
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent100424468" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+        <activity
+            android:name="com.umeng.socialize.editorpage.ShareActivity"
+            android:theme="@style/Theme.UMDefault"
+            android:excludeFromRecents="true"
+            />
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="57f39f45e0f55a55be0043f3" >
+        </meta-data>
     </application>
 
 </manifest>

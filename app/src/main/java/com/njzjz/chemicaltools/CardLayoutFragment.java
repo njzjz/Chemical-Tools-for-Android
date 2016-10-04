@@ -12,6 +12,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+
 import java.util.ArrayList;
 
 import static com.njzjz.chemicaltools.TitleActivity.doyouknowArray;
@@ -124,14 +127,17 @@ public class CardLayoutFragment extends Fragment {
                             }
                             break;
                     }
-                    Intent share = new Intent(Intent.ACTION_SEND);
-                    share.setType("text/plain");
-                    share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    share.putExtra(Intent.EXTRA_SUBJECT,
-                            getString(R.string.app_name));
-                    share.putExtra(Intent.EXTRA_TEXT, x);
-                    startActivity(Intent.createChooser(share,
-                            getString(R.string.app_name)));
+                   // Intent share = new Intent(Intent.ACTION_SEND);
+                   // share.setType("text/plain");
+                   // share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                   // share.putExtra(Intent.EXTRA_SUBJECT,
+                   //         getString(R.string.app_name));
+                   // share.putExtra(Intent.EXTRA_TEXT, x);
+                   // startActivity(Intent.createChooser(share,
+                   //         getString(R.string.app_name)));
+                    new ShareAction(getActivity()).withText(x)
+                            .setDisplayList(/*SHARE_MEDIA.QQ,*/SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,/*SHARE_MEDIA.SINA,*/SHARE_MEDIA.SMS,SHARE_MEDIA.EMAIL,SHARE_MEDIA.MORE)
+                            .open();
                 } else if (v == cardsList.getChildAt(i - cardsList.getFirstVisiblePosition()).findViewById(R.id.list_item_card_button_2)) {
                     // PERFORM ANOTHER ACTION WITH THE ITEM AT POSITION i
                     switch (i){

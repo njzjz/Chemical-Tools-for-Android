@@ -20,6 +20,9 @@ import android.widget.TextView;
 
 import com.mikepenz.aboutlibraries.Libs;
 import com.tencent.stat.StatService;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -253,19 +256,26 @@ public class ExamActivity extends AppCompatActivity {
                 this.finish();
                 return true;
             case R.id.action_share:
-                Intent share = new Intent(Intent.ACTION_SEND);
-                share.setType("text/plain");
-                share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                share.putExtra(Intent.EXTRA_SUBJECT,
-                        getString(R.string.app_name));
+                //Intent share = new Intent(Intent.ACTION_SEND);
+                //share.setType("text/plain");
+                //share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                //share.putExtra(Intent.EXTRA_SUBJECT,
+                //        getString(R.string.app_name));
                 int examCorrectNumber=Integer.parseInt(PreferenceUtils.getPrefString(getApplicationContext(),"examCorrectNumber","0"));
                 int examIncorrectnumber=Integer.parseInt(PreferenceUtils.getPrefString(getApplicationContext(),"examIncorrectnumber","0"));
                 int sum=examCorrectNumber+examIncorrectnumber;
                 double examCorrectPercent;
                 if(sum>0) examCorrectPercent=(double)examCorrectNumber/sum*100; else examCorrectPercent=0;
-                share.putExtra(Intent.EXTRA_TEXT, String.format(getResources().getString(R.string.examShare_name),sum,examCorrectPercent));
-                startActivity(Intent.createChooser(share,
-                        getString(R.string.app_name)));
+                //share.putExtra(Intent.EXTRA_TEXT, String.format(getResources().getString(R.string.examShare_name),sum,examCorrectPercent));
+                //startActivity(Intent.createChooser(share,
+                //        getString(R.string.app_name)));
+                UMImage image = new UMImage(this, R.drawable.ic_launcher);//资源文件
+                new ShareAction(this).withText(String.format(getResources().getString(R.string.examShare_name),sum,examCorrectPercent))
+                        .withTargetUrl("http://chem.njzjz.win")
+                        .withMedia(image)
+                        .withTitle(getString(R.string.app_name))
+                        .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,/*SHARE_MEDIA.SINA,*/SHARE_MEDIA.SMS,SHARE_MEDIA.EMAIL,SHARE_MEDIA.MORE)
+                        .open();
                 return true;
             case R.id.action_settings:
                 openSettings();

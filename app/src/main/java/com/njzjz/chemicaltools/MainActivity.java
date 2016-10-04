@@ -30,6 +30,9 @@ import android.widget.TextView;
 
 import com.mikepenz.aboutlibraries.Libs;
 import com.tencent.stat.StatService;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener,
         AdapterView.OnItemClickListener {
@@ -191,14 +194,20 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 return true;
             case R.id.action_share:
                 String historyElementOutput=PreferenceUtils.getPrefString(getApplicationContext(),"historyElementOutput","");
-                Intent share = new Intent(Intent.ACTION_SEND);
-                share.setType("text/plain");
-                share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                share.putExtra(Intent.EXTRA_SUBJECT,
-                        getString(R.string.app_name));
-                share.putExtra(Intent.EXTRA_TEXT, historyElementOutput);
-                startActivity(Intent.createChooser(share,
-                        getString(R.string.app_name)));
+                ShareAction share=new ShareAction(MainActivity.this).withText(historyElementOutput);
+                //等垃圾微信sdk什么时候支持图文分享了再加上吧
+                /*
+                String historyElementNumber=PreferenceUtils.getPrefString(getApplicationContext(),"historyElementNumber","0");
+                int elementNumber=Integer.parseInt(historyElementNumber);
+                if (elementNumber>0) {
+                    TypedArray elementPictureArray = getResources().obtainTypedArray(R.array.elementPictureArray);
+                    int resId = elementPictureArray.getResourceId(elementNumber - 1, 0);
+                    UMImage image = new UMImage(this,resId);//资源文件
+                    share.withMedia(image);
+                }
+                */
+                share.setDisplayList(/*SHARE_MEDIA.QQ,*/SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,/*SHARE_MEDIA.SINA,*/SHARE_MEDIA.SMS,SHARE_MEDIA.EMAIL,SHARE_MEDIA.MORE)
+                     .setCallback(umShareListener).open();
                 return true;
             case R.id.action_settings:
                 openSettings();
@@ -218,6 +227,22 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         Intent intent =new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
+
+    private UMShareListener umShareListener = new UMShareListener() {
+        @Override
+        public void onResult(SHARE_MEDIA platform) {
+        //    Toast.makeText(MainActivity.this, platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
+        }
+        @Override
+        public void onError(SHARE_MEDIA platform, Throwable t){
+        //    Toast.makeText(MainActivity.this,platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform) {
+      //      Toast.makeText(MainActivity.this,platform + " 分享取消了", Toast.LENGTH_SHORT).show();
+        }
+    };
 
 };
 

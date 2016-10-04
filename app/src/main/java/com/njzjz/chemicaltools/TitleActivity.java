@@ -1,10 +1,13 @@
 package com.njzjz.chemicaltools;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -19,9 +22,10 @@ import android.widget.ListView;
 import com.ikimuhendis.ldrawer.ActionBarDrawerToggle;
 import com.ikimuhendis.ldrawer.DrawerArrowDrawable;
 import com.mikepenz.aboutlibraries.Libs;
-import com.sangbo.autoupdate.CheckVersion;
-import com.tencent.stat.MtaSDkException;
 import com.tencent.stat.StatService;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
 
 public class TitleActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "com.njzjz.chemicalTools.MESSAGE";
@@ -45,24 +49,10 @@ public class TitleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_title);
         if (!notfirstCreate) {
             //activity首次创建时
-
-            String appkey = "A55JRMC53SPT";
-            // 在startStatService之前调用StatConfig配置类接口，使得MTA配置及时生效
-            // 初始化并启动MTA
-            // 第三方SDK必须按以下代码初始化MTA，其中appkey为规定的格式或MTA分配的代码。
-            // 其它普通的app可自行选择是否调用
-            try {
-                // 第三个参数必须为：com.tencent.stat.common.StatConstants.VERSION
-                StatService.startStatService(this, appkey,
-                        com.tencent.stat.common.StatConstants.VERSION);
-            } catch (MtaSDkException e) {
-                // MTA初始化失败
-
+            if(Build.VERSION.SDK_INT>=23){
+                String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.CALL_PHONE,Manifest.permission.READ_LOGS,Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.SET_DEBUG_APP,Manifest.permission.SYSTEM_ALERT_WINDOW,Manifest.permission.GET_ACCOUNTS,Manifest.permission.WRITE_APN_SETTINGS};
+                ActivityCompat.requestPermissions(this,mPermissionList,123);
             }
-
-            CheckVersion.checkUrl = "http://test-10061032.cos.myqcloud.com/version.txt";     //定义服务器版本信息
-            CheckVersion.update(this);
-
             historyElementOutput = PreferenceUtils.getPrefString(getApplicationContext(), "historyElementOutput", "");
             historyMassOutput = PreferenceUtils.getPrefString(getApplicationContext(), "historyMassOutput", "");
             historyAcidOutput = PreferenceUtils.getPrefString(getApplicationContext(), "historyAcidOutput", "");
@@ -143,15 +133,12 @@ public class TitleActivity extends AppCompatActivity {
                         break;
                     case 4:
                         //Share
-                        Intent share = new Intent(Intent.ACTION_SEND);
-                        share.setType("text/plain");
-                        share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        share.putExtra(Intent.EXTRA_SUBJECT,
-                                getString(R.string.app_name));
-                        share.putExtra(Intent.EXTRA_TEXT, getString(R.string.app_name) + "\n" +
-                                "https://github.com/njzjz/Chemical-Tools-for-Android");
-                        startActivity(Intent.createChooser(share,
-                                getString(R.string.app_name)));
+                        UMImage image = new UMImage(TitleActivity.this, R.drawable.ic_launcher);//资源文件
+                        new ShareAction(TitleActivity.this).withText(getString(R.string.app_name)
+                                + "，化学专业学生必备的工具，下载地址：chem.njzjz.win").withTargetUrl("http://chem.njzjz.win").withMedia(image)
+                                .withTitle(getString(R.string.app_name))
+                                .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,/*SHARE_MEDIA.SINA,*/SHARE_MEDIA.SMS,SHARE_MEDIA.EMAIL,SHARE_MEDIA.MORE)
+                                .open();
                         break;
                     case 3:
                         //Exam
@@ -202,15 +189,21 @@ public class TitleActivity extends AppCompatActivity {
                 }
                 return true;
             case R.id.action_share:
-                Intent share = new Intent(Intent.ACTION_SEND);
-                share.setType("text/plain");
-                share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                share.putExtra(Intent.EXTRA_SUBJECT,
-                        getString(R.string.app_name));
-                share.putExtra(Intent.EXTRA_TEXT, getString(R.string.app_name) + "\n" +
-                        "https://github.com/njzjz/Chemical-Tools-for-Android");
-                startActivity(Intent.createChooser(share,
-                        getString(R.string.app_name)));
+                //Intent share = new Intent(Intent.ACTION_SEND);
+                //share.setType("text/plain");
+                //share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                //share.putExtra(Intent.EXTRA_SUBJECT,
+                //        getString(R.string.app_name));
+                //share.putExtra(Intent.EXTRA_TEXT, getString(R.string.app_name) + "\n" +
+                //        "https://github.com/njzjz/Chemical-Tools-for-Android");
+                //startActivity(Intent.createChooser(share,
+                //        getString(R.string.app_name)));
+                UMImage image = new UMImage(this, R.drawable.ic_launcher);//资源文件
+                new ShareAction(this).withText(getString(R.string.app_name)
+                        + "，化学专业学生必备的工具，下载地址：chem.njzjz.win").withTargetUrl("http://chem.njzjz.win").withMedia(image)
+                        .withTitle(getString(R.string.app_name))
+                        .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,/*SHARE_MEDIA.SINA,*/SHARE_MEDIA.SMS,SHARE_MEDIA.EMAIL,SHARE_MEDIA.MORE)
+                        .open();
                 return true;
             case R.id.action_settings:
                 openSettings();
