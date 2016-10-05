@@ -3,7 +3,6 @@ package com.njzjz.chemicaltools;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
@@ -18,6 +17,10 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.GetCallback;
 import com.mikepenz.aboutlibraries.Libs;
 import com.tencent.stat.StatService;
 import com.umeng.socialize.ShareAction;
@@ -39,6 +42,33 @@ public class ExamActivity extends AppCompatActivity {
         ab.setDisplayShowHomeEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setHomeButtonEnabled(true);
+
+        AVUser currentUser = AVUser.getCurrentUser();
+        if (currentUser != null) {
+            // 有
+            AVUser.getCurrentUser().fetchIfNeededInBackground(new GetCallback<AVObject>() {
+                @Override
+                public void done(AVObject avObject, AVException e) {
+                    // 调用 fetchIfNeededInBackground 和 refreshInBackground 效果是一样的。
+                    String examCorrectNumber=avObject.getString("examCorrectNumber");
+                    if(examCorrectNumber==null)examCorrectNumber="0";
+                    String examIncorrectnumber=avObject.getString("examIncorrectnumber");
+                    if(examIncorrectnumber==null)examIncorrectnumber="0";
+                    String elementnumber_limit=avObject.getString("elementnumber_limit");
+                    if(elementnumber_limit==null)elementnumber_limit="118";
+                    String examMode=avObject.getString("examMode");
+                    if(examMode==null)examMode="0";
+                    Boolean setting_examOptionMode=avObject.getBoolean("setting_examOptionMode");
+                    if(setting_examOptionMode==null)setting_examOptionMode=false;
+                    PreferenceUtils.setPrefString(getApplicationContext(),"examCorrectNumber",examCorrectNumber);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"examIncorrectnumber",examIncorrectnumber);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"elementnumber_limit",elementnumber_limit);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"examMode",examMode);
+                    PreferenceUtils.setPrefBoolean(getApplicationContext(),"setting_examOptionMode",setting_examOptionMode);
+                }});
+
+        }
+
         TextView mFileContentView = (TextView) findViewById(R.id.examTextview);
         final Button Optionbutton_1=(Button) findViewById(R.id.Optionbutton_1);
         final Button Optionbutton_2=(Button) findViewById(R.id.Optionbutton_2);
@@ -109,10 +139,20 @@ public class ExamActivity extends AppCompatActivity {
                     examTextview.setText(getResources().getString(R.string.examOutputRight_name));
                     examCorrectNumber++;
                     PreferenceUtils.setPrefString(getApplicationContext(),"examCorrectNumber",String.valueOf(examCorrectNumber));
+                    AVUser currentUser = AVUser.getCurrentUser();
+                    if (currentUser != null) {
+                        AVUser.getCurrentUser().put("examCorrectNumber",String.valueOf(examCorrectNumber));
+                        AVUser.getCurrentUser().saveInBackground();
+                    }
                 }else{
                     examTextview.setText(String.format(getResources().getString(R.string.examOutputWrong_name),correctAnswer,examInput,output));
                     examIncorrectnumber++;
                     PreferenceUtils.setPrefString(getApplicationContext(),"examIncorrectnumber",String.valueOf(examIncorrectnumber));
+                    AVUser currentUser = AVUser.getCurrentUser();
+                    if (currentUser != null) {
+                        AVUser.getCurrentUser().put("examIncorrectnumber",String.valueOf(examCorrectNumber));
+                        AVUser.getCurrentUser().saveInBackground();
+                    }
                 }
                 examScoreOutput(examCorrectNumber,examIncorrectnumber);
                 examMode[0] =PreferenceUtils.getPrefString(getApplicationContext(),"examMode","0");

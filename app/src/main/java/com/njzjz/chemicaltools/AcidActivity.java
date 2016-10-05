@@ -26,6 +26,10 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.GetCallback;
 import com.mikepenz.aboutlibraries.Libs;
 import com.tencent.stat.StatService;
 import com.umeng.socialize.ShareAction;
@@ -155,6 +159,11 @@ public class AcidActivity extends AppCompatActivity implements View.OnTouchListe
                         TextView acidTextview = (TextView) findViewById(R.id.acidTextview);
                         acidTextview.setText(Html.fromHtml(parseContent(acidOutput)));
                         PreferenceUtils.setPrefString(getApplicationContext(),"historyAcidOutput",acidOutput);
+                        AVUser currentUser = AVUser.getCurrentUser();
+                        if (currentUser != null) {
+                            AVUser.getCurrentUser().put("historyAcidOutput", acidOutput);
+                            AVUser.getCurrentUser().saveInBackground();
+                        }
                     }else Snackbar.make(v, getResources().getString(R.string.error_name), Snackbar.LENGTH_LONG)
                             .setAction("Error", null).show();
                 }else Snackbar.make(v, getResources().getString(R.string.error_name), Snackbar.LENGTH_LONG)
@@ -162,6 +171,19 @@ public class AcidActivity extends AppCompatActivity implements View.OnTouchListe
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(AcidActivity.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }});
+        AVUser currentUser = AVUser.getCurrentUser();
+        if (currentUser != null) {
+            // 有
+            AVUser.getCurrentUser().fetchIfNeededInBackground(new GetCallback<AVObject>() {
+                @Override
+                public void done(AVObject avObject, AVException e) {
+                    // 调用 fetchIfNeededInBackground 和 refreshInBackground 效果是一样的。
+                    String historyAcidOutput=avObject.getString("historyAcidOutput");
+                    String pKw=avObject.getString("pKw");
+                    PreferenceUtils.setPrefString(getApplicationContext(),"historyAcidOutput",historyAcidOutput);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"pKw",pKw);
+                }});
+        }
         final EditText acidText_c = (EditText) findViewById(R.id.acidText_c);
         final TextView acidTextview=(TextView) findViewById(R.id.acidTextview);
         acidText_c.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -323,7 +345,7 @@ public class AcidActivity extends AppCompatActivity implements View.OnTouchListe
              //   startActivity(Intent.createChooser(share,
              //           getString(R.string.app_name)));
                 new ShareAction(this).withText(acidTextview.getText().toString())
-                        .setDisplayList(/*SHARE_MEDIA.QQ,*/SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,/*SHARE_MEDIA.SINA,*/SHARE_MEDIA.SMS,SHARE_MEDIA.EMAIL,SHARE_MEDIA.MORE)
+                        .setDisplayList(/*SHARE_MEDIA.QQ,*/SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.WEIXIN_FAVORITE,/*SHARE_MEDIA.SINA,*/SHARE_MEDIA.SMS,SHARE_MEDIA.EMAIL,SHARE_MEDIA.MORE)
                         .open();
                 return true;
             case R.id.action_settings:

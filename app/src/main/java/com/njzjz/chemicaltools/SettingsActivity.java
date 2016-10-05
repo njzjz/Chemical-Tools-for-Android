@@ -13,6 +13,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.GetCallback;
 import com.mikepenz.aboutlibraries.Libs;
 import com.sangbo.autoupdate.CheckVersion;
 import com.tencent.stat.StatService;
@@ -35,6 +40,29 @@ public class SettingsActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setHomeButtonEnabled(true);
 
+        AVUser currentUser = AVUser.getCurrentUser();
+        if (currentUser != null) {
+            // 有
+            AVUser.getCurrentUser().fetchIfNeededInBackground(new GetCallback<AVObject>() {
+                @Override
+                public void done(AVObject avObject, AVException e) {
+                    // 调用 fetchIfNeededInBackground 和 refreshInBackground 效果是一样的。
+                    String elementnumber_limit=avObject.getString("elementnumber_limit");
+                    if(elementnumber_limit==null)elementnumber_limit="118";
+                    String examMode=avObject.getString("examMode");
+                    if(examMode==null)examMode="0";
+                    Boolean setting_examOptionMode=avObject.getBoolean("setting_examOptionMode");
+                    if(setting_examOptionMode==null)setting_examOptionMode=false;
+                    String pKw=avObject.getString("pKw");
+                    if(pKw==null)pKw="14";
+                    PreferenceUtils.setPrefString(getApplicationContext(),"elementnumber_limit",elementnumber_limit);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"examMode",examMode);
+                    PreferenceUtils.setPrefBoolean(getApplicationContext(),"setting_examOptionMode",setting_examOptionMode);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"pKw",pKw);
+                }});
+
+        }
+
         PreferenceFragment fragment = new PreferenceFragment() {
             @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                                Bundle savedInstanceState) {
@@ -46,6 +74,31 @@ public class SettingsActivity extends AppCompatActivity {
             @Override public void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
                 addPreferencesFromResource(R.xml.settings_general);
+                findPreference("login").setOnPreferenceClickListener(
+                        new Preference.OnPreferenceClickListener() {
+                            @Override public boolean onPreferenceClick(Preference preference) {
+                                AVUser currentUser = AVUser.getCurrentUser();
+                                if(currentUser !=null){
+                                    AVUser.logOut();// 清除缓存用户对象
+                                    finish();
+                                    Intent intent = new Intent(SettingsActivity.this, SettingsActivity.class);
+                                    startActivity(intent);
+                                }else {
+                                    openLogin();
+                                }
+                                return true;
+                            }
+                        });
+                AVUser currentUser = AVUser.getCurrentUser();
+                PreferenceScreen Login= (PreferenceScreen) findPreference("login");
+                if (currentUser != null) {
+                    // 有
+                    Login.setTitle(getString(R.string.action_sign_out));
+                    Login.setSummary(currentUser.getUsername());
+                } else {
+                    //缓存用户对象为空时，可打开用户注册界面…
+                    Login.setTitle(getString(R.string.action_sign_in));
+                }
                 findPreference("about").setOnPreferenceClickListener(
                         new Preference.OnPreferenceClickListener() {
                             @Override public boolean onPreferenceClick(Preference preference) {
@@ -75,6 +128,11 @@ public class SettingsActivity extends AppCompatActivity {
                                 ListPreference elementnumber_limitList= (ListPreference) findPreference("elementnumber_limit");
                                 String elementnumber_limit=newValue.toString();
                                 PreferenceUtils.setPrefString(getApplicationContext(),"elementnumber_limit",elementnumber_limit);
+                                AVUser currentUser = AVUser.getCurrentUser();
+                                if (currentUser != null) {
+                                    AVUser.getCurrentUser().put("elementnumber_limit", elementnumber_limit);
+                                    AVUser.getCurrentUser().saveInBackground();
+                                }
                                 elementnumber_limitList.setSummary(elementnumber_limit);
                                 Intent intent=new Intent();
                                 intent.putExtra("result","1");
@@ -110,6 +168,11 @@ public class SettingsActivity extends AppCompatActivity {
                                 ListPreference examModeList= (ListPreference) findPreference("examMode");
                                 String examMode=newValue.toString();
                                 PreferenceUtils.setPrefString(getApplicationContext(),"examMode",examMode);
+                                AVUser currentUser = AVUser.getCurrentUser();
+                                if (currentUser != null) {
+                                    AVUser.getCurrentUser().put("examMode", examMode);
+                                    AVUser.getCurrentUser().saveInBackground();
+                                }
                                 examModeList.setSummary(examModeList.getEntries()[Integer.parseInt(examMode)]);
                                 Intent intent=new Intent();
                                 intent.putExtra("result","1");
@@ -128,6 +191,11 @@ public class SettingsActivity extends AppCompatActivity {
                             public boolean onPreferenceChange(Preference preference, Object newValue) {
                                 boolean setting_examOptionMode=Boolean.valueOf(newValue.toString());
                                 PreferenceUtils.setPrefBoolean(getApplicationContext(),"setting_examOptionMode",setting_examOptionMode);
+                                AVUser currentUser = AVUser.getCurrentUser();
+                                if (currentUser != null) {
+                                    AVUser.getCurrentUser().put("setting_examOptionMode", setting_examOptionMode);
+                                    AVUser.getCurrentUser().saveInBackground();
+                                }
                                 Intent intent=new Intent();
                                 intent.putExtra("result","1");
                                 setResult(1001,intent);
@@ -144,6 +212,11 @@ public class SettingsActivity extends AppCompatActivity {
                         String pKw=newValue.toString();
                         if (isNumeric(pKw)) {
                             PreferenceUtils.setPrefString(getApplicationContext(), "pKw", pKw);
+                            AVUser currentUser = AVUser.getCurrentUser();
+                            if (currentUser != null) {
+                                AVUser.getCurrentUser().put("pKw", pKw);
+                                AVUser.getCurrentUser().saveInBackground();
+                            }
                             EditTextPreference pKwEditText = (EditTextPreference) findPreference("pKw");
                             pKwEditText.setSummary(pKw);
                             return true;
@@ -180,7 +253,6 @@ public class SettingsActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 this.finish();
                 return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -196,6 +268,33 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 PreferenceUtils.clearPreference(getApplicationContext(), PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
+                String historyElementOutput = PreferenceUtils.getPrefString(getApplicationContext(), "historyElementOutput", "");
+                String historyElementOutputHtml = PreferenceUtils.getPrefString(getApplicationContext(), "historyElementOutputHtml", "");
+                String historyElementNumber = PreferenceUtils.getPrefString(getApplicationContext(), "historyElementNumber", "0");
+                String historyElement = PreferenceUtils.getPrefString(getApplicationContext(), "historyElement", "");
+                String historyMass = PreferenceUtils.getPrefString(getApplicationContext(), "historyMass", "");
+                String historyMassOutput = PreferenceUtils.getPrefString(getApplicationContext(), "historyMassOutput", "");
+                String historyAcidOutput = PreferenceUtils.getPrefString(getApplicationContext(), "historyAcidOutput", "");
+                String examCorrectNumber=PreferenceUtils.getPrefString(getApplicationContext(),"examCorrectNumber","0");
+                String examIncorrectnumber=PreferenceUtils.getPrefString(getApplicationContext(),"examIncorrectnumber","0");
+                String elementnumber_limit=PreferenceUtils.getPrefString(getApplicationContext(),"elementnumber_limit","118");
+                String examMode=PreferenceUtils.getPrefString(getApplicationContext(),"examMode","0");
+                Boolean setting_examOptionMode=PreferenceUtils.getPrefBoolean(getApplicationContext(),"setting_examOptionMode",false);
+                String pKw=PreferenceUtils.getPrefString(getApplicationContext(),"pKw","14");
+                AVUser.getCurrentUser().put("historyElementOutput", historyElementOutput);
+                AVUser.getCurrentUser().put("historyElementOutputHtml", historyElementOutputHtml);
+                AVUser.getCurrentUser().put("historyElementNumber", historyElementNumber);
+                AVUser.getCurrentUser().put("historyElement", historyElement);
+                AVUser.getCurrentUser().put("historyMass", historyMass);
+                AVUser.getCurrentUser().put("historyMassOutput", historyMassOutput);
+                AVUser.getCurrentUser().put("historyAcidOutput", historyAcidOutput);
+                AVUser.getCurrentUser().put("examCorrectNumber", examCorrectNumber);
+                AVUser.getCurrentUser().put("examIncorrectnumber", examIncorrectnumber);
+                AVUser.getCurrentUser().put("elementnumber_limit", elementnumber_limit);
+                AVUser.getCurrentUser().put("examMode", examMode);
+                AVUser.getCurrentUser().put("setting_examOptionMode", setting_examOptionMode);
+                AVUser.getCurrentUser().put("pKw", pKw);
+                AVUser.getCurrentUser().saveInBackground();
                 finish();
                 Intent intent = new Intent(SettingsActivity.this, SettingsActivity.class);
                 startActivity(intent);
@@ -211,5 +310,19 @@ public class SettingsActivity extends AppCompatActivity {
         builder.setCancelable(true);
         AlertDialog dialog=builder.create();
         dialog.show();
+    }
+    @Override
+    protected void onActivityResult(int requestCode,int resultCode,Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode==1002 && resultCode==1003)
+            if(data.getStringExtra("result").equals("1")){
+                finish();
+                Intent intent = new Intent(SettingsActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+    }
+    public void openLogin(){
+        Intent intent =new Intent(this, LoginActivity.class);
+        startActivityForResult(intent,1002);
     }
 }

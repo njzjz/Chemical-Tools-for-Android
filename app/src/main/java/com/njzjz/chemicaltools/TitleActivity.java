@@ -19,6 +19,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.GetCallback;
 import com.ikimuhendis.ldrawer.ActionBarDrawerToggle;
 import com.ikimuhendis.ldrawer.DrawerArrowDrawable;
 import com.mikepenz.aboutlibraries.Libs;
@@ -53,6 +57,7 @@ public class TitleActivity extends AppCompatActivity {
                 String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.CALL_PHONE,Manifest.permission.READ_LOGS,Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.SET_DEBUG_APP,Manifest.permission.SYSTEM_ALERT_WINDOW,Manifest.permission.GET_ACCOUNTS,Manifest.permission.WRITE_APN_SETTINGS};
                 ActivityCompat.requestPermissions(this,mPermissionList,123);
             }
+
             historyElementOutput = PreferenceUtils.getPrefString(getApplicationContext(), "historyElementOutput", "");
             historyMassOutput = PreferenceUtils.getPrefString(getApplicationContext(), "historyMassOutput", "");
             historyAcidOutput = PreferenceUtils.getPrefString(getApplicationContext(), "historyAcidOutput", "");
@@ -61,6 +66,53 @@ public class TitleActivity extends AppCompatActivity {
             doyouknowArray = getResources().getStringArray(R.array.doyouknow);
 
             notfirstCreate=true;
+        }
+        String loginButton;
+        AVUser currentUser = AVUser.getCurrentUser();
+        if (currentUser != null) {
+            // 有
+            AVUser.getCurrentUser().fetchIfNeededInBackground(new GetCallback<AVObject>() {
+                @Override
+                public void done(AVObject avObject, AVException e) {
+                    // 调用 fetchIfNeededInBackground 和 refreshInBackground 效果是一样的。
+                    String historyElementOutput=avObject.getString("historyElementOutput");
+                    String historyElementOutputHtml=avObject.getString("historyElementOutputHtml");
+                    String historyElementNumber=avObject.getString("historyElementNumber");
+                    if(historyElementNumber==null)historyElementNumber="0";
+                    String historyElement=avObject.getString("historyElement");
+                    String historyMass=avObject.getString("historyMass");
+                    String historyMassOutput=avObject.getString("historyMassOutput");
+                    String historyAcidOutput=avObject.getString("historyAcidOutput");
+                    String examCorrectNumber=avObject.getString("examCorrectNumber");
+                    if(examCorrectNumber==null)examCorrectNumber="0";
+                    String examIncorrectnumber=avObject.getString("examIncorrectnumber");
+                    if(examIncorrectnumber==null)examIncorrectnumber="0";
+                    String elementnumber_limit=avObject.getString("elementnumber_limit");
+                    if(elementnumber_limit==null)elementnumber_limit="118";
+                    String examMode=avObject.getString("examMode");
+                    if(examMode==null)examMode="0";
+                    Boolean setting_examOptionMode=avObject.getBoolean("setting_examOptionMode");
+                    if(setting_examOptionMode==null)setting_examOptionMode=false;
+                    String pKw=avObject.getString("pKw");
+                    if(pKw==null)pKw="14";
+                    PreferenceUtils.setPrefString(getApplicationContext(),"historyElementOutput",historyElementOutput);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"historyElementOutputHtml",historyElementOutputHtml);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"historyElementNumber",historyElementNumber);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"historyElement",historyElement);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"historyMass",historyMass);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"historyMassOutput",historyMassOutput);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"historyAcidOutput",historyAcidOutput);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"examCorrectNumber",examCorrectNumber);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"examIncorrectnumber",examIncorrectnumber);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"elementnumber_limit",elementnumber_limit);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"examMode",examMode);
+                    PreferenceUtils.setPrefBoolean(getApplicationContext(),"setting_examOptionMode",setting_examOptionMode);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"pKw",pKw);
+                }});
+            loginButton=getString(R.string.action_sign_out);
+        } else {
+            //缓存用户对象为空时，可打开用户注册界面…
+            loginButton=getString(R.string.action_sign_in);
         }
         ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.home);
@@ -100,6 +152,7 @@ public class TitleActivity extends AppCompatActivity {
 
         Resources res = getResources();
         String[] values = new String[]{
+                loginButton,
                 res.getString(R.string.button_element),
                 res.getString(R.string.button_mass),
                 res.getString(R.string.button_acid),
@@ -118,20 +171,20 @@ public class TitleActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 switch (position) {
-                    case 0:
+                    case 1:
                        //Element
                         openElement(view);
                         break;
-                    case 1:
+                    case 2:
                         //Mass
                         openMass(view);
                         break;
-                    case 6:
+                    case 7:
                         //Feedback
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:njzjz@msn.com?subject=Chemical Tools App Feedback"));
                         startActivity(browserIntent);
                         break;
-                    case 4:
+                    case 5:
                         //Share
                         UMImage image = new UMImage(TitleActivity.this, R.drawable.ic_launcher);//资源文件
                         new ShareAction(TitleActivity.this).withText(getString(R.string.app_name)
@@ -140,31 +193,56 @@ public class TitleActivity extends AppCompatActivity {
                                 .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,/*SHARE_MEDIA.SINA,*/SHARE_MEDIA.SMS,SHARE_MEDIA.EMAIL,SHARE_MEDIA.MORE)
                                 .open();
                         break;
-                    case 3:
+                    case 4:
                         //Exam
                         openExam(view);
                         break;
-                    case 5:
+                    case 6:
                         //Settings
                         openSettings();
                         break;
-                    case 7:
+                    case 8:
                         //Website
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://chem.njzjz.win/")));
                         break;
-                    case 8:
+                    case 9:
                         //About
                         new Libs.Builder().withActivityTitle(getString(R.string.button_About)).withFields(R.string.class.getFields()).start(TitleActivity.this);
                         break;
-                    case 2:
+                    case 3:
                         //acid
                         openAcid(view);
                         break;
+                    case 0:
+                        //Login
+                        AVUser currentUser = AVUser.getCurrentUser();
+                        if(currentUser !=null){
+                            AVUser.logOut();// 清除缓存用户对象
+                            finish();
+                            Intent intent = new Intent(TitleActivity.this, TitleActivity.class);
+                            startActivity(intent);
+                        }else {
+                            openLogin();
+                        }
                 }
 
             }
         });
 
+    }
+    @Override
+    protected void onActivityResult(int requestCode,int resultCode,Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode==1002 && resultCode==1003)
+            if(data.getStringExtra("result").equals("1")){
+                finish();
+                Intent intent = new Intent(this, TitleActivity.class);
+                startActivity(intent);
+            }
+    }
+    public void openLogin(){
+        Intent intent =new Intent(this, LoginActivity.class);
+        startActivityForResult(intent,1002);
     }
     @Override
     protected void onResume() {

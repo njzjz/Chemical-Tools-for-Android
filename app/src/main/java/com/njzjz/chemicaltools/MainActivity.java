@@ -28,6 +28,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.GetCallback;
 import com.mikepenz.aboutlibraries.Libs;
 import com.tencent.stat.StatService;
 import com.umeng.socialize.ShareAction;
@@ -84,6 +88,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     PreferenceUtils.setPrefString(getApplicationContext(),"historyElementOutput",elementOutput);
                     String elementoutputhtml=elementOutput+"\n<a href='https://en.wikipedia.org/wiki/"+elementIUPACArray[elementNumber-1]+"'>"+getResources().getString(R.string.elementWikipedia)+"</a>";
                     PreferenceUtils.setPrefString(getApplicationContext(),"historyElementOutputHtml",elementoutputhtml);
+                    AVUser currentUser = AVUser.getCurrentUser();
+                    if (currentUser != null) {
+                        AVUser.getCurrentUser().put("historyElementOutput", elementOutput);
+                        AVUser.getCurrentUser().put("historyElementOutputHtml", elementoutputhtml);
+                        AVUser.getCurrentUser().put("historyElementNumber", String.valueOf(elementNumber));
+                        AVUser.getCurrentUser().put("historyElement", elementInput);
+                        AVUser.getCurrentUser().saveInBackground();
+                    }
                     elementTextview.setText(Html.fromHtml(parseContent(elementoutputhtml)));
                     TypedArray elementPictureArray = getResources().obtainTypedArray(R.array.elementPictureArray);
                     int  resId = elementPictureArray.getResourceId(elementNumber-1, 0);
@@ -97,6 +109,24 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 imm.hideSoftInputFromWindow(MainActivity.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             };
         });
+        AVUser currentUser = AVUser.getCurrentUser();
+        if (currentUser != null) {
+            // 有
+            currentUser .fetchIfNeededInBackground(new GetCallback<AVObject>() {
+                @Override
+                public void done(AVObject avObject, AVException e) {
+                    // 调用 fetchIfNeededInBackground 和 refreshInBackground 效果是一样的。
+                    String historyElementOutput=avObject.getString("historyElementOutput");
+                    String historyElementOutputHtml=avObject.getString("historyElementOutputHtml");
+                    String historyElementNumber=avObject.getString("historyElementNumber");
+                    if(historyElementNumber==null)historyElementNumber="0";
+                    String historyElement=avObject.getString("historyElement");
+                    PreferenceUtils.setPrefString(getApplicationContext(),"historyElementOutput",historyElementOutput);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"historyElementOutputHtml",historyElementOutputHtml);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"historyElementNumber",historyElementNumber);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"historyElement",historyElement);
+                }});
+        }
         final EditText elementText = (EditText) findViewById(R.id.elementText);
         elementText.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -206,7 +236,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     share.withMedia(image);
                 }
                 */
-                share.setDisplayList(/*SHARE_MEDIA.QQ,*/SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,/*SHARE_MEDIA.SINA,*/SHARE_MEDIA.SMS,SHARE_MEDIA.EMAIL,SHARE_MEDIA.MORE)
+                share.setDisplayList(/*SHARE_MEDIA.QQ,*/SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.WEIXIN_FAVORITE,/*SHARE_MEDIA.SINA,*/SHARE_MEDIA.SMS,SHARE_MEDIA.EMAIL,SHARE_MEDIA.MORE)
                      .setCallback(umShareListener).open();
                 return true;
             case R.id.action_settings:

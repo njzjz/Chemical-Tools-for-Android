@@ -21,6 +21,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.GetCallback;
 import com.mikepenz.aboutlibraries.Libs;
 import com.tencent.stat.StatService;
 import com.umeng.socialize.ShareAction;
@@ -202,6 +206,12 @@ public class MassActivity extends AppCompatActivity {
                     massTextview.setText(Html.fromHtml(parseContent(massOutput)));
                     PreferenceUtils.setPrefString(getApplicationContext(),"historyMass",x);
                     PreferenceUtils.setPrefString(getApplicationContext(),"historyMassOutput",massOutput);
+                    AVUser currentUser = AVUser.getCurrentUser();
+                    if (currentUser != null) {
+                        AVUser.getCurrentUser().put("historyMass", x);
+                        AVUser.getCurrentUser().put("historyMassOutput",massOutput);
+                        AVUser.getCurrentUser().saveInBackground();
+                    }
                 } else {
                     Snackbar.make(v, res.getString(R.string.error_name), Snackbar.LENGTH_LONG)
                             .setAction("Error", null).show();
@@ -212,6 +222,20 @@ public class MassActivity extends AppCompatActivity {
 
             ;
         });
+        AVUser currentUser = AVUser.getCurrentUser();
+        if (currentUser != null) {
+            // 有
+            AVUser.getCurrentUser().fetchIfNeededInBackground(new GetCallback<AVObject>() {
+                @Override
+                public void done(AVObject avObject, AVException e) {
+                    // 调用 fetchIfNeededInBackground 和 refreshInBackground 效果是一样的。
+                    String historyMass=avObject.getString("historyMass");
+                    String historyMassOutput=avObject.getString("historyMassOutput");
+                    PreferenceUtils.setPrefString(getApplicationContext(),"historyMass",historyMass);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"historyMassOutput",historyMassOutput);
+                }});
+
+        }
         final EditText massText = (EditText) findViewById(R.id.massText);
         massText.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -298,7 +322,7 @@ public class MassActivity extends AppCompatActivity {
                 //startActivity(Intent.createChooser(share,
                 //        getString(R.string.app_name)));
                 new ShareAction(this).withText(massTextview.getText().toString())
-                        .setDisplayList(/*SHARE_MEDIA.QQ,*/SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,/*SHARE_MEDIA.SINA,*/SHARE_MEDIA.SMS,SHARE_MEDIA.EMAIL,SHARE_MEDIA.MORE)
+                        .setDisplayList(/*SHARE_MEDIA.QQ,*/SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.WEIXIN_FAVORITE,/*SHARE_MEDIA.SINA,*/SHARE_MEDIA.SMS,SHARE_MEDIA.EMAIL,SHARE_MEDIA.MORE)
                         .open();
                 return true;
             case R.id.action_settings:

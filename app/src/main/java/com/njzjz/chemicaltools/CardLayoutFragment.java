@@ -114,7 +114,7 @@ public class CardLayoutFragment extends Fragment {
                             if(!historyElementOutput.equals(getResources().getString(R.string.button_notUsed))){
                                 x=itemText.getText().toString();
                             }else{
-                                x=getString(R.string.app_name)+"\nhttps://github.com/njzjz/Chemical-Tools-for-Android";
+                                x=getString(R.string.app_name)+"\nhttps://chem.njzjz.win/";
                             }
                             break;
                         case 4:
@@ -123,7 +123,7 @@ public class CardLayoutFragment extends Fragment {
                                 double examCorrectPercent=(double)examCorrectNumber/sum*100;
                                 x=String.format(getResources().getString(R.string.examScoreOutput_name),sum,examCorrectNumber,examCorrectPercent);
                             }else {
-                                x=getString(R.string.app_name)+"\nhttps://github.com/njzjz/Chemical-Tools-for-Android";
+                                x=getString(R.string.app_name)+"\nhttps://chem.njzjz.win/";
                             }
                             break;
                     }
@@ -136,7 +136,7 @@ public class CardLayoutFragment extends Fragment {
                    // startActivity(Intent.createChooser(share,
                    //         getString(R.string.app_name)));
                     new ShareAction(getActivity()).withText(x)
-                            .setDisplayList(/*SHARE_MEDIA.QQ,*/SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,/*SHARE_MEDIA.SINA,*/SHARE_MEDIA.SMS,SHARE_MEDIA.EMAIL,SHARE_MEDIA.MORE)
+                            .setDisplayList(/*SHARE_MEDIA.QQ,*/SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.WEIXIN_FAVORITE,/*SHARE_MEDIA.SINA,*/SHARE_MEDIA.SMS,SHARE_MEDIA.EMAIL,SHARE_MEDIA.MORE)
                             .open();
                 } else if (v == cardsList.getChildAt(i - cardsList.getFirstVisiblePosition()).findViewById(R.id.list_item_card_button_2)) {
                     // PERFORM ANOTHER ACTION WITH THE ITEM AT POSITION i
