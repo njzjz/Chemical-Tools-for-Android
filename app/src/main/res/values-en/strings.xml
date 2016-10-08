@@ -82,4 +82,7 @@
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
     <string name="action_sign_out">Sign Out</string>
+    <string name="setting_QQ">Sign in QQ account</string>
+    <string name="setting_wechat">Sign in Wechat account</string>
+    <string name="button_rank">排行榜</string>
 </resources>

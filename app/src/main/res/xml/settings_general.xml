@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="@string/button_user">
+    <PreferenceCategory android:title="@string/button_user" android:key="user">
         <PreferenceScreen android:title="@string/button_login" android:key="login"/>
+        <PreferenceScreen android:title="@string/setting_QQ" android:key="qq" />
+        <!--
+        <PreferenceScreen android:title="@string/setting_wechat" android:key="wechat" />
+        -->
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/button_exam">
         <ListPreference android:title="@string/setting_mode"

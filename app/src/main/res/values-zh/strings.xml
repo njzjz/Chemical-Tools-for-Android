@@ -83,4 +83,7 @@
     <string name="prompt_email">邮箱</string>
     <string name="prompt_password">密码</string>
     <string name="action_sign_out">注销</string>
+    <string name="setting_QQ">授权QQ账号</string>
+    <string name="setting_wechat">授权微信账号</string>
+    <string name="button_rank">排行榜</string>
 </resources>

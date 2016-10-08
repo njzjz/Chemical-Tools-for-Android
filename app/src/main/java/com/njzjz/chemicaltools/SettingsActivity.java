@@ -17,10 +17,12 @@ import android.preference.PreferenceScreen;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
@@ -29,6 +31,11 @@ import com.avos.avoscloud.GetCallback;
 import com.mikepenz.aboutlibraries.Libs;
 import com.sangbo.autoupdate.CheckVersion;
 import com.tencent.stat.StatService;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+
+import java.util.Map;
 
 public class SettingsActivity extends AppCompatActivity {
     @Override
@@ -47,20 +54,27 @@ public class SettingsActivity extends AppCompatActivity {
                 @Override
                 public void done(AVObject avObject, AVException e) {
                     // 调用 fetchIfNeededInBackground 和 refreshInBackground 效果是一样的。
+                    String qqid=avObject.getString("qqid");
+                    String qqname=avObject.getString("qqname");
+                   // String wechatid=avObject.getString("wechatid");
+                    //String wechatname=avObject.getString("wechatname");
                     String elementnumber_limit=avObject.getString("elementnumber_limit");
                     if(elementnumber_limit==null)elementnumber_limit="118";
                     String examMode=avObject.getString("examMode");
                     if(examMode==null)examMode="0";
                     Boolean setting_examOptionMode=avObject.getBoolean("setting_examOptionMode");
-                    if(setting_examOptionMode==null)setting_examOptionMode=false;
                     String pKw=avObject.getString("pKw");
                     if(pKw==null)pKw="14";
+                    PreferenceUtils.setPrefString(getApplicationContext(),"qqid",qqid);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"qqname",qqname);
+                    //PreferenceUtils.setPrefString(getApplicationContext(),"wechatid",wechatid);
+                    //PreferenceUtils.setPrefString(getApplicationContext(),"wechatname",wechatname);
                     PreferenceUtils.setPrefString(getApplicationContext(),"elementnumber_limit",elementnumber_limit);
                     PreferenceUtils.setPrefString(getApplicationContext(),"examMode",examMode);
                     PreferenceUtils.setPrefBoolean(getApplicationContext(),"setting_examOptionMode",setting_examOptionMode);
                     PreferenceUtils.setPrefString(getApplicationContext(),"pKw",pKw);
-                }});
-
+                }}
+            );
         }
 
         PreferenceFragment fragment = new PreferenceFragment() {
@@ -95,10 +109,46 @@ public class SettingsActivity extends AppCompatActivity {
                     // 有
                     Login.setTitle(getString(R.string.action_sign_out));
                     Login.setSummary(currentUser.getUsername());
+                    String qqid=PreferenceUtils.getPrefString(getApplicationContext(),"qqid","");
+                    if(qqid!=""){
+                        String qqname=PreferenceUtils.getPrefString(getApplicationContext(),"qqname","");
+                        findPreference("qq").setSummary(qqname);
+                    }
+                    /*
+                    String wechatid=PreferenceUtils.getPrefString(getApplicationContext(),"wechatid","");
+                    if(wechatid!=""){
+                        String wechatname=PreferenceUtils.getPrefString(getApplicationContext(),"wechatname","");
+                        findPreference("qq").setSummary(wechatname);
+                    }
+                    */
                 } else {
                     //缓存用户对象为空时，可打开用户注册界面…
                     Login.setTitle(getString(R.string.action_sign_in));
+                    findPreference("qq").setEnabled(false);
+                   // ((PreferenceGroup)findPreference("user")).removePreference(findPreference("qq"));
+                    //((PreferenceGroup)findPreference("user")).removePreference(findPreference("wechat"));
                 }
+                findPreference("qq").setOnPreferenceClickListener(
+                        new Preference.OnPreferenceClickListener() {
+                            @Override
+                            public boolean onPreferenceClick(Preference preference) {
+                                UMShareAPI  mShareAPI = UMShareAPI.get( SettingsActivity.this );
+                                mShareAPI.doOauthVerify(SettingsActivity.this, SHARE_MEDIA.QQ, umAuthListener);
+                                return true;
+                            }
+                        }
+                );
+                /*
+                findPreference("wechat").setOnPreferenceClickListener(
+                        new Preference.OnPreferenceClickListener() {
+                            @Override
+                            public boolean onPreferenceClick(Preference preference) {
+                                UMShareAPI  mShareAPI = UMShareAPI.get( SettingsActivity.this );
+                                mShareAPI.doOauthVerify(SettingsActivity.this, SHARE_MEDIA.WEIXIN, umAuthListener);
+                                return true;
+                            }
+                        }
+                );*/
                 findPreference("about").setOnPreferenceClickListener(
                         new Preference.OnPreferenceClickListener() {
                             @Override public boolean onPreferenceClick(Preference preference) {
@@ -268,6 +318,10 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 PreferenceUtils.clearPreference(getApplicationContext(), PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
+                String qqid=PreferenceUtils.getPrefString(getApplicationContext(),"qqid","");
+                String qqname=PreferenceUtils.getPrefString(getApplicationContext(),"qqname","");
+                //String wechatid=PreferenceUtils.getPrefString(getApplicationContext(),"wechatid","");
+                //String wechatname=PreferenceUtils.getPrefString(getApplicationContext(),"wechatname","");
                 String historyElementOutput = PreferenceUtils.getPrefString(getApplicationContext(), "historyElementOutput", "");
                 String historyElementOutputHtml = PreferenceUtils.getPrefString(getApplicationContext(), "historyElementOutputHtml", "");
                 String historyElementNumber = PreferenceUtils.getPrefString(getApplicationContext(), "historyElementNumber", "0");
@@ -281,6 +335,10 @@ public class SettingsActivity extends AppCompatActivity {
                 String examMode=PreferenceUtils.getPrefString(getApplicationContext(),"examMode","0");
                 Boolean setting_examOptionMode=PreferenceUtils.getPrefBoolean(getApplicationContext(),"setting_examOptionMode",false);
                 String pKw=PreferenceUtils.getPrefString(getApplicationContext(),"pKw","14");
+                AVUser.getCurrentUser().put("qqid", qqid);
+                AVUser.getCurrentUser().put("qqname", qqname);
+                //AVUser.getCurrentUser().put("wechatid", wechatid);
+                //AVUser.getCurrentUser().put("wechatname", wechatname);
                 AVUser.getCurrentUser().put("historyElementOutput", historyElementOutput);
                 AVUser.getCurrentUser().put("historyElementOutputHtml", historyElementOutputHtml);
                 AVUser.getCurrentUser().put("historyElementNumber", historyElementNumber);
@@ -314,6 +372,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode,int resultCode,Intent data){
         super.onActivityResult(requestCode,resultCode,data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
         if(requestCode==1002 && resultCode==1003)
             if(data.getStringExtra("result").equals("1")){
                 finish();
@@ -325,4 +384,60 @@ public class SettingsActivity extends AppCompatActivity {
         Intent intent =new Intent(this, LoginActivity.class);
         startActivityForResult(intent,1002);
     }
+    private UMAuthListener umAuthListener = new UMAuthListener() {
+        @Override
+        public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
+            Toast.makeText(getApplicationContext(), "授权成功", Toast.LENGTH_SHORT).show();
+            String uid = data.get("uid");
+            if (!TextUtils.isEmpty(uid)) {
+                // uid不为空，获取用户信息
+                UMShareAPI mShareAPI = UMShareAPI.get(SettingsActivity.this);
+                mShareAPI.getPlatformInfo(SettingsActivity.this, platform, umAuthListener2);
+            }
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, int action, Throwable t) {
+            Toast.makeText( getApplicationContext(), "Authorize fail", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform, int action) {
+            Toast.makeText( getApplicationContext(), "Authorize cancel", Toast.LENGTH_SHORT).show();
+        }
+    };
+    private UMAuthListener umAuthListener2 = new UMAuthListener() {
+        @Override
+        public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
+            String username=data.get("screen_name");
+            String openid=data.get("openid");
+            /*
+            if(platform==SHARE_MEDIA.WEIXIN){
+                PreferenceUtils.setPrefString(getApplicationContext(), "wechatid", openid);
+                PreferenceUtils.setPrefString(getApplicationContext(), "wechatname", username);
+                AVUser.getCurrentUser().put("wechatid", openid);
+                AVUser.getCurrentUser().put("wechatname", username);
+                AVUser.getCurrentUser().saveInBackground();
+            }else*/
+            if(platform==SHARE_MEDIA.QQ){
+                PreferenceUtils.setPrefString(getApplicationContext(), "qqid", openid);
+                PreferenceUtils.setPrefString(getApplicationContext(), "qqname", username);
+                AVUser.getCurrentUser().put("qqid", openid);
+                AVUser.getCurrentUser().put("qqname", username);
+                AVUser.getCurrentUser().saveInBackground();
+            }
+            finish();
+            startActivity(new Intent(SettingsActivity.this,SettingsActivity.class));
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA share_media, int i) {
+
+        }
+    };
 }

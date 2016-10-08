@@ -97,11 +97,12 @@
 
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="57f39f45e0f55a55be0043f3"></meta-data>
+            android:value="57f39f45e0f55a55be0043f3" />
 
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login" />
+        <activity android:name=".RankActivity" android:label="@string/button_rank"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/selectable_background"
+    android:orientation="vertical"
+    android:foreground="?attr/selectableItemBackground">
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/list_item_card_number"
+            style="@style/ListItemText"
+            android:layout_width="41dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_horizontal"
+            android:gravity="start|center_vertical" />
+        <TextView
+            android:id="@+id/list_item_card_text1"
+            style="@style/ListItemText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_horizontal"
+            android:gravity="start|center_vertical"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/list_item_card_text2"
+            style="@style/ListItemText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_horizontal"
+            android:gravity="end|center_vertical"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+
+</LinearLayout>

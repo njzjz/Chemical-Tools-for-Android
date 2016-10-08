@@ -65,6 +65,8 @@
     <string name="setting_examOptionModeOff">You need to answer questions by yourself.</string>
     <string name="setting_update">Update this app</string>
     <string name="setting_website">Visit the website</string>
+    <string name="setting_QQ">Sign in QQ account</string>
+    <string name="setting_wechat">Sign in Wechat account</string>
     <!--  测试模式  -->
     <string name="setting_mode">Exam Mode</string>
     <string name="setting_mode_0">Answer symbols for elements according to Chinese names</string>
@@ -96,4 +98,5 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="button_rank">排行榜</string>
 </resources>

@@ -75,6 +75,10 @@ public class TitleActivity extends AppCompatActivity {
                 @Override
                 public void done(AVObject avObject, AVException e) {
                     // 调用 fetchIfNeededInBackground 和 refreshInBackground 效果是一样的。
+                    String qqid=avObject.getString("qqid");
+                    String qqname=avObject.getString("qqname");
+                    //String wechatid=avObject.getString("wechatid");
+                    //String wechatname=avObject.getString("wechatname");
                     String historyElementOutput=avObject.getString("historyElementOutput");
                     String historyElementOutputHtml=avObject.getString("historyElementOutputHtml");
                     String historyElementNumber=avObject.getString("historyElementNumber");
@@ -95,6 +99,10 @@ public class TitleActivity extends AppCompatActivity {
                     if(setting_examOptionMode==null)setting_examOptionMode=false;
                     String pKw=avObject.getString("pKw");
                     if(pKw==null)pKw="14";
+                    PreferenceUtils.setPrefString(getApplicationContext(),"qqid",qqid);
+                    PreferenceUtils.setPrefString(getApplicationContext(),"qqname",qqname);
+                    //PreferenceUtils.setPrefString(getApplicationContext(),"wechatid",wechatid);
+                    //PreferenceUtils.setPrefString(getApplicationContext(),"wechatname",wechatname);
                     PreferenceUtils.setPrefString(getApplicationContext(),"historyElementOutput",historyElementOutput);
                     PreferenceUtils.setPrefString(getApplicationContext(),"historyElementOutputHtml",historyElementOutputHtml);
                     PreferenceUtils.setPrefString(getApplicationContext(),"historyElementNumber",historyElementNumber);

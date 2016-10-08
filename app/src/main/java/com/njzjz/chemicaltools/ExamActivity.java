@@ -33,7 +33,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ExamActivity extends AppCompatActivity {
-
+    private static final int action_rank = Menu.FIRST;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -283,6 +283,7 @@ public class ExamActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.mainmenu, menu);
+        menu.add(0, action_rank, 100, getString(R.string.button_rank));
         return super.onCreateOptionsMenu(menu);
     }
     @Override
@@ -327,6 +328,9 @@ public class ExamActivity extends AppCompatActivity {
             case R.id.action_About:
                 new Libs.Builder().withActivityTitle(getString(R.string.button_About)).withFields(R.string.class.getFields()).start(ExamActivity.this);
                 return true;
+            case action_rank:
+                openrank();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -334,6 +338,10 @@ public class ExamActivity extends AppCompatActivity {
     public void openSettings(){
         Intent intent =new Intent(this, SettingsActivity.class);
         startActivityForResult(intent,1000);
+    }
+    public void openrank(){
+        Intent intent =new Intent(this, RankActivity.class);
+        startActivity(intent);
     }
     @Override
     protected void onActivityResult(int requestCode,int resultCode,Intent data){

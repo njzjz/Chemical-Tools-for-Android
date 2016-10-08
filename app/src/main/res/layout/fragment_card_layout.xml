@@ -14,5 +14,4 @@
         android:padding="10dp"
         android:scrollbarStyle="outsideOverlay"
         tools:listitem="@layout/list_item_card" />
-
 </LinearLayout>
