@@ -228,11 +228,13 @@ public class MassActivity extends AppCompatActivity {
             AVUser.getCurrentUser().fetchIfNeededInBackground(new GetCallback<AVObject>() {
                 @Override
                 public void done(AVObject avObject, AVException e) {
-                    // 调用 fetchIfNeededInBackground 和 refreshInBackground 效果是一样的。
-                    String historyMass=avObject.getString("historyMass");
-                    String historyMassOutput=avObject.getString("historyMassOutput");
-                    PreferenceUtils.setPrefString(getApplicationContext(),"historyMass",historyMass);
-                    PreferenceUtils.setPrefString(getApplicationContext(),"historyMassOutput",historyMassOutput);
+                    if(e==null) {
+                        // 调用 fetchIfNeededInBackground 和 refreshInBackground 效果是一样的。
+                        String historyMass = avObject.getString("historyMass");
+                        String historyMassOutput = avObject.getString("historyMassOutput");
+                        PreferenceUtils.setPrefString(getApplicationContext(), "historyMass", historyMass);
+                        PreferenceUtils.setPrefString(getApplicationContext(), "historyMassOutput", historyMassOutput);
+                    }
                 }});
 
         }

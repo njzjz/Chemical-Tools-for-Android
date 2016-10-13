@@ -49,22 +49,24 @@ public class ExamActivity extends AppCompatActivity {
             AVUser.getCurrentUser().fetchIfNeededInBackground(new GetCallback<AVObject>() {
                 @Override
                 public void done(AVObject avObject, AVException e) {
-                    // 调用 fetchIfNeededInBackground 和 refreshInBackground 效果是一样的。
-                    String examCorrectNumber=avObject.getString("examCorrectNumber");
-                    if(examCorrectNumber==null)examCorrectNumber="0";
-                    String examIncorrectnumber=avObject.getString("examIncorrectnumber");
-                    if(examIncorrectnumber==null)examIncorrectnumber="0";
-                    String elementnumber_limit=avObject.getString("elementnumber_limit");
-                    if(elementnumber_limit==null)elementnumber_limit="118";
-                    String examMode=avObject.getString("examMode");
-                    if(examMode==null)examMode="0";
-                    Boolean setting_examOptionMode=avObject.getBoolean("setting_examOptionMode");
-                    if(setting_examOptionMode==null)setting_examOptionMode=false;
-                    PreferenceUtils.setPrefString(getApplicationContext(),"examCorrectNumber",examCorrectNumber);
-                    PreferenceUtils.setPrefString(getApplicationContext(),"examIncorrectnumber",examIncorrectnumber);
-                    PreferenceUtils.setPrefString(getApplicationContext(),"elementnumber_limit",elementnumber_limit);
-                    PreferenceUtils.setPrefString(getApplicationContext(),"examMode",examMode);
-                    PreferenceUtils.setPrefBoolean(getApplicationContext(),"setting_examOptionMode",setting_examOptionMode);
+                    if(e==null) {
+                        // 调用 fetchIfNeededInBackground 和 refreshInBackground 效果是一样的。
+                        String examCorrectNumber = avObject.getString("examCorrectNumber");
+                        if (examCorrectNumber == null) examCorrectNumber = "0";
+                        String examIncorrectnumber = avObject.getString("examIncorrectnumber");
+                        if (examIncorrectnumber == null) examIncorrectnumber = "0";
+                        String elementnumber_limit = avObject.getString("elementnumber_limit");
+                        if (elementnumber_limit == null) elementnumber_limit = "118";
+                        String examMode = avObject.getString("examMode");
+                        if (examMode == null) examMode = "0";
+                        Boolean setting_examOptionMode = avObject.getBoolean("setting_examOptionMode");
+                        if (setting_examOptionMode == null) setting_examOptionMode = false;
+                        PreferenceUtils.setPrefString(getApplicationContext(), "examCorrectNumber", examCorrectNumber);
+                        PreferenceUtils.setPrefString(getApplicationContext(), "examIncorrectnumber", examIncorrectnumber);
+                        PreferenceUtils.setPrefString(getApplicationContext(), "elementnumber_limit", elementnumber_limit);
+                        PreferenceUtils.setPrefString(getApplicationContext(), "examMode", examMode);
+                        PreferenceUtils.setPrefBoolean(getApplicationContext(), "setting_examOptionMode", setting_examOptionMode);
+                    }
                 }});
 
         }

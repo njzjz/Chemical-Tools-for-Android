@@ -115,16 +115,18 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             currentUser .fetchIfNeededInBackground(new GetCallback<AVObject>() {
                 @Override
                 public void done(AVObject avObject, AVException e) {
-                    // 调用 fetchIfNeededInBackground 和 refreshInBackground 效果是一样的。
-                    String historyElementOutput=avObject.getString("historyElementOutput");
-                    String historyElementOutputHtml=avObject.getString("historyElementOutputHtml");
-                    String historyElementNumber=avObject.getString("historyElementNumber");
-                    if(historyElementNumber==null)historyElementNumber="0";
-                    String historyElement=avObject.getString("historyElement");
-                    PreferenceUtils.setPrefString(getApplicationContext(),"historyElementOutput",historyElementOutput);
-                    PreferenceUtils.setPrefString(getApplicationContext(),"historyElementOutputHtml",historyElementOutputHtml);
-                    PreferenceUtils.setPrefString(getApplicationContext(),"historyElementNumber",historyElementNumber);
-                    PreferenceUtils.setPrefString(getApplicationContext(),"historyElement",historyElement);
+                    if(e==null) {
+                        // 调用 fetchIfNeededInBackground 和 refreshInBackground 效果是一样的。
+                        String historyElementOutput = avObject.getString("historyElementOutput");
+                        String historyElementOutputHtml = avObject.getString("historyElementOutputHtml");
+                        String historyElementNumber = avObject.getString("historyElementNumber");
+                        if (historyElementNumber == null) historyElementNumber = "0";
+                        String historyElement = avObject.getString("historyElement");
+                        PreferenceUtils.setPrefString(getApplicationContext(), "historyElementOutput", historyElementOutput);
+                        PreferenceUtils.setPrefString(getApplicationContext(), "historyElementOutputHtml", historyElementOutputHtml);
+                        PreferenceUtils.setPrefString(getApplicationContext(), "historyElementNumber", historyElementNumber);
+                        PreferenceUtils.setPrefString(getApplicationContext(), "historyElement", historyElement);
+                    }
                 }});
         }
         final EditText elementText = (EditText) findViewById(R.id.elementText);

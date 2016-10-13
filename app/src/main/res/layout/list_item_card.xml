@@ -22,6 +22,7 @@
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/ic_launcher"
         android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="0dp"
         android:layout_height="25dp" />
 

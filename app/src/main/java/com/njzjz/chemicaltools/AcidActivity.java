@@ -177,11 +177,13 @@ public class AcidActivity extends AppCompatActivity implements View.OnTouchListe
             AVUser.getCurrentUser().fetchIfNeededInBackground(new GetCallback<AVObject>() {
                 @Override
                 public void done(AVObject avObject, AVException e) {
-                    // 调用 fetchIfNeededInBackground 和 refreshInBackground 效果是一样的。
-                    String historyAcidOutput=avObject.getString("historyAcidOutput");
-                    String pKw=avObject.getString("pKw");
-                    PreferenceUtils.setPrefString(getApplicationContext(),"historyAcidOutput",historyAcidOutput);
-                    PreferenceUtils.setPrefString(getApplicationContext(),"pKw",pKw);
+                    if(e==null) {
+                        // 调用 fetchIfNeededInBackground 和 refreshInBackground 效果是一样的。
+                        String historyAcidOutput = avObject.getString("historyAcidOutput");
+                        String pKw = avObject.getString("pKw");
+                        PreferenceUtils.setPrefString(getApplicationContext(), "historyAcidOutput", historyAcidOutput);
+                        PreferenceUtils.setPrefString(getApplicationContext(), "pKw", pKw);
+                    }
                 }});
         }
         final EditText acidText_c = (EditText) findViewById(R.id.acidText_c);

@@ -53,26 +53,24 @@ public class SettingsActivity extends AppCompatActivity {
             AVUser.getCurrentUser().fetchIfNeededInBackground(new GetCallback<AVObject>() {
                 @Override
                 public void done(AVObject avObject, AVException e) {
-                    // 调用 fetchIfNeededInBackground 和 refreshInBackground 效果是一样的。
-                    String qqid=avObject.getString("qqid");
-                    String qqname=avObject.getString("qqname");
-                   // String wechatid=avObject.getString("wechatid");
-                    //String wechatname=avObject.getString("wechatname");
-                    String elementnumber_limit=avObject.getString("elementnumber_limit");
-                    if(elementnumber_limit==null)elementnumber_limit="118";
-                    String examMode=avObject.getString("examMode");
-                    if(examMode==null)examMode="0";
-                    Boolean setting_examOptionMode=avObject.getBoolean("setting_examOptionMode");
-                    String pKw=avObject.getString("pKw");
-                    if(pKw==null)pKw="14";
-                    PreferenceUtils.setPrefString(getApplicationContext(),"qqid",qqid);
-                    PreferenceUtils.setPrefString(getApplicationContext(),"qqname",qqname);
-                    //PreferenceUtils.setPrefString(getApplicationContext(),"wechatid",wechatid);
-                    //PreferenceUtils.setPrefString(getApplicationContext(),"wechatname",wechatname);
-                    PreferenceUtils.setPrefString(getApplicationContext(),"elementnumber_limit",elementnumber_limit);
-                    PreferenceUtils.setPrefString(getApplicationContext(),"examMode",examMode);
-                    PreferenceUtils.setPrefBoolean(getApplicationContext(),"setting_examOptionMode",setting_examOptionMode);
-                    PreferenceUtils.setPrefString(getApplicationContext(),"pKw",pKw);
+                    if(e==null) {
+                        // 调用 fetchIfNeededInBackground 和 refreshInBackground 效果是一样的。
+                        String qqid = avObject.getString("qqid");
+                        String qqname = avObject.getString("qqname");
+                        String elementnumber_limit = avObject.getString("elementnumber_limit");
+                        if (elementnumber_limit == null) elementnumber_limit = "118";
+                        String examMode = avObject.getString("examMode");
+                        if (examMode == null) examMode = "0";
+                        Boolean setting_examOptionMode = avObject.getBoolean("setting_examOptionMode");
+                        String pKw = avObject.getString("pKw");
+                        if (pKw == null) pKw = "14";
+                        PreferenceUtils.setPrefString(getApplicationContext(), "qqid", qqid);
+                        PreferenceUtils.setPrefString(getApplicationContext(), "qqname", qqname);
+                        PreferenceUtils.setPrefString(getApplicationContext(), "elementnumber_limit", elementnumber_limit);
+                        PreferenceUtils.setPrefString(getApplicationContext(), "examMode", examMode);
+                        PreferenceUtils.setPrefBoolean(getApplicationContext(), "setting_examOptionMode", setting_examOptionMode);
+                        PreferenceUtils.setPrefString(getApplicationContext(), "pKw", pKw);
+                    }
                 }}
             );
         }
@@ -88,7 +86,8 @@ public class SettingsActivity extends AppCompatActivity {
             @Override public void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
                 addPreferencesFromResource(R.xml.settings_general);
-                findPreference("login").setOnPreferenceClickListener(
+                PreferenceScreen Login= (PreferenceScreen) findPreference("login");
+                Login.setOnPreferenceClickListener(
                         new Preference.OnPreferenceClickListener() {
                             @Override public boolean onPreferenceClick(Preference preference) {
                                 AVUser currentUser = AVUser.getCurrentUser();
@@ -104,7 +103,6 @@ public class SettingsActivity extends AppCompatActivity {
                             }
                         });
                 AVUser currentUser = AVUser.getCurrentUser();
-                PreferenceScreen Login= (PreferenceScreen) findPreference("login");
                 if (currentUser != null) {
                     // 有
                     Login.setTitle(getString(R.string.action_sign_out));
@@ -114,19 +112,10 @@ public class SettingsActivity extends AppCompatActivity {
                         String qqname=PreferenceUtils.getPrefString(getApplicationContext(),"qqname","");
                         findPreference("qq").setSummary(qqname);
                     }
-                    /*
-                    String wechatid=PreferenceUtils.getPrefString(getApplicationContext(),"wechatid","");
-                    if(wechatid!=""){
-                        String wechatname=PreferenceUtils.getPrefString(getApplicationContext(),"wechatname","");
-                        findPreference("qq").setSummary(wechatname);
-                    }
-                    */
                 } else {
                     //缓存用户对象为空时，可打开用户注册界面…
                     Login.setTitle(getString(R.string.action_sign_in));
                     findPreference("qq").setEnabled(false);
-                   // ((PreferenceGroup)findPreference("user")).removePreference(findPreference("qq"));
-                    //((PreferenceGroup)findPreference("user")).removePreference(findPreference("wechat"));
                 }
                 findPreference("qq").setOnPreferenceClickListener(
                         new Preference.OnPreferenceClickListener() {
@@ -171,7 +160,8 @@ public class SettingsActivity extends AppCompatActivity {
                                 return false;
                             }
                         });
-                findPreference("elementnumber_limit").setOnPreferenceChangeListener(
+                ListPreference elementnumber_limitList= (ListPreference) findPreference("elementnumber_limit");
+                elementnumber_limitList.setOnPreferenceChangeListener(
                         new Preference.OnPreferenceChangeListener() {
                             @Override
                             public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -191,7 +181,6 @@ public class SettingsActivity extends AppCompatActivity {
                             }
                         }
                 );
-                ListPreference elementnumber_limitList= (ListPreference) findPreference("elementnumber_limit");
                 String elementnumber_limit=PreferenceUtils.getPrefString(getApplicationContext(),"elementnumber_limit","118");
                 switch (elementnumber_limit){
                     case "18":
@@ -211,7 +200,8 @@ public class SettingsActivity extends AppCompatActivity {
                         break;
                 };
                 elementnumber_limitList.setSummary(elementnumber_limit);
-                findPreference("examMode").setOnPreferenceChangeListener(
+                ListPreference examModeList= (ListPreference) findPreference("examMode");
+                examModeList.setOnPreferenceChangeListener(
                         new Preference.OnPreferenceChangeListener() {
                             @Override
                             public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -231,11 +221,11 @@ public class SettingsActivity extends AppCompatActivity {
                             }
                         }
                 );
-                ListPreference examModeList= (ListPreference) findPreference("examMode");
                 int examMode=Integer.parseInt(PreferenceUtils.getPrefString(getApplicationContext(),"examMode","0"));
                 examModeList.setValueIndex(examMode);
                 examModeList.setSummary(examModeList.getEntry());
-                findPreference("setting_examOptionMode").setOnPreferenceChangeListener(
+                CheckBoxPreference setting_examOptionModeCheck= (CheckBoxPreference) findPreference("setting_examOptionMode");
+                setting_examOptionModeCheck.setOnPreferenceChangeListener(
                         new Preference.OnPreferenceChangeListener() {
                             @Override
                             public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -253,10 +243,10 @@ public class SettingsActivity extends AppCompatActivity {
                             }
                         }
                 );
-                CheckBoxPreference setting_examOptionModeCheck= (CheckBoxPreference) findPreference("setting_examOptionMode");
                 Boolean setting_examOptionMode=PreferenceUtils.getPrefBoolean(getApplicationContext(),"setting_examOptionMode",false);
-                setting_examOptionModeCheck.setChecked(setting_examOptionMode); ;
-                findPreference("pKw").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                setting_examOptionModeCheck.setChecked(setting_examOptionMode);
+                EditTextPreference pKwEditText= (EditTextPreference) findPreference("pKw");
+                pKwEditText.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                     @Override
                     public boolean onPreferenceChange(Preference preference, Object newValue) {
                         String pKw=newValue.toString();
@@ -272,7 +262,6 @@ public class SettingsActivity extends AppCompatActivity {
                             return true;
                         }else return false;
                     }});
-                EditTextPreference pKwEditText= (EditTextPreference) findPreference("pKw");
                 String pKw=PreferenceUtils.getPrefString(getApplicationContext(),"pKw","14");
                 pKwEditText.setText(pKw);
                 pKwEditText.setSummary(pKw);
@@ -320,8 +309,6 @@ public class SettingsActivity extends AppCompatActivity {
                 PreferenceUtils.clearPreference(getApplicationContext(), PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
                 String qqid=PreferenceUtils.getPrefString(getApplicationContext(),"qqid","");
                 String qqname=PreferenceUtils.getPrefString(getApplicationContext(),"qqname","");
-                //String wechatid=PreferenceUtils.getPrefString(getApplicationContext(),"wechatid","");
-                //String wechatname=PreferenceUtils.getPrefString(getApplicationContext(),"wechatname","");
                 String historyElementOutput = PreferenceUtils.getPrefString(getApplicationContext(), "historyElementOutput", "");
                 String historyElementOutputHtml = PreferenceUtils.getPrefString(getApplicationContext(), "historyElementOutputHtml", "");
                 String historyElementNumber = PreferenceUtils.getPrefString(getApplicationContext(), "historyElementNumber", "0");
@@ -337,8 +324,6 @@ public class SettingsActivity extends AppCompatActivity {
                 String pKw=PreferenceUtils.getPrefString(getApplicationContext(),"pKw","14");
                 AVUser.getCurrentUser().put("qqid", qqid);
                 AVUser.getCurrentUser().put("qqname", qqname);
-                //AVUser.getCurrentUser().put("wechatid", wechatid);
-                //AVUser.getCurrentUser().put("wechatname", wechatname);
                 AVUser.getCurrentUser().put("historyElementOutput", historyElementOutput);
                 AVUser.getCurrentUser().put("historyElementOutputHtml", historyElementOutputHtml);
                 AVUser.getCurrentUser().put("historyElementNumber", historyElementNumber);
@@ -398,12 +383,12 @@ public class SettingsActivity extends AppCompatActivity {
 
         @Override
         public void onError(SHARE_MEDIA platform, int action, Throwable t) {
-            Toast.makeText( getApplicationContext(), "Authorize fail", Toast.LENGTH_SHORT).show();
+            Toast.makeText( getApplicationContext(), "授权失败", Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onCancel(SHARE_MEDIA platform, int action) {
-            Toast.makeText( getApplicationContext(), "Authorize cancel", Toast.LENGTH_SHORT).show();
+            Toast.makeText( getApplicationContext(), "授权取消", Toast.LENGTH_SHORT).show();
         }
     };
     private UMAuthListener umAuthListener2 = new UMAuthListener() {

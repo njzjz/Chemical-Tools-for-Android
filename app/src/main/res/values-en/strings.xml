@@ -85,4 +85,5 @@
     <string name="setting_QQ">Sign in QQ account</string>
     <string name="setting_wechat">Sign in Wechat account</string>
     <string name="button_rank">排行榜</string>
+    <string name="permission_rationale">\"Contacts permissions are needed for providing email         completions.\"</string>
 </resources>
