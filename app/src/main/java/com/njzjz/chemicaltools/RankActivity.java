@@ -31,7 +31,7 @@ public class RankActivity extends AppCompatActivity {
         ab.setHomeButtonEnabled(true);
 
         AVQuery<AVUser> userQuery = new AVQuery<>("_User");
-        userQuery.selectKeys(Arrays.asList("examCorrectNumber", "qqname","Username"));
+        userQuery.selectKeys(Arrays.asList("examCorrectNumber", "qqname","username"));
         userQuery.findInBackground(new FindCallback<AVUser>() {
             @Override
             public void done(List<AVUser> list, AVException e) {
@@ -46,7 +46,7 @@ public class RankActivity extends AppCompatActivity {
                         if (score > 0) {
                             String name = userlist.get(i).getString("qqname");
                             if (name == null) {
-                                name = userlist.get(i).getUsername();
+                                name = userlist.get(i).getString("username");
                                 name = name.substring(0, name.indexOf("@"));
                             }
                             map.put("text1", name);
