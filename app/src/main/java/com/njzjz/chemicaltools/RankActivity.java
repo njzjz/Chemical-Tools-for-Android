@@ -41,8 +41,10 @@ public class RankActivity extends AppCompatActivity {
                     ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();
                     for (int i = 0; i < userlist.size(); i++) {
                         HashMap<String, String> map = new HashMap<String, String>();
-                        String score_str = userlist.get(i).getString("examCorrectNumber");
-                        int score = Integer.parseInt(userlist.get(i).getString("examCorrectNumber"));
+                        String score_str="0";
+                        if(userlist.get(i).getString("examCorrectNumber")!=null)
+                            score_str = userlist.get(i).getString("examCorrectNumber");
+                        int score = Integer.parseInt(score_str);
                         if (score > 0) {
                             String name = userlist.get(i).getString("qqname");
                             if (name == null) {
