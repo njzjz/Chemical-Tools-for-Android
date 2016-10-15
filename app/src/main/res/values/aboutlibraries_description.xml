@@ -4,6 +4,6 @@
     <string name="aboutLibraries_description_showIcon" translatable="false">true</string>
     <string name="aboutLibraries_description_showVersion" translatable="false">true</string>
   <string name="aboutLibraries_description_text" translatable="false">
-    <![CDATA[This is an Android app in material design. <br /><br /><b>You can fork me on <a href="https://github.com/njzjz/Chemical-Tools-for-Android">GitHub</a> </b>]]>
+    <![CDATA[化学e+由团队二号（曾晋哲、陈子晗、邓凌雪）使用Android Studio开发，将参加第十届华东师大学计算机应用能力大赛。 <br /><b>技术支持</b><br/>LeanCloud、友盟、腾讯移动分析、autoUpdate、LDrawer、AboutLibraries<br/><a href="https://chem.njzjz.win/">访问官网</a><br /><b><a href="https://github.com/njzjz/Chemical-Tools-for-Android">访问GitHub</a> </b>]]>
   </string>
 </resources>

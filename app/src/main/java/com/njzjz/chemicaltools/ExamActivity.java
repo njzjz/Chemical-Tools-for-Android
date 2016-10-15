@@ -314,7 +314,7 @@ public class ExamActivity extends AppCompatActivity {
                 //        getString(R.string.app_name)));
                 UMImage image = new UMImage(this, R.drawable.ic_launcher);//资源文件
                 new ShareAction(this).withText(String.format(getResources().getString(R.string.examShare_name),sum,examCorrectPercent))
-                        .withTargetUrl("http://chem.njzjz.win")
+                        .withTargetUrl("http://chemapp.njzjz.win/exam.php")
                         .withMedia(image)
                         .withTitle(getString(R.string.app_name))
                         .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,/*SHARE_MEDIA.SINA,*/SHARE_MEDIA.SMS,SHARE_MEDIA.EMAIL,SHARE_MEDIA.MORE)
