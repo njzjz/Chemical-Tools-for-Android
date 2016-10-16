@@ -37,14 +37,15 @@ public class GasActivity extends AppCompatActivity {
                 EditText EditText_V=(EditText)findViewById(R.id.textView_V);
                 EditText EditText_n=(EditText)findViewById(R.id.textView_n);
                 EditText EditText_T=(EditText)findViewById(R.id.textView_T);
-                try {
-                    double p = Double.parseDouble(EditText_p.getText().toString());
-                    double V = Double.parseDouble(EditText_V.getText().toString());
-                    double n = Double.parseDouble(EditText_n.getText().toString());
-                    double T = Double.parseDouble(EditText_T.getText().toString());
+                double p,V,n,T;
+                try{ p = Double.parseDouble(EditText_p.getText().toString());}catch (Exception e){ p=0;};
+                try{ V = Double.parseDouble(EditText_V.getText().toString());}catch (Exception e){ V=0;};
+                try{ n = Double.parseDouble(EditText_n.getText().toString());}catch (Exception e){ n=0;};
+                try{ T = Double.parseDouble(EditText_T.getText().toString());}catch (Exception e){ T=0;};
                     double gasR = 8.314;
                     RadioGroup mRadioGroup = (RadioGroup) findViewById(R.id.radiogroup1);
                     RadioButton mRadioButton = (RadioButton) findViewById(mRadioGroup.getCheckedRadioButtonId());
+                try {
                     switch (mRadioButton.getText().toString()) {
                         case "p":
                             p = n * gasR * T / V;
