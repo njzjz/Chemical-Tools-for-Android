@@ -86,4 +86,6 @@
     <string name="setting_wechat">Sign in Wechat account</string>
     <string name="button_rank">排行榜</string>
     <string name="permission_rationale">\"Contacts permissions are needed for providing email         completions.\"</string>
+    <string name="button_gas">Calculate Gas</string>
+    <string name="gas_welcome">Use pV=nRT to calculate gas. Have a try!</string>
 </resources>

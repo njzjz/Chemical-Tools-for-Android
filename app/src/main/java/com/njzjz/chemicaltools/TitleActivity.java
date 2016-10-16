@@ -176,11 +176,14 @@ public class TitleActivity extends AppCompatActivity {
                         //acid
                         startActivity(new Intent(TitleActivity.this, AcidActivity.class));
                         break;
-                    case 4:
+                    case 4://Gas
+                        startActivity(new Intent(TitleActivity.this,GasActivity.class));
+                        break;
+                    case 5:
                         //Exam
                         startActivity(new Intent(TitleActivity.this, ExamActivity.class));
                         break;
-                    case 5:
+                    case 6:
                         //Share
                         UMImage image = new UMImage(TitleActivity.this, R.drawable.ic_launcher);//资源文件
                         new ShareAction(TitleActivity.this).withText(getString(R.string.app_name)+ "，化学专业学生必备的工具，下载地址：chem.njzjz.win")
@@ -188,20 +191,20 @@ public class TitleActivity extends AppCompatActivity {
                                 .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,/*SHARE_MEDIA.SINA,*/SHARE_MEDIA.SMS,SHARE_MEDIA.EMAIL,SHARE_MEDIA.MORE)
                                 .open();
                         break;
-                    case 6:
+                    case 7:
                         //Settings
                         startActivity(new Intent(TitleActivity.this, SettingsActivity.class));
                         break;
-                    case 7:
+                    case 8:
                         //Feedback
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:njzjz@msn.com?subject=Chemical Tools App Feedback"));
                         startActivity(browserIntent);
                         break;
-                    case 8:
+                    case 9:
                         //Website
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.app_website))));
                         break;
-                    case 9:
+                    case 10:
                         //About
                         new Libs.Builder().withActivityTitle(getString(R.string.button_About)).withFields(R.string.class.getFields()).start(TitleActivity.this);
                         break;
@@ -236,26 +239,30 @@ public class TitleActivity extends AppCompatActivity {
                     map.put("img", R.drawable.gray_apple);
                     break;
                 case 4:
+                    map.put("title",getString(R.string.button_gas));
+                    map.put("img",R.drawable.gas);
+                    break;
+                case 5:
                     map.put("title",getString(R.string.button_exam));
                     map.put("img", R.drawable.orange_apple);
                     break;
-                case 5:
+                case 6:
                     map.put("title",getString(R.string.button_Share));
                     map.put("img", android.R.drawable.ic_menu_share);
                     break;
-                case 6:
+                case 7:
                     map.put("title",getString(R.string.button_Settings));
                     map.put("img", android.R.drawable.ic_menu_preferences);
                     break;
-                case 7:
+                case 8:
                     map.put("title",getString(R.string.setting_feedback));
                     map.put("img", android.R.drawable.sym_action_email);
                     break;
-                case 8:
+                case 9:
                     map.put("title",getString(R.string.setting_website));
                     map.put("img", android.R.drawable.ic_menu_upload);
                     break;
-                case 9:
+                case 10:
                     map.put("title",getString(R.string.button_About));
                     map.put("img", android.R.drawable.ic_menu_help);
                     break;

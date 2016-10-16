@@ -87,4 +87,6 @@
     <string name="setting_wechat">授权微信账号</string>
     <string name="button_rank">排行榜</string>
     <string name="permission_rationale">权限不足。</string>
+    <string name="button_gas">气体计算</string>
+    <string name="gas_welcome">使用理想气体状态方程<b>pV=nRT</b>计算气体状态，快来试试吧！</string>
 </resources>

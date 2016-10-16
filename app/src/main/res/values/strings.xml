@@ -41,6 +41,7 @@
     <string name="drawer_close" translatable="false">drawer_close</string>
     <string name="button_element">Search Elements</string>
     <string name="button_mass">Calculate Mass</string>
+    <string name="button_gas">Calculate Gas</string>
     <string name="button_exam">Exam</string>
     <string name="button_acid">Calculate Acid or Base</string>
     <string name="button_Settings">Settings</string>
@@ -51,6 +52,7 @@
     <string name="button_notUsed">You\'ve never used this function. Have a try!</string>
     <string name="button_doyouknow">Do you know?</string>
     <string name="Change">Change</string>
+    <string name="gas_welcome">Use pV=nRT to calculate gas. Have a try!</string>
     <!-- Settings -->
     <string name="setting_elementnumber_limit">Atomic Number Limit</string>
     <string name="setting_rate">Rate this app</string>

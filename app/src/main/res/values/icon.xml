@@ -5,6 +5,7 @@
         <item>@drawable/blue_apple</item>
         <item>@drawable/lime_apple</item>
         <item>@drawable/gray_apple</item>
+        <item>@drawable/gas</item>
         <item>@drawable/orange_apple</item>
     </string-array>
 </resources>

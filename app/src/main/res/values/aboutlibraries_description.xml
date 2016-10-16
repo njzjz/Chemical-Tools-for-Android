@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="aboutLibraries_description_name" translatable="false">@string/app_name</string>
-    <string name="aboutLibraries_description_showIcon" translatable="false">true</string>
-    <string name="aboutLibraries_description_showVersion" translatable="false">true</string>
+<string name="aboutLibraries_description_name" translatable="false">@string/app_name</string>
+<string name="aboutLibraries_description_showIcon" translatable="false">true</string>
+<string name="aboutLibraries_description_showVersion" translatable="false">true</string>
   <string name="aboutLibraries_description_text" translatable="false">
     <![CDATA[化学e+由团队二号（曾晋哲、陈子晗、邓凌雪）使用Android Studio开发，将参加第十届华东师大学计算机应用能力大赛。 <br /><br/><b>技术支持</b><br/>LeanCloud、友盟、腾讯移动分析、autoUpdate、LDrawer、AboutLibraries<br/><br/><a href="http://chem.njzjz.win/">访问官网</a><br /><br/><b><a href="https://github.com/njzjz/Chemical-Tools-for-Android">访问GitHub</a> </b>]]>
   </string>

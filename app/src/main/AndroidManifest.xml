@@ -102,7 +102,10 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".RankActivity" android:label="@string/button_rank"></activity>
+        <activity
+            android:name=".RankActivity"
+            android:label="@string/button_rank" />
+        <activity android:name=".GasActivity"></activity>
     </application>
 
 </manifest>
