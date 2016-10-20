@@ -88,4 +88,6 @@
     <string name="permission_rationale">\"Contacts permissions are needed for providing email         completions.\"</string>
     <string name="button_gas">Calculate Gas</string>
     <string name="gas_welcome">Use pV=nRT to calculate gas. Have a try!</string>
+    <string name="button_deviation">Calculate Deviation</string>
+    <string name="deviationEditText_name">Please input numbers.</string>
 </resources>

@@ -7,5 +7,6 @@
         <item>@drawable/gray_apple</item>
         <item>@drawable/gas</item>
         <item>@drawable/orange_apple</item>
+        <item>@drawable/deviation</item>
     </string-array>
 </resources>

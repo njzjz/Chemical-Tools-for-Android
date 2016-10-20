@@ -105,7 +105,8 @@
         <activity
             android:name=".RankActivity"
             android:label="@string/button_rank" />
-        <activity android:name=".GasActivity"></activity>
+        <activity android:name=".GasActivity" />
+        <activity android:name=".DeviationActivity"></activity>
     </application>
 
 </manifest>

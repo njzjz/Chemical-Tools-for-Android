@@ -49,8 +49,8 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/switchAB"
             android:textOff="@string/acid_name"
+            android:id="@+id/switchAB"
             android:textOn="@string/base_name"
             android:showText="true"
             android:allowUndo="false"

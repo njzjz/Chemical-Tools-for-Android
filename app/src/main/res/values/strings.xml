@@ -44,6 +44,7 @@
     <string name="button_gas">Calculate Gas</string>
     <string name="button_exam">Exam</string>
     <string name="button_acid">Calculate Acid or Base</string>
+    <string name="button_deviation">Calculate Deviation</string>
     <string name="button_Settings">Settings</string>
     <string name="button_Share">Share</string>
     <string name="button_About">About</string>
@@ -102,4 +103,5 @@
         completions."
     </string>
     <string name="button_rank">排行榜</string>
+    <string name="deviationEditText_name">Please input numbers.</string>
 </resources>

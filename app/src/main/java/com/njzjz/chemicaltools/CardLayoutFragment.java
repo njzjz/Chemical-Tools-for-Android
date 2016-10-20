@@ -47,7 +47,7 @@ public class CardLayoutFragment extends Fragment {
         ArrayList<String> itemsButton2 = new ArrayList<String>();
 
         TypedArray iconArray=getResources().obtainTypedArray(R.array.iconArray);
-        for(int i=0;i<6;i++) {
+        for(int i=0;i<7;i++) {
             String items1Text = null,items2Text = null,Button1Text = null,Button2Text = null;
             Integer resId = iconArray.getResourceId(i, 0);
             switch (i){
@@ -68,6 +68,9 @@ public class CardLayoutFragment extends Fragment {
                     break;
                 case 5:
                     items1Text=getString(R.string.button_exam);
+                    break;
+                case 6:
+                    items1Text=getString(R.string.button_deviation);
                     break;
             }
             switch (i){
@@ -98,10 +101,13 @@ public class CardLayoutFragment extends Fragment {
                         items2Text=String.format(getResources().getString(R.string.examScoreOutput_name),sum,examCorrectNumber,examCorrectPercent);
                     }
                     break;
+                case 6:
+                    String historyDeviation=PreferenceUtils.getPrefString(getActivity().getApplicationContext(), "historyDeviation", "");
+                    items2Text=historyDeviation;
             }
-            if(items2Text==null)items2Text=getString(R.string.button_notUsed);
+            if(items2Text==null || items2Text.equals( ""))items2Text=getString(R.string.button_notUsed);
             switch (i){
-                case 0:case 1:case 2:case 3:case 4:case 5:
+                case 0:case 1:case 2:case 3:case 4:case 5:case 6:
                     Button1Text=getString(R.string.button_Share);
                     break;
             }
@@ -109,7 +115,7 @@ public class CardLayoutFragment extends Fragment {
                 case 0:
                     Button2Text=getString(R.string.Change);
                     break;
-                case 1:case 2:case 3:case 4:case 5:
+                case 1:case 2:case 3:case 4:case 5:case 6:
                     Button2Text=getString(R.string.button_open);
             }
             pic.add(resId);
@@ -129,7 +135,7 @@ public class CardLayoutFragment extends Fragment {
                     // PERFORM AN ACTION WITH THE ITEM AT POSITION i
                     String x = null;
                     switch (i){
-                        case 0:case 1:case 2:case 3:case 4:
+                        case 0:case 1:case 2:case 3:case 4:case 6:
                             TextView itemText = (TextView) cardsList.getChildAt(i - cardsList.getFirstVisiblePosition()).findViewById(R.id.list_item_card_text2);
                             if(!itemText.getText().toString().equals(getResources().getString(R.string.button_notUsed))){
                                 x=itemText.getText().toString();
@@ -176,6 +182,9 @@ public class CardLayoutFragment extends Fragment {
                             Intent intent5 =new Intent(getActivity(), ExamActivity.class);
                             startActivity(intent5);
                             break;
+                        case 6:
+                            startActivity(new Intent(getActivity(),DeviationActivity.class));
+                            break;
                     }
                 }
             }
@@ -204,6 +213,9 @@ public class CardLayoutFragment extends Fragment {
                 case 5:
                     Intent intent4 =new Intent(getActivity(), ExamActivity.class);
                     startActivity(intent4);
+                    break;
+                case 6:
+                    startActivity(new Intent(getActivity(),DeviationActivity.class));
                     break;
             }
         }

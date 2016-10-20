@@ -89,4 +89,6 @@
     <string name="permission_rationale">权限不足。</string>
     <string name="button_gas">气体计算</string>
     <string name="gas_welcome">使用理想气体状态方程<b>pV=nRT</b>计算气体状态，快来试试吧！</string>
+    <string name="button_deviation">偏差计算</string>
+    <string name="deviationEditText_name">请输入您需要计算的数据，每行一个。</string>
 </resources>
