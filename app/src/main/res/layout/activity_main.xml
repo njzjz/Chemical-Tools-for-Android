@@ -39,7 +39,7 @@
             android:layout_toStartOf="@+id/elementButton"
             android:drawableRight="@drawable/numberpicker_down_normal_holo_light"
             />
-        />
+
 
             <Button
                 android:layout_width="80dp"

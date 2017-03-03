@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/selectable_background"
+    android:orientation="vertical"
+    android:foreground="?attr/selectableItemBackground"
+    android:weightSum="6">
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:foreground="?attr/selectableItemBackground"
+            >
+
+            <ImageView
+                android:id="@+id/list_item_card_pic1"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_launcher"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                />
+
+            <TextView
+                android:id="@+id/list_item_card_text1"
+                style="@style/ListItemText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/list_item_card_pic1"
+                android:minLines="1"
+                android:text="Test"
+                android:textSize="16dp"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/relativeLayout1"
+            android:layout_toRightOf="@+id/relativeLayout1"
+            android:layout_weight="1"
+            android:foreground="?attr/selectableItemBackground"
+            >
+
+            <ImageView
+                android:id="@+id/list_item_card_pic2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_launcher"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                />
+
+            <TextView
+                android:id="@+id/list_item_card_text2"
+                style="@style/ListItemText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/list_item_card_pic2"
+                android:minLines="1"
+                android:text="Test"
+                android:textSize="16dp"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout3"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/relativeLayout2"
+            android:layout_toEndOf="@+id/relativeLayout2"
+            android:layout_toRightOf="@+id/relativeLayout2"
+            android:layout_weight="1"
+            android:foreground="?attr/selectableItemBackground"
+            >
+
+            <ImageView
+                android:id="@+id/list_item_card_pic3"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_launcher"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                />
+
+            <TextView
+                android:id="@+id/list_item_card_text3"
+                style="@style/ListItemText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/list_item_card_pic3"
+                android:minLines="1"
+                android:text="Test"
+                android:textSize="16dp"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout4"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/relativeLayout3"
+            android:layout_toEndOf="@+id/relativeLayout3"
+            android:layout_toRightOf="@+id/relativeLayout3"
+            android:layout_weight="1"
+            android:foreground="?attr/selectableItemBackground"
+            >
+
+            <ImageView
+                android:id="@+id/list_item_card_pic4"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_launcher"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                />
+
+            <TextView
+                android:id="@+id/list_item_card_text4"
+                style="@style/ListItemText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/list_item_card_pic4"
+                android:minLines="1"
+                android:text="Test"
+                android:textSize="16dp"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout5"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/relativeLayout4"
+            android:layout_toEndOf="@+id/relativeLayout4"
+            android:layout_toRightOf="@+id/relativeLayout4"
+            android:layout_weight="1"
+            android:foreground="?attr/selectableItemBackground"
+            >
+
+            <ImageView
+                android:id="@+id/list_item_card_pic5"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_launcher"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                />
+
+            <TextView
+                android:id="@+id/list_item_card_text5"
+                style="@style/ListItemText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/list_item_card_pic5"
+                android:minLines="1"
+                android:text="Test"
+                android:textSize="16dp"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout6"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/relativeLayout5"
+            android:layout_toEndOf="@+id/relativeLayout5"
+            android:layout_toRightOf="@+id/relativeLayout5"
+            android:layout_weight="1"
+            android:foreground="?attr/selectableItemBackground"
+            >
+
+            <ImageView
+                android:id="@+id/list_item_card_pic6"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_launcher"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                />
+
+            <TextView
+                android:id="@+id/list_item_card_text6"
+                style="@style/ListItemText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/list_item_card_pic6"
+                android:minLines="1"
+                android:text="Test"
+                android:textSize="16dp"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

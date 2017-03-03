@@ -1,17 +1,37 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_grey" >
 
-    <ListView
-        android:id="@+id/cards_list"
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="10dp"
+        android:id="@+id/linearLayout1"
         android:padding="10dp"
-        android:scrollbarStyle="outsideOverlay"
-        tools:listitem="@layout/list_item_card" />
-</LinearLayout>
+        android:dividerHeight="10dp"
+        >
+        <include
+            android:id="@+id/main1"
+            layout="@layout/list_item_title" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linearLayout1">
+
+        <ListView
+            android:id="@+id/cards_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="10dp"
+            android:padding="10dp"
+            android:scrollbarStyle="outsideOverlay"
+            tools:listitem="@layout/list_item_card" />
+    </LinearLayout>
+</RelativeLayout>

@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,6 +32,70 @@ public class CardLayoutFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_card_layout, container, false);
         cardsList = (ListView) rootView.findViewById(R.id.cards_list);
         setupList();
+
+        TextView titletext1 = (TextView) rootView.findViewById(R.id.list_item_card_text1);
+        TextView titletext2 = (TextView) rootView.findViewById(R.id.list_item_card_text2);
+        TextView titletext3 = (TextView) rootView.findViewById(R.id.list_item_card_text3);
+        TextView titletext4 = (TextView) rootView.findViewById(R.id.list_item_card_text4);
+        TextView titletext5 = (TextView) rootView.findViewById(R.id.list_item_card_text5);
+        TextView titletext6 = (TextView) rootView.findViewById(R.id.list_item_card_text6);
+        titletext1.setText(getString(R.string.button_element));
+        titletext2.setText(getString(R.string.button_mass));
+        titletext3.setText(getString(R.string.button_acid));
+        titletext4.setText(getString(R.string.button_gas));
+        titletext5.setText(getString(R.string.button_exam));
+        titletext6.setText(getString(R.string.button_deviation));
+
+        ImageView titleimage1 = (ImageView) rootView.findViewById(R.id.list_item_card_pic1);
+        ImageView titleimage2 = (ImageView) rootView.findViewById(R.id.list_item_card_pic2);
+        ImageView titleimage3 = (ImageView) rootView.findViewById(R.id.list_item_card_pic3);
+        ImageView titleimage4 = (ImageView) rootView.findViewById(R.id.list_item_card_pic4);
+        ImageView titleimage5 = (ImageView) rootView.findViewById(R.id.list_item_card_pic5);
+        ImageView titleimage6 = (ImageView) rootView.findViewById(R.id.list_item_card_pic6);
+        titleimage1.setImageResource(R.drawable.blue_apple);
+        titleimage2.setImageResource(R.drawable.lime_apple);
+        titleimage3.setImageResource(R.drawable.gray_apple);
+        titleimage4.setImageResource(R.drawable.gas);
+        titleimage5.setImageResource(R.drawable.orange_apple);
+        titleimage6.setImageResource(R.drawable.deviation);
+
+        rootView.findViewById(R.id.relativeLayout1).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), MainActivity.class));
+            }
+        });
+        rootView.findViewById(R.id.relativeLayout2).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), MassActivity.class));
+            }
+        });
+        rootView.findViewById(R.id.relativeLayout3).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), AcidActivity.class));
+            }
+        });
+        rootView.findViewById(R.id.relativeLayout4).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), GasActivity.class));
+            }
+        });
+        rootView.findViewById(R.id.relativeLayout5).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), ExamActivity.class));
+            }
+        });
+        rootView.findViewById(R.id.relativeLayout6).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), DeviationActivity.class));
+            }
+        });
+
         return rootView;
     }
 
