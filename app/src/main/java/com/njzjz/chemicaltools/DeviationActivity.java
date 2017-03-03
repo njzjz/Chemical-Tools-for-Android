@@ -21,7 +21,6 @@ import com.avos.avoscloud.GetCallback;
 import com.mikepenz.aboutlibraries.Libs;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
 
 public class DeviationActivity extends AppCompatActivity {
 
@@ -132,9 +131,10 @@ public class DeviationActivity extends AppCompatActivity {
                 this.finish();
                 return true;
             case R.id.action_share:
-                UMImage image = new UMImage(this, R.drawable.ic_launcher);//资源文件
-                new ShareAction(this).withText(getString(R.string.gas_welcome)).withTargetUrl("http://chemapp.njzjz.win/gas.php").withMedia(image).withTitle(getString(R.string.app_name))
-                        .setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE,/*SHARE_MEDIA.SINA,*/SHARE_MEDIA.SMS, SHARE_MEDIA.EMAIL, SHARE_MEDIA.MORE)
+                //UMImage image = new UMImage(this, R.drawable.ic_launcher);//资源文件
+                TextView textView=(TextView)findViewById(R.id.Textview);
+                new ShareAction(this).withText(textView.getText().toString())/*.withTargetUrl("http://chemapp.njzjz.win/gas.php").withMedia(image).withTitle(getString(R.string.app_name))*/
+                        .setDisplayList(/*SHARE_MEDIA.QQ,*/ SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE,/*SHARE_MEDIA.SINA,*/SHARE_MEDIA.SMS, SHARE_MEDIA.EMAIL, SHARE_MEDIA.MORE)
                         .open();
                 return true;
             case R.id.action_settings:

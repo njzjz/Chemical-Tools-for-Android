@@ -1,12 +1,12 @@
 <component name="libraryTable">
   <library name="autoUpdate-1.0.1">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.sangbo.autoupdate/autoUpdate/1.0.1/res" />
-      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.sangbo.autoupdate/autoUpdate/1.0.1/jars/classes.jar!/" />
+      <root url="jar://E:/Android/.android/build-cache/d8be506e026adaded2e46ed6b29909121b10f8f3/output/jars/classes.jar!/" />
+      <root url="file://E:/Android/.android/build-cache/d8be506e026adaded2e46ed6b29909121b10f8f3/output/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sangbo.autoupdate/autoUpdate/1.0.1/bef5a20b8db6d84abbecfa1b2a920dcf1d2fad5/autoUpdate-1.0.1-sources.jar!/" />
+      <root url="jar://E:/Android/.gradle/caches/modules-2/files-2.1/com.sangbo.autoupdate/autoUpdate/1.0.1/bef5a20b8db6d84abbecfa1b2a920dcf1d2fad5/autoUpdate-1.0.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
