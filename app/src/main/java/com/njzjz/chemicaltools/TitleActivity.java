@@ -58,7 +58,7 @@ public class TitleActivity extends AppCompatActivity {
             if(Build.VERSION.SDK_INT>=23){
                 String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.CALL_PHONE,Manifest.permission.READ_LOGS,Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.SET_DEBUG_APP,Manifest.permission.SYSTEM_ALERT_WINDOW,Manifest.permission.GET_ACCOUNTS,Manifest.permission.WRITE_APN_SETTINGS};
                 ActivityCompat.requestPermissions(this,mPermissionList,123);
-                CheckVersion.checkUrl = "http://test-10061032.cos.myqcloud.com/version.txt";     //定义服务器版本信息
+                CheckVersion.checkUrl = "https://f.zgchemicals.mobi/version.txt";     //定义服务器版本信息
                 CheckVersion.update(this);
             }
             notfirstCreate=true;
@@ -191,7 +191,7 @@ public class TitleActivity extends AppCompatActivity {
                     case 7:
                         //Share
                         UMImage image = new UMImage(TitleActivity.this, R.drawable.ic_launcher);//资源文件
-                        new ShareAction(TitleActivity.this).withText(getString(R.string.app_name)+ "，化学专业学生必备的工具，下载地址：chem.njzjz.win")
+                        new ShareAction(TitleActivity.this).withText(getString(R.string.app_name)+ "，化学专业学生必备的工具，"+getString(R.string.app_website))
                                 .withTargetUrl(getString(R.string.app_website)).withMedia(image).withTitle(getString(R.string.app_name))
                                 .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,/*SHARE_MEDIA.SINA,*/SHARE_MEDIA.SMS,SHARE_MEDIA.EMAIL,SHARE_MEDIA.MORE)
                                 .open();
@@ -319,7 +319,7 @@ public class TitleActivity extends AppCompatActivity {
             case R.id.action_share:
                 UMImage image = new UMImage(this, R.drawable.ic_launcher);//资源文件
                 new ShareAction(this).withText(getString(R.string.app_name)
-                        + "，化学专业学生必备的工具，下载地址：chem.njzjz.win").withTargetUrl(getString(R.string.app_website)).withMedia(image)
+                        + "，化学专业学生必备的工具，下载地址："+getString(R.string.app_website)).withTargetUrl(getString(R.string.app_website)).withMedia(image)
                         .withTitle(getString(R.string.app_name))
                         .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,/*SHARE_MEDIA.SINA,*/SHARE_MEDIA.SMS,SHARE_MEDIA.EMAIL,SHARE_MEDIA.MORE)
                         .open();
