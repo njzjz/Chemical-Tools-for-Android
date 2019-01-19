@@ -4,15 +4,19 @@ sudo: false
 
 android:
   components:
+  - tools
+  - platform-tools
   - build-tools-25.0.1
   - android-23
   - extra-android-m2repository
   - extra-android-support
+  licenses:
+  - 'android-sdk-preview-license-.+'
+  - 'android-sdk-license-.+'
+  - 'google-gdk-license-.+'
 
 before_install:
-    - yes | sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2"
-    - yes | sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout-solver;1.0.2"
-
-script:
   - chmod +x gradlew
+  
+script:
   - ./gradlew assembleRelease
