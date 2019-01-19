@@ -10,4 +10,5 @@ android:
   - extra-android-support
 
 script:
-  - "./gradlew assembleRelease"
+  - chmod +x gradlew
+  - ./gradlew assembleRelease
